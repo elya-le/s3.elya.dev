@@ -1,0 +1,65 @@
+/* toggle container with fixed width */
+.toggle-container {
+  height: 40px; /* increase the height for the bigger toggle */
+  width: 110px; /* adjust width to accommodate larger toggle and text */
+  display: flex;
+  justify-content: flex-end; /* align the text or empty space to the right */
+  align-items: center;
+  margin-right: 10px; /* space between text container and toggle */
+  /* border: 1px solid #ccc;  */
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+/* toggle switch styles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 80px; /* increase the width of the toggle */
+  height: 40px; /* increase the height of the toggle */
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 40px; /* adjust for a circular edge */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 32px; /* increase the size of the toggle knob */
+  width: 32px; /* increase the size of the toggle knob */
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%; /* keep it circular */
+}
+
+input:checked + .slider {
+  background-color: #FFA500;
+}
+
+input:checked + .slider:before {
+  transform: translateX(40px); /* adjust based on new width */
+}
+
+/* Text "FASTER!!!!" only when toggle is off */
+.faster-text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+}

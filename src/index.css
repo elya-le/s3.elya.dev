@@ -1,0 +1,127 @@
+/* colors reference 
+background: #191B00
+table: #262900
+input text: #2C2F03
+button: #4C5200
+button hover: #5F6600
+*/
+
+@import url('https://fonts.cdnfonts.com/css/general-sans');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+  font-weight: thin;
+}
+
+body {
+  background: #191B00;
+  font-family: 'General Sans', sans-serif;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  background-color: #2C2F03 !important;
+  color: white !important;
+  -webkit-box-shadow: 0 0 0px 1000px #2C2F03 inset !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+input:-webkit-autofill::first-line,
+textarea:-webkit-autofill::first-line,
+select:-webkit-autofill::first-line {
+  color: white !important;
+}
+
+
+@layer utilities {
+  .c-space {
+    @apply sm:px-10 px-5;
+  }
+
+  .head-text {
+    @apply sm:text-3xl text-2xl text-gray_gradient;
+  }
+
+  .nav-ul {
+    @apply flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20;
+  }
+
+  .nav-li {
+    @apply text-neutral-400 hover:text-white font-generalsans max-sm:hover:bg-black-500 max-sm:w-full py-2 max-sm:px-5;
+  }
+
+  .nav-li_a {
+    @apply text-lg md:text-base hover:text-white transition-colors;
+  }
+
+  .nav-sidebar {
+    @apply absolute left-0 right-0 bg-black-200 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
+  }
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(14deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-canvas {
+  border: 1px solid red;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 0; /* stays as the background */
+}
+
+/* Projects Section */
+/* .projects-section {
+  border: 1px solid blue;
+  position: relative;
+  height: auto;
+  padding: 10px 10px;
+} */
+
+.hide-scrollbar {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
