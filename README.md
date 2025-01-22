@@ -1,3 +1,5 @@
+# s3.elya.dev
+Personal portfolio site showcasing web development, design, and fabrication projects
 # React + Vite
 
  Minimal setup to get React working in Vite with HMR and some ESLint rules.
