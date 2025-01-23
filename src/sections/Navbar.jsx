@@ -5,7 +5,20 @@ const NavItems = ({ onClick = () => {} }) => (
   <ul className="nav-ul">
     {navLinks.map((item) => (
       <li key={item.id} className="nav-li">
-        <a href={item.href} className="nav-li_a" onClick={onClick}>
+        <a
+          href={item.href}
+          className="nav-li_a"
+          onClick={(e) => {
+            e.preventDefault(); // prevent default link behavior
+            const targetElement = document.querySelector(item.href);
+            const navbarHeight = document.querySelector("header").offsetHeight; // get navbar height
+            window.scrollTo({
+              top: targetElement.offsetTop - navbarHeight, // adjust scroll position by navbar height
+              behavior: "smooth", // smooth scroll to section
+            });
+            onClick(); // close the menu after clicking on mobile
+          }}
+        >
           {item.name}
         </a>
       </li>
@@ -66,9 +79,9 @@ const Navbar = ({ animationName, toggleAnimation }) => {
       style={{
         backgroundColor:
           activeSection === "about"
-            ? "#262900"
+            ? "#191B00"
             : activeSection === "projects"
-            ? "#1A1A1A"
+            ? "#191B00"
             : "transparent", // dynamic background color based on section
         transition: "background-color 0.3s ease", // smooth background transition
       }}

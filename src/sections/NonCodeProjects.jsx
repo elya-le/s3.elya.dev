@@ -106,8 +106,8 @@ const NonCodeProjects = () => {
 
   return (
     <section
-      className="projects-section relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
-      id="other-projects"
+      className="non-code-projects-section relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
+      id="non-code-projects"
     >
       {/* Header Section for "Other Projects" */}
       <div

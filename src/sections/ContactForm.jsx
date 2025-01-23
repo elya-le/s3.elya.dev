@@ -88,7 +88,7 @@ const ContactForm = () => {
   return (
     <section 
       className="border flex flex-col items-center justify-center bg-[#191B00] p-4"
-      id="contact"
+      // id="contact"
     >
       <div
         style={{

@@ -24,6 +24,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%; /* ensure the body takes the full viewport height */
+  scroll-behavior: smooth;  /* Enables smooth scrolling for the entire page */
 }
 
 body {
