@@ -62,8 +62,8 @@ const Hero = ({ animationName }) => {
       };
 
   // log debugging information
-  console.log("screen width:", screenWidth);
-  console.log("scroll progress:", scrollProgress);
+  // console.log("screen width:", screenWidth);
+  // console.log("scroll progress:", scrollProgress);
 
   return (
     <section className="relative w-full h-[60vh] sm:h-[130vh] bg-black bg-opacity-35 flex items-center justify-center z-10">
@@ -134,8 +134,8 @@ const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) =>
       );
 
       // debugging logs
-      console.log("camera position:", { xPos, yPos, zPos });
-      console.log("look-at point:", currentLookAt);
+      // console.log("camera position:", { xPos, yPos, zPos });
+      // console.log("look-at point:", currentLookAt);
 
       cameraRef.current.position.set(xPos, yPos, zPos); // update camera position
       cameraRef.current.lookAt(...currentLookAt); // update camera look-at point

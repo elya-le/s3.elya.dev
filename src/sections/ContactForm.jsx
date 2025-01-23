@@ -5,6 +5,7 @@ const ContactForm = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -29,41 +30,72 @@ const ContactForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const validateEmail = (email) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailPattern.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setLoading(true);  // Disable form while submitting
+    console.log('Form submitted:', formData);  // Log form data
+  
+    if (!validateEmail(formData.email)) {
+      setStatus('Please enter a valid email address.');
+      setLoading(false);  // Re-enable form after validation
+      return;
+    }
+  
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbwHwz7g5DvXlIFFzHYQ0qLgEyDgoBQspyVBXgtbm3oQRyeBWT5OPFqDu_HfGSYXUZtU/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzBgY3ZEqIbc2GyMr-bz-I1cC31ug-j_9uIgRcxo1BzdupgcY2w8dxnxI8rQABxaimp/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        mode: 'cors',  // Make sure CORS is enabled
       });
-      const result = await response.json();
-      console.log('Response from server:', result);
-      if (result.result === 'success') {
-        setStatus('Message sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
+  
+      console.log('Response from server:', response);
+  
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Parsed response:', result);
+  
+        if (result.result === 'success') {
+          setStatus('Message sent successfully!');
+          setFormData({ name: '', email: '', message: '' });
+        } else {
+          setStatus('Failed to send — Try via <a href="mailto:elyaj.le@gmail.com" style="text-decoration: underline;">direct email link</a>');
+        }
       } else {
-        setStatus('Failed to send — Try via&nbsp;<a href="mailto:elyaj.le@gmail.com" style="text-decoration: underline;">direct email link</a>');
+        console.error('Error with fetch response:', response.statusText);
+        setStatus('Failed to send — Try via <a href="mailto:elyaj.le@gmail.com" style="text-decoration: underline;"> direct email link</a>');
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setStatus('Failed to send — Try via&nbsp;<a href="mailto:elyaj.le@gmail.com" style="text-decoration: underline;"> direct email link</a>');
+      console.error('Error submitting form:', error);  // Log the error
+      setStatus('Failed to send — Try via <a href="mailto:elyaj.le@gmail.com" style="text-decoration: underline;"> direct email link</a>');
+    } finally {
+      setLoading(false);  // Re-enable form after response is received
     }
+  
+    // Clear status after 5 seconds
+    setTimeout(() => {
+      setStatus('');
+    }, 5000);
   };
 
   return (
     <section 
       className="flex flex-col items-center justify-center bg-[#191B00] p-4"
       id="contact"
-      >
+    >
       <div
-      style={{
-        height: responsiveSectionDimensions.height,
-        width: responsiveSectionDimensions.width,
-      }}>
+        style={{
+          height: responsiveSectionDimensions.height,
+          width: responsiveSectionDimensions.width,
+        }}
+      >
         <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
           <p className="text-white text-lg sm:text-xl font-thin">Lets build together!</p>
         </div>
@@ -136,8 +168,9 @@ const ContactForm = () => {
                   <button
                     type="submit"
                     className="text-white text-sm inline-flex items-center border border-white border-opacity-50 rounded-full pl-4 pr-4 py-1.5 transition-colors bg-[#4C5200] hover:bg-[#5F6600]"
+                    disabled={loading}
                   >
-                  Send <RiSendPlaneLine className="pl-1.5" size={18} />
+                    {loading ? 'Sending...' : 'Send'} <RiSendPlaneLine className="pl-1.5" size={18} />
                   </button>
                 </div>
               </div>
