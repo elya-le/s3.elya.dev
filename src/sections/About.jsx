@@ -88,7 +88,7 @@ const About = ({ animationName, toggleAnimation }) => {
             </p>
             <div className="flex flex-row items-center mt-4 mb-2 space-x-2 justify-right">
               <a
-                href="mailto:elyaj.le@gmail.com?subject=Resume%20Request&body=..."
+                href="mailto:elyaj.le@gmail.com?subject=Resume%20Request&body=Hi%20Elya,%0D%0A%0D%0AMy%20name%20is%20______%0D%0A%0D%0AI%20am%20interested%20in%20hiring%20you%20for%20______%0D%0A%0D%0AOR%0D%0A%0D%0AI%20would%20love%20to%20see%20if%20you%20are%20interested%20in%20______%0D%0A%0D%0ACould%20you%20please%20send%20me%20a%20copy%20of%20your%20resume?%0D%0A%0D%0AThanks!%0D%0A%0D%0A______"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
