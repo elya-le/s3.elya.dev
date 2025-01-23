@@ -45,29 +45,31 @@ const About = ({ animationName, toggleAnimation }) => {
       }`} // Apply different animation classes based on the animationName state
       style={{ marginTop: `${marginTop}px` }}
     >
-      {/* toggle overlay */}
       <div
-        className="relative transform bg-transparent p-2 transition-all duration-300 pointer-events-auto"
+        className="flex flex-col lg:flex-row justify-center mx-auto"
         style={{
-          bottom: screenWidth > 768
-            ? `${300 - scrollProgress * 240}px`
-            : `${0 + scrollProgress * 130}px`,
-          right: screenWidth > 768
-            ? `${460 - scrollProgress * 60}px`
-            : `${-30 + scrollProgress * 20}px`,
+          width: responsiveDimensions.width,
+          height:"80px",
         }}
       >
-        <label className="toggle-switch flex items-center">
-          <input
-            type="checkbox"
-            checked={animationName === "Fast"}
-            onChange={toggleAnimation} // toggleAnimation is passed as a prop
-            className="hidden"
-          />
-          <span className="slider"></span>
-        </label>
+        {/* toggle overlay */}
+        <div
+          className="p-3 flex flex-col sm:p-5 w-full lg:w-[415px] lg:mr-auto md:w-[440px] md:mr-auto"
+          style={{
+            left: 0,
+          }}
+        >
+          <label className="toggle-switch flex">
+            <input
+              type="checkbox"
+              checked={animationName === "Fast"}
+              onChange={toggleAnimation} // toggleAnimation is passed as a prop
+              className="hidden"
+            />
+            <span className="slider"></span>
+          </label>
+        </div>
       </div>
-
       {/* about section */}
       <div
         className="flex flex-col lg:flex-row justify-center mx-auto"
@@ -84,7 +86,7 @@ const About = ({ animationName, toggleAnimation }) => {
               Guided by my beliefs in autonomy, equity, and empowerment — I strive to build secure,
               meaningful tools that foster inclusion & uplift communities.
             </p>
-            <div className="flex flex-row items-center mt-4 mb-2 space-x-2 lg:mt-0 lg:ml-4">
+            <div className="flex flex-row items-center mt-4 mb-2 space-x-2">
               <a
                 href="mailto:elyaj.le@gmail.com?subject=Resume%20Request&body=..."
                 target="_blank"
