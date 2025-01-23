@@ -19,16 +19,17 @@ const App = () => {
   };
 
   return (
-    <>
+    <div className="App">
       <Navbar animationName={animationName} toggleAnimation={toggleAnimation} />
-      <Hero animationName={animationName} toggleAnimation={toggleAnimation} />
-      {/* <Hero /> */}
-      <About animationName={animationName} toggleAnimation={toggleAnimation} /> {/* passing props */}
-      <Projects />
-      <Contact />
-      <NonCodeProjects />
+      <main>
+        <Hero animationName={animationName} toggleAnimation={toggleAnimation} />
+        <About animationName={animationName} toggleAnimation={toggleAnimation} />
+        <Projects />
+        <Contact />
+        <NonCodeProjects />
+      </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

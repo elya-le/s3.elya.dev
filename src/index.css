@@ -15,15 +15,45 @@ button hover: #5F6600
 * {
   scroll-behavior: smooth;
   font-weight: thin;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* ensure the body takes the full viewport height */
 }
 
 body {
   background: #191B00;
   font-family: 'General Sans', sans-serif;
   color: #FFFFFF;
-  margin: 0;
 }
 
+#root {
+  display: flex;
+  flex-direction: column; /* sets the root container to be vertical */
+  min-height: 100vh; /* makes sure it takes up the full height of the viewport */
+}
+
+.App {
+  display: flex;
+  flex-direction: column; /* stack elements vertically */
+  flex-grow: 1; /* allows the main content to take up all available space */
+}
+
+main {
+  flex: 1; /* makes the main content grow and take up available space */
+}
+
+.projects-section {
+  overflow: visible;
+}
+
+
+/* input Autofill Fix */
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
@@ -39,7 +69,7 @@ select:-webkit-autofill::first-line {
   color: white !important;
 }
 
-
+/* tailwind utility customizations */
 @layer utilities {
   .c-space {
     @apply sm:px-10 px-5;
@@ -65,7 +95,7 @@ select:-webkit-autofill::first-line {
     @apply absolute left-0 right-0 bg-black-200 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
   }
 }
-
+/* keyframes for animations */
 @keyframes wave-animation {
   0% {
     transform: rotate(0deg);
@@ -93,7 +123,17 @@ select:-webkit-autofill::first-line {
   }
 }
 
-/* Hero Section */
+/* Ensure Footer is always visible */
+footer {
+  background-color: #191B00;
+  text-align: center;
+  padding: 20px;
+  color: white;
+  position: relative; /* ensure it's positioned at the bottom of the layout */
+  margin-top: auto; /* pushes footer to the bottom if there is space */
+}
+
+/* hero section */
 .hero-section {
   position: relative;
   height: 100vh;
@@ -125,3 +165,5 @@ select:-webkit-autofill::first-line {
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */
 }
+
+
