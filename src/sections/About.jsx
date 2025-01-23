@@ -86,7 +86,7 @@ const About = ({ animationName, toggleAnimation }) => {
               Guided by my beliefs in autonomy, equity, and empowerment — I strive to build secure,
               meaningful tools that foster inclusion & uplift communities.
             </p>
-            <div className="flex flex-row items-center mt-4 mb-2 space-x-2">
+            <div className="flex flex-row items-center mt-4 mb-2 space-x-2 justify-right">
               <a
                 href="mailto:elyaj.le@gmail.com?subject=Resume%20Request&body=..."
                 target="_blank"
@@ -99,15 +99,15 @@ const About = ({ animationName, toggleAnimation }) => {
                 href="https://github.com/elya-le"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white text-sm inline-flex items-center border border-white rounded-full pl-2 pr-2 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
+                className="text-white text-sm inline-flex items-center border border-white rounded-full pl-3 pr-3 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
               >
-                <FiGithub />
+                Github <span className="ml-1"><FiGithub /></span>
               </a>
               <a
                 href="mailto:elyaj.le@gmail.com"
-                className="text-white text-sm inline-flex items-center border border-white rounded-full pl-2 pr-2 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
+                className="text-white text-sm inline-flex items-center border border-white rounded-full pl-3 pr-3 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
               >
-                <AiOutlineMail />
+                Email <span className="ml-1"><AiOutlineMail /></span>
               </a>
             </div>
           </div>
