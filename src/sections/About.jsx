@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { AiOutlineMail } from "react-icons/ai";
+import { FiGithub } from "react-icons/fi";
 
 const About = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth); // state to track screen width
@@ -47,24 +49,54 @@ const About = () => {
       }}
     >
       <div
-        className="flex justify-center mx-auto"
+        className="flex flex-col lg:flex-row justify-center mx-auto"
         style={{
           width: responsiveDimensions.width,
           height: responsiveDimensions.height,
         }}
       >
         {/* first container */ }
-        <div className="p-3 sm:p-5 bg-[#262900] w-full lg:w-[415px] lg:mr-auto md:w-[440px] md:mr-auto">
-          <p className="text-lg font-thin">
-            Full-Stack Engineer with a background in UI/UX, motion design, and 3D art. <br /> <br />
-            Guided by my beliefs in autonomy, equity, and empowerment — I strive to build secure, meaningful tools that foster inclusion & uplift communities.
-          </p>
+        <div className="p-3 flex flex-col sm:p-5 bg-[#262900] w-full lg:w-[415px] lg:mr-auto md:w-[440px] md:mr-auto">
+          <div className="flex flex-col items-left justify-between">
+            <p className="text-lg font-thin">
+              Full-Stack Engineer with a background in UI/UX, motion design, and 3D art. <br /> <br />
+              Guided by my beliefs in autonomy, equity, and empowerment — I strive to build secure, meaningful tools that foster inclusion & uplift communities.
+            </p>
+            <div className="flex flex-row items-center mt-4 mb-2 space-x-2 lg:mt-0 lg:ml-4">
+              <a
+                href='mailto:elyaj.le@gmail.com?subject=Resume%20Request&body=
+                Hi%20Elya,%0D%0A%0D%0A
+                My%20name%20is%20______
+                %0D%0A%0D%0AI%20am%20interested%20in%20hiring%20you%20for%20______%0D%0A%0D%0A
+                OR%0D%0A%0D%0A
+                I%20would%20love%20to%20see%20if%20you%20are%20interested%20in%20______%0D%0A%0D%0A
+                Could%20you%20please%20send%20me%20a%20copy%20of%20your%20resume?%0D%0A%0D%0A
+                Thanks!%0D%0A%0D%0A
+                ______'
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
+              > 
+                Request Resume 
+              </a>
+              <a 
+                href="https://github.com/elya-le" target="_blank" rel="noopener noreferrer"
+                className="text-white text-sm inline-flex items-center border border-white rounded-full pl-2 pr-2 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
+              >
+              <FiGithub />
+              </a>
+              <a
+                className="text-white text-sm inline-flex items-center border border-white rounded-full pl-2 pr-2 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
+                href="mailto:elyaj.le@gmail.com"
+              >
+              <AiOutlineMail />
+              </a>
+            </div>
+          </div>
         </div>
-        {/* second container pleace holder */}
       </div>
     </section>
   );
 };
-
 
 export default About;
