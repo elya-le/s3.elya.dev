@@ -77,13 +77,8 @@ const Navbar = ({ animationName, toggleAnimation }) => {
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
       style={{
-        backgroundColor:
-          activeSection === "about"
-            ? "#191B00"
-            : activeSection === "projects"
-            ? "#191B00"
-            : "transparent", // dynamic background color based on section
-        transition: "background-color 0.3s ease", // smooth background transition
+        backgroundColor: "#262900",  // Set any color you prefer
+        transition: "background-color 0.3s ease",
       }}
     >
       <div className="max-w-7xl mx-auto">
