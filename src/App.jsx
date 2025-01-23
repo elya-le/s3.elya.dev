@@ -3,6 +3,7 @@ import Navbar from "./sections/Navbar.jsx";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
 import About from "./sections/About";
+import FormSpree from "./sections/FormSpree.jsx";  // Import your FormSpree component
 import Contact from "./sections/ContactForm.jsx";
 import NonCodeProjects from "./sections/NonCodeProjects"; 
 import Footer from "./sections/Footer.jsx";
@@ -25,7 +26,8 @@ const App = () => {
         <Hero animationName={animationName} toggleAnimation={toggleAnimation} />
         <About animationName={animationName} toggleAnimation={toggleAnimation} />
         <Projects />
-        <Contact />
+        <FormSpree /> {/* Add FormSpree above the Contact form */}
+        {/* <Contact /> */}
         <NonCodeProjects />
       </main>
       <Footer />
