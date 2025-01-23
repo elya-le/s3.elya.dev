@@ -22,7 +22,8 @@ const App = () => {
     <>
       <Navbar animationName={animationName} toggleAnimation={toggleAnimation} />
       <Hero animationName={animationName} toggleAnimation={toggleAnimation} />
-      <About />
+      {/* <Hero /> */}
+      <About animationName={animationName} toggleAnimation={toggleAnimation} /> {/* passing props */}
       <Projects />
       <Contact />
       <NonCodeProjects />

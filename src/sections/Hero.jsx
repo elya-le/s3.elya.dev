@@ -7,7 +7,7 @@ import Cat from "../components/Cat.jsx"; // custom 3d cat model component
 import "./Hero.css"; // import specific styles for hero component
 
 // hero component to render the 3d scene and toggle animation
-const Hero = ({ animationName, toggleAnimation }) => {
+const Hero = ({ animationName }) => {
   const rectLightRef = useRef(); // reference for the rectangle area light
   const catRef = useRef(); // reference for the cat model
   const cameraRef = useRef(); // reference for the perspectivecamera
@@ -67,29 +67,6 @@ const Hero = ({ animationName, toggleAnimation }) => {
 
   return (
     <section className="relative w-full h-[60vh] sm:h-[130vh] bg-black bg-opacity-35 flex items-center justify-center z-10">
-      {/* toggle overlay */}
-      <div
-        className={`absolute z-50 transform -translate-x-1/2 bg-transparent p-2 transition-all duration-300 pointer-events-auto`}
-        style={{
-          bottom: screenWidth > 768 
-            ? `${300 - scrollProgress * 240}px` // desktop: interpolate from 300px to 60px
-            : `${0 + scrollProgress * 130}px`, // mobile: interpolate from 0px to 130px
-          right: screenWidth > 768 
-            ? `${460 - scrollProgress * 60}px` // desktop: interpolate from 460px to 400px
-            : `${-30 + scrollProgress * 20}px`, // mobile: interpolate from -30px to -10px
-        }}
-      >
-        <label className="toggle-switch flex items-center">
-          <input
-            type="checkbox"
-            checked={animationName === "Fast"}
-            onChange={toggleAnimation}
-            className="hidden"
-          />
-          <span className="slider"></span>
-        </label>
-      </div>
-
       {/* canvas */}
       <Canvas
         className="w-full h-full"
