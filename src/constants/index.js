@@ -1,19 +1,7 @@
 export const navLinks = [
-  {
-    id: 1,
-    name: 'Projects',
-    href: '#projects',
-  },
-  {
-    id: 2,
-    name: 'Contact',
-    href: '#contact',
-  },
-  {
-    id: 3,
-    name: 'Non-Code Projects',
-    href: '#non-code-projects',
-  },
+  { id: 1, name: "Projects", href: "#projects" },
+  { id: 2, name: "Contact", href: "#contact" },
+  { id: 3, name: "Non Code Projects", href: "#non-code-projects" },
 ];
 
 export const myProjects = [

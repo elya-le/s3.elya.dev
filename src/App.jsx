@@ -3,11 +3,10 @@ import Navbar from "./sections/Navbar.jsx";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
 import About from "./sections/About";
-import FormSpree from "./sections/FormSpree.jsx";  // Import your FormSpree component
-import Contact from "./sections/ContactForm.jsx";
+import FormSpree from "./sections/FormSpree.jsx";  
 import NonCodeProjects from "./sections/NonCodeProjects"; 
 import Footer from "./sections/Footer.jsx";
-import "./index.css"; // Import your global CSS file
+import "./index.css"; // import your global CSS file
 
 const App = () => {
   const [animationName, setAnimationName] = useState("Slow"); // manage animation state
@@ -21,17 +20,16 @@ const App = () => {
 
   return (
     <div className="App">
-      <Navbar animationName={animationName} toggleAnimation={toggleAnimation} />
-      <main>
-        <Hero animationName={animationName} toggleAnimation={toggleAnimation} />
-        <About animationName={animationName} toggleAnimation={toggleAnimation} />
-        <Projects />
-        <FormSpree /> {/* Add FormSpree above the Contact form */}
-        {/* <Contact /> */}
-        <NonCodeProjects />
-      </main>
-      <Footer />
-    </div>
+    <Navbar />
+    <main>
+      <Hero animationName={animationName} toggleAnimation={toggleAnimation} />
+      <About animationName={animationName} toggleAnimation={toggleAnimation} />
+      <Projects />
+      <FormSpree />
+      <NonCodeProjects />
+    </main>
+    <Footer />
+  </div>
   );
 };
 
