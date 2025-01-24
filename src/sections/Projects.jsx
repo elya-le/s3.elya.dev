@@ -198,7 +198,7 @@ const Projects = () => {
                 ))}
             </div>
             {/* project title and live link/github repo */}
-            <div className="border border-transparent mt-4 flex justify-between items-center w-full">
+            <div className="mt-4 flex justify-between items-center w-full">
               <p
                 className={`text-white font-medium ${
                   screenWidth > 1024 ? "text-2xl" : "text-xl"
@@ -232,7 +232,7 @@ const Projects = () => {
               </div>
             </div>
             {/* project description */}
-            <p className="border mt-2 text-white font-thin text-sm sm:text-base md:text-lg lg:text-lg">
+            <p className="mt-2 text-white font-thin text-sm sm:text-base md:text-lg lg:text-lg">
               {currentProject.desc}
             </p>
             <div
