@@ -21,7 +21,7 @@ const NonCodeProjects = () => {
     if (screenWidth > 1024) {
       return { height: "930px", width: "900px" }; // fullscreen
     } else if (screenWidth > 768) {
-      return { height: "900px", width: "800px" }; // tablet
+      return { height: "960px", width: "800px" }; // tablet
     } else {
       return { height: "800px", width: "99%" }; // mobile
     }
