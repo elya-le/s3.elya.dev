@@ -84,7 +84,7 @@ const About = ({ animationName, toggleAnimation }) => {
               Full-Stack Engineer with a background in UI/UX, motion design, and 3D art. <br />
               <br />
               Radicalization rooted in care, equity, and autonomy — <br/>
-              I strive to contribute to the creation of secure tools that foster inclusion, empower communities, and inspire transformative change.
+              I strive to contribute to the creation of secure tools that empower communities and foster transformative change.
             </p>
             <div className="flex flex-row items-center mt-4 mb-2 space-x-2 justify-right">
               <a
