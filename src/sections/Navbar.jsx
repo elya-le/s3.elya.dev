@@ -1,9 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { navLinks } from "../constants/index.js"; // Ensure this is correctly imported
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState(""); // Track active link
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Track menu open state
+  const [isTransparent, setIsTransparent] = useState(true); // Track transparency state
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsTransparent(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => {
+      if (heroRef.current) {
+        observer.unobserve(heroRef.current);
+      }
+    };
+  }, []);
 
   const handleClick = (e, href) => {
     e.preventDefault();
@@ -20,32 +41,70 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="border fixed top-0 left-0 w-full bg-[#191B00] text-white py-4 px-6 z-50">
-      <div className="border flex justify-between items-center">
-        <div className="text-lg">E</div>
-        <button
-          className=" md:hidden text-white"
-          onClick={toggleMenu}
+    <>
+      <div ref={heroRef} id="hero"></div> {/* Add this div to mark the Hero section */}
+      <nav
+        className={`fixed top-0 left-0 w-full text-white py-4 px-6 z-50 transition-all duration-300 ${
+          isTransparent ? "bg-transparent border-transparent" : "bg-[#191B00] border-b border-white border-opacity-10"
+        }`}
+      >
+        {/* container for E and menu/hamburger */}
+        <div className="flex justify-between items-center">
+          {/* 'E' icon */}
+          <a href="#home" onClick={(e) => handleClick(e, "#home")} className="text-lg">Elya_</a>
+
+          {/* hamburger menu (hidden on desktop) */}
+          <button
+            className="md:hidden text-white"
+            onClick={toggleMenu}
+          >
+            {isMenuOpen ? "✕" : "☰"}
+          </button>
+
+          {/* links for desktop (hidden on mobile) */}
+          <ul className="hidden md:flex space-x-4 items-center ml-auto">
+            {navLinks.map((link) => (
+              <li key={link.id}>
+                <a
+                  href={link.href}
+                  onClick={(e) => handleClick(e, link.href)}
+                  className={`px-4 py-2 ${
+                    activeLink === link.href
+                      ? "text-white"
+                      : "text-white opacity-80"
+                  } hover:text-white hover:opacity-100`}
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* links for mobile view (toggleable) */}
+        <ul
+          className={`${
+            isMenuOpen ? "block text-right mt-4" : "hidden"
+          } md:hidden`}
         >
-          {isMenuOpen ? "✕" : "☰"}
-        </button>
-      </div>
-      <ul className={`md:flex space-x-4 justify-center ${isMenuOpen ? "block text-right" : "hidden"} md:block`}>
-        {navLinks.map((link) => (
-          <li key={link.id} className="my-2 md:my-0">
-            <a
-              href={link.href}
-              onClick={(e) => handleClick(e, link.href)}
-              className={`px-4 py-2 ${
-                activeLink === link.href ? "text-white" : "text-white opacity-80"
-              } hover:text-white hover:opacity-100`}
-            >
-              {link.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+          {navLinks.map((link) => (
+            <li key={link.id} className="my-2">
+              <a
+                href={link.href}
+                onClick={(e) => handleClick(e, link.href)}
+                className={`px-4 py-2 ${
+                  activeLink === link.href
+                    ? "text-white"
+                    : "text-white opacity-80"
+                } hover:text-white hover:opacity-100`}
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
   );
 };
 

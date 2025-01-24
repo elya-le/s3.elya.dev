@@ -66,7 +66,9 @@ const Hero = ({ animationName }) => {
   // console.log("scroll progress:", scrollProgress);
 
   return (
-    <section className="relative w-full h-[60vh] sm:h-[130vh] bg-black bg-opacity-35 flex items-center justify-center z-10">
+    <section 
+    id="home"
+    className="relative w-full h-[60vh] sm:h-[130vh] bg-black bg-opacity-35 flex items-center justify-center z-10">
       {/* canvas */}
       <Canvas
         className="w-full h-full"
