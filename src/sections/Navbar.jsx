@@ -20,11 +20,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-[#191B00] text-white py-4 px-6 z-50">
-      <div className="flex justify-between items-center">
+    <nav className="border fixed top-0 left-0 w-full bg-[#191B00] text-white py-4 px-6 z-50">
+      <div className="border flex justify-between items-center">
         <div className="text-lg">E</div>
         <button
-          className="md:hidden text-white"
+          className=" md:hidden text-white"
           onClick={toggleMenu}
         >
           {isMenuOpen ? "✕" : "☰"}
