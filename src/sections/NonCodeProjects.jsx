@@ -8,8 +8,6 @@ const NonCodeProjects = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // state for internal image carousel
   const currentProject = otherProjects[selectedProjectIndex]; // get current project data
   const carouselRef = useRef(null); // reference for the internal image carousel
-  const subdescRef = useRef(null); // reference for subdesc container
-  const [subdescHeight, setSubdescHeight] = useState("auto"); // state for subdesc height
 
   // update screen width on resize
   useEffect(() => {
@@ -21,11 +19,11 @@ const NonCodeProjects = () => {
   // dynamically calculate dimensions based on screen size
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
-      return { height: "770px", width: "900px" }; // fullscreen
+      return { height: "930px", width: "900px" }; // fullscreen
     } else if (screenWidth > 768) {
-      return { height: "750px", width: "800px" }; // tablet
+      return { height: "900px", width: "800px" }; // tablet
     } else {
-      return { height: "680px", width: "99%" }; // mobile
+      return { height: "800px", width: "99%" }; // mobile
     }
   };
 
@@ -39,16 +37,19 @@ const NonCodeProjects = () => {
     }
   };
 
-  // dynamically adjust subdesc height based on content
-  useEffect(() => {
-    if (subdescRef.current) {
-      // calculate height based on scrollHeight of the element
-      setSubdescHeight(`${subdescRef.current.scrollHeight}px`);
+  const getResponsiveSubdescHeight = () => {
+    if (screenWidth > 1024) {
+      return "360px"; // height for desktop
+    } else if (screenWidth > 768) {
+      return "390px"; // height for tablet
+    } else {
+      return "300px"; // height for mobile
     }
-  }, [currentProject, screenWidth]); // recalculate on project or screen size change
+  };
 
   const responsiveSectionDimensions = getResponsiveSectionDimensions();
   const responsiveImageSize = getResponsiveImageSize();
+  const subdescHeight = getResponsiveSubdescHeight();
 
   // click on an image to navigate and toggle visibility
   const handleImageClick = (index) => {
@@ -106,10 +107,10 @@ const NonCodeProjects = () => {
 
   return (
     <section
-      className="non-code-projects-section relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
+      className="non-code-projects relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
       id="non-code-projects"
     >
-      {/* Header Section for "Other Projects" */}
+      {/* header dection for "Selected Projects" */}
       <div
         style={{
           height: responsiveSectionDimensions.height,
@@ -117,7 +118,7 @@ const NonCodeProjects = () => {
         }}
       >
         <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
-          <p className="text-white text-lg sm:text-xl font-thin">Noteworthy Design & Fabrication Projects</p>
+          <p className="text-white text-lg sm:text-xl font-thin">Selected Projects</p>
         </div>
         {/* project grid container */}
         <div
@@ -130,7 +131,7 @@ const NonCodeProjects = () => {
             {/* internal image carousel */}
             <div
               ref={carouselRef}
-              className="border border-white border-opacity-10 whitespace-nowrap overflow-x-auto hide-scrollbar"
+              className="whitespace-nowrap overflow-x-auto hide-scrollbar"
               style={{
                 overflowX: "scroll", // enable horizontal scrolling
                 overflowY: "hidden",
@@ -148,6 +149,8 @@ const NonCodeProjects = () => {
                       marginRight: "10px", // spacing between images
                       height: `${responsiveImageSize.height}px`, // dynamically apply height
                       width: `${responsiveImageSize.width}px`, // dynamically apply width
+                      // border: "1px solid #fff", 
+                      position: "relative", // for aspect ratio
                     }}
                     onClick={() => handleImageClick(index)} // attach click handler
                   >
@@ -155,9 +158,11 @@ const NonCodeProjects = () => {
                       src={currentProject[key]}
                       alt={`${currentProject.title} screenshot ${index + 1}`}
                       style={{
-                        height: "100%",
-                        width: "100%",
-                        objectFit: "contain", // maintain image aspect ratio
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        objectPosition: top,
+                        objectFit: "cover", // maintain image aspect ratio
                       }}
                     />
                   </div>
@@ -198,23 +203,16 @@ const NonCodeProjects = () => {
               </div>
             </div>
             {/* project description */}
-            <p
-              className="mt-2 text-white font-thin text-sm sm:text-base md:text-lg lg:text-lg"
-              dangerouslySetInnerHTML={{ __html: currentProject.desc }} // render HTML content
-            />
-            {/* subdesc with dynamic height */}
+            <p className="mt-2 text-white font-thin text-sm sm:text-base md:text-lg lg:text-lg">
+              {currentProject.desc}
+            </p>
             <div
-              ref={subdescRef}
-              className="subdesc border mt-4 text-sm sm:text-base md:text-lg lg:text-lg"
+              className="subdesc mt-4 text-sm sm:text-base md:text-lg lg:text-lg"
+              dangerouslySetInnerHTML={{ __html: currentProject.subdesc }}
               style={{
                 height: subdescHeight,
               }}
-            >
-              {/* Render the subdesc with line-height adjustment */}
-              <div
-                dangerouslySetInnerHTML={{ __html: currentProject.subdesc }} // render HTML content
-              />
-            </div>
+            ></div>
             {/* add tags */}
             <div className="tags my-4 flex flex-wrap gap-2">
               {currentProject.tags.map((tag) => (
@@ -268,3 +266,5 @@ const NonCodeProjects = () => {
 };
 
 export default NonCodeProjects;
+
+

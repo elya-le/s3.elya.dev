@@ -110,11 +110,9 @@ export const otherProjects = [
       - Led the woodworking and assembly.<br> 
       - Ensured structural integrity and artistic cohesion.
     </span><br><br>
-    <span class="font-thin text-xs leading-tight">
       Lighting Engineer & Sponsor: <span class="font-thin">Richerd Chan 
-      — Extra special thanks to my family Kari, Jessie, Santana, Jason, Olivia, Kevin, Belinda, Ray, Ryan, and AFC for the support in this build.
-    </span>
     `,
+    // — Extra special thanks to my family Kari, Jessie, Santana, Jason, Olivia, Kevin, Belinda, Ray, Ryan, and AFC for the support in this build.
     liveLink: '',
     repoLink: '',
     previewImg: '/assets/aws1.gif',

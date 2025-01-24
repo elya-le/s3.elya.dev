@@ -20,7 +20,7 @@ const ContactForm = () => {
     } else if (screenWidth > 768) {
       return { height: "400px", width: "800px" }; // tablet
     } else {
-      return { height: "755px", width: "99%" }; // mobile
+      return { height: "700px", width: "99%" }; // mobile
     }
   };
   const responsiveSectionDimensions = getResponsiveSectionDimensions();

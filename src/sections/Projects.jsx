@@ -73,6 +73,7 @@ const Projects = () => {
       return "140px"; // height for mobile
     }
   };
+
   const responsiveSectionDimensions = getResponsiveSectionDimensions();
   const responsiveImageSize = getResponsiveImageSize();
   const subdescHeight = getResponsiveSubdescHeight(); // get height dynamically
@@ -138,7 +139,7 @@ const Projects = () => {
       className="projects-section relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
       id="projects"
     >
-      {/* Header Section for "Selected Projects" */}
+      {/* header dection for "Selected Projects" */}
       <div
         style={{
           height: responsiveSectionDimensions.height,
@@ -231,7 +232,7 @@ const Projects = () => {
               </div>
             </div>
             {/* project description */}
-            <p className="mt-2 text-white font-thin text-sm sm:text-base md:text-lg lg:text-lg">
+            <p className="border mt-2 text-white font-thin text-sm sm:text-base md:text-lg lg:text-lg">
               {currentProject.desc}
             </p>
             <div
