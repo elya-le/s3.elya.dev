@@ -54,7 +54,7 @@ const About = ({ animationName, toggleAnimation }) => {
       >
         {/* toggle overlay */}
         <div
-          className="p-3 flex flex-col sm:p-5 w-full lg:w-[415px] lg:ml-auto md:w-[440px] md:ml-auto"
+          className="border p-3 flex flex-col sm:p-5 w-full lg:w-[415px] lg:ml-auto md:w-[440px] md:ml-auto"
         >
           <label className="toggle-switch flex ml-auto mr-4">
             <input
@@ -80,8 +80,8 @@ const About = ({ animationName, toggleAnimation }) => {
             <p className="text-lg font-thin">
               Full-Stack Engineer with a background in UI/UX, motion design, and 3D art. <br />
               <br />
-              Radicalization rooted in care, equity, and autonomy — 
-              I strive to contribute to the creation of secure tools that empower communities and foster transformative change.
+              Rooted in care, equity, and autonomy — 
+              I am dedicated to building secure tools that empower communities.
             </p>
             <div className="flex flex-row items-center mt-4 mb-2 space-x-2 justify-right">
               <a

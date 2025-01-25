@@ -118,7 +118,7 @@ const NonCodeProjects = () => {
         }}
       >
         <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
-          <p className="text-white text-lg sm:text-xl font-thin">Selected Projects</p>
+          <p className="text-white text-lg sm:text-xl font-thin">Selected Projects (Not Code Focused)</p>
         </div>
         {/* project grid container */}
         <div

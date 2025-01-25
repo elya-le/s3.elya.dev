@@ -1,7 +1,8 @@
 export const navLinks = [
-  { id: 1, name: "Projects", href: "#projects" },
+  { id: 1, name: "Code Projects", href: "#projects" },
   { id: 2, name: "Contact", href: "#contact" },
-  { id: 3, name: "Non Code Projects", href: "#non-code-projects" },
+  { id: 3, name: "Other Projects", href: "#non-code-projects" },
+  // { id: 4, name: "Github", href: "https://github.com/elya-le" },
 ];
 
 export const myProjects = [
@@ -123,10 +124,11 @@ export const otherProjects = [
     previewImg5: '/assets/odonata3.jpg',
     previewImg6: '/assets/odonata14.jpg',
     tags: [
-      { id: 501, name: 'SketchUp/CAD', color: '#393D00'}, 
+      { id: 501, name: 'SketchUp', color: '#393D00'}, 
       { id: 502, name: 'Fabrication', color: '#393D00'}, 
       { id: 503, name: 'Woodworking', color: '#393D00'}, 
       { id: 504, name: 'Project Management', color: '#393D00'}, 
+      { id: 505, name: 'CAD', color: '#393D00'}, 
     ]
   },
   {
@@ -145,7 +147,7 @@ export const otherProjects = [
       - Align branding and visuals for share-worthy photos
     </span><br><br>
     <span class="font-thin">
-      Extra special thanks to Patrick for entrusting me with taking on a bigger role with these activations ❤︎
+      Extra special thanks to Patrick for entrusting me with taking on a bigger role with these activations.
     </span>
     `,
     liveLink: '',
@@ -153,10 +155,12 @@ export const otherProjects = [
     previewImg1: '/assets/aws1.gif',
     previewImg2: '/assets/aws2.gif',
     tags: [
-      { id: 601, name: 'SketchUp/CAD', color: '#393D00'}, 
+      { id: 601, name: 'SketchUp', color: '#393D00'}, 
       { id: 602, name: 'Fabrication', color: '#393D00' },
       { id: 603, name: 'Installation', color: '#393D00' },
       { id: 604, name: 'Woodworking', color: '#393D00'},
+      { id: 605, name: 'Project Management', color: '#393D00' },
+      { id: 606, name: 'CAD', color: '#393D00' },
     ],
   },
   {
@@ -171,7 +175,7 @@ export const otherProjects = [
     </span><br><br>
     Key Responsibilities: <span class="font-thin"><br>
     - Delivered 50+ animations under tight deadlines<br>
-    - Collaborated with team to align with the bank's visual identity<br>
+    - Maintained consistent visual identity<br>
     - Ensured seamless integration for a high-impact installation<br>
     </span></p>
     `,
@@ -182,8 +186,9 @@ export const otherProjects = [
     tags: [
       { id: 701, name: 'After Effects', color: '#393D00'}, 
       { id: 702, name: 'Illustrator', color: '#393D00' },
-      { id: 703, name: 'Procreate', color: '#393D00' },
+      { id: 703, name: 'Cinema4D', color: '#393D00' },
       { id: 704, name: 'Media Encoder', color: '#393D00'}, 
+      { id: 705, name: 'Procreate', color: '#393D00' },
     ],
   },
   {
@@ -233,9 +238,10 @@ export const otherProjects = [
     previewImg2: '/assets/aws2.gif',
     tags: [
       { id: 901, name: 'Cinema4D', color: '#393D00'}, 
-      { id: 902, name: 'Octane/Redshift', color: '#393D00' },
-      { id: 903, name: 'After Effects', color: '#393D00'}, 
-      { id: 904, name: 'Media Encoder', color: '#393D00'},
+      { id: 902, name: 'After Effects', color: '#393D00'}, 
+      { id: 903, name: 'Media Encoder', color: '#393D00'},
+      { id: 904, name: 'Octane', color: '#393D00' },
+      { id: 905, name: 'Redshift', color: '#393D00' },
     ],
   },
   {
@@ -272,23 +278,4 @@ export const otherProjects = [
   },
 ];
 
-// export const workExperiences = [
-//   {
-//     id: 1,
-//     name: 'Company 1',
-//     pos: 'Position Placeholder',
-//     duration: 'Year - Year',
-//     title: 'Placeholder description for the work experience at Company 1.',
-//     icon: '/assets/placeholder-icon1.svg',
-//     animation: 'animation1',
-//   },
-//   {
-//     id: 2,
-//     name: 'Company 2',
-//     pos: 'Position Placeholder',
-//     duration: 'Year - Year',
-//     title: 'Placeholder description for the work experience at Company 2.',
-//     icon: '/assets/placeholder-icon2.svg',
-//     animation: 'animation2',
-//   },
-// ];
+
