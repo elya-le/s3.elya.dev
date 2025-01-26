@@ -116,6 +116,7 @@ export const otherProjects = [
     // — Extra special thanks to my family Kari, Jessie, Santana, Jason, Olivia, Kevin, Belinda, Ray, Ryan, and AFC for the support in this build.
     liveLink: '',
     repoLink: '',
+    // videoLink: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_2018.MOV', // added video link
     // previewImg: '/assets/aws1.gif',
     previewImg1: '/assets/odonata11.jpg',
     previewImg2: '/assets/odonata12.jpg',
