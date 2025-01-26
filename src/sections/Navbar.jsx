@@ -12,7 +12,7 @@ const Navbar = () => {
   const heroRef = useRef(null);
 
   // typing animation variables
-  const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist"];
+  const words = ["Full", ];
   const typingSpeed = 70; // milliseconds per character
   const delayBetweenWords = 2000; // delay before next word starts typing
   const cursorDelay = 500; // delay before showing cursor
@@ -85,24 +85,29 @@ const Navbar = () => {
         }
       }
 
-      // stop after one loop, type out "Full Stack Developer" and icon
+      // stop after one loop, type out "Full Stack Developer"
       setIsTyping(true);
 
-      // typing effect for the final "Full Stack Developer" and icon
       const finalText = "Full Stack Developer ";
+      // typing effect for the final "Full Stack Developer"
       for (let i = 0; i <= finalText.length; i++) {
         await new Promise((resolve) => {
           typingTimeout = setTimeout(() => {
-            setDisplayText([
-              "Elya — " + finalText.substring(0, i), // typing the final text
-              <TiArrowLoop key="loop-icon" className="inline-block ml-2" /> // Icon part
-            ]);
+            setDisplayText("Elya — " + finalText.substring(0, i)); // typing the final text
             resolve();
           }, typingSpeed);
         });
       }
 
-      setIsTyping(false); // no more typing after the first loop
+      setIsTyping(false);
+
+      // add delay before showing the icon
+      setTimeout(() => {
+        setDisplayText([
+          "Elya — Full Stack Developer ",
+          <TiArrowLoop key="loop-icon" className="inline-block" style={{ marginBottom: "3px" }} />
+        ]);
+      }, 200); // 1-second delay before showing the icon
     };
 
     typeWords();
