@@ -51,7 +51,10 @@ const Navbar = () => {
         {/* container for E and menu/hamburger */}
         <div className="flex justify-between items-center">
           {/* 'E' icon */}
-          <a href="#home" onClick={(e) => handleClick(e, "#home")} className="text-lg">Elya_</a>
+          <a href="#home" onClick={(e) => handleClick(e, "#home")} className="logo">
+            <span>Elya</span>
+            <span className="flashing-underscore">_</span>
+          </a>
 
           {/* hamburger menu (hidden on desktop) */}
           <button

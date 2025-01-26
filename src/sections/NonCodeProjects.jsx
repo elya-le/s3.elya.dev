@@ -131,7 +131,7 @@ const NonCodeProjects = () => {
             {/* internal image carousel */}
             <div
               ref={carouselRef}
-              className="whitespace-nowrap overflow-x-auto hide-scrollbar"
+              className="border whitespace-nowrap overflow-x-auto hide-scrollbar"
               style={{
                 overflowX: "scroll", // enable horizontal scrolling
                 overflowY: "hidden",

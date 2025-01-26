@@ -55,6 +55,19 @@ main {
   overflow: visible;
 }
 
+.flashing-underscore {
+  animation: flash 1s steps(1, start) infinite; 
+}
+
+/* Keyframes for flashing effect */
+@keyframes flash {
+  0%, 100% {
+    opacity: 1; /* Visible */
+  }
+  50% {
+    opacity: 0; /* Hidden */
+  }
+}
 
 /* input Autofill Fix */
 input:-webkit-autofill,
