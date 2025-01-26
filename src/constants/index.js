@@ -204,7 +204,7 @@ export const otherProjects = [
     `,
     liveLink: '',
     repoLink: '',
-  
+    videoLink: "https://player.vimeo.com/video/589222917?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
     tags: [
       { id: 801, name: 'Cinema4D', color: '#393D00'}, 
       { id: 802, name: 'After Effects', color: '#393D00'}, 

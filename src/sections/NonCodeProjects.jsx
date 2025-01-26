@@ -167,7 +167,6 @@ const NonCodeProjects = () => {
                     />
                   </div>
                 ))}
-            </div>
             {/* Video Element if videoLink exists */}
             {currentProject.videoLink && (
             <div className="video-container mt-4">
@@ -181,6 +180,7 @@ const NonCodeProjects = () => {
             ></iframe>
             </div>
             )}
+            </div>
             {/* project title and live link/github repo */}
             <div className="mt-4 flex justify-between items-center w-full">
               <p
