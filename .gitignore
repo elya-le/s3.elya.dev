@@ -1,3 +1,7 @@
+# Ignore hide.txt inside the /ignore directory
+/ignore/hide.txt
+
+
 # Logs
 logs
 *.log
