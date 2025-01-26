@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { navLinks } from "../constants/index.js"; // ensure this is correctly imported
-import { TiArrowLoop } from "react-icons/ti";
+import { TfiLoop } from "react-icons/tfi";
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState(""); // track active link
@@ -105,7 +105,7 @@ const Navbar = () => {
       setTimeout(() => {
         setDisplayText([
           "Elya — Full Stack Developer ",
-          <TiArrowLoop key="loop-icon" className="inline-block" style={{ marginBottom: "3px" }} />
+          <TfiLoop key="loop-icon" className="inline-block ml-1" style={{ marginBottom: "1px", fontSize: "18px",}}/>,
         ]);
       }, 200); // 1-second delay before showing the icon
     };
@@ -153,7 +153,7 @@ const Navbar = () => {
           </a>
 
           {/* hamburger menu (hidden on desktop) */}
-          <button className="md:hidden text-white" onClick={toggleMenu}>
+          <button className="md:hidden text-white m-0 pb-1 flex items-center justify-center" onClick={toggleMenu}>
             {isMenuOpen ? "✕" : "☰"}
           </button>
 
