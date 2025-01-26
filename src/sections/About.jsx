@@ -78,7 +78,7 @@ const About = ({ animationName, toggleAnimation }) => {
         <div className="p-3 flex flex-col sm:p-5 bg-[#262900] w-full lg:w-[415px] lg:mr-auto md:w-[440px] md:mr-auto">
           <div className="flex flex-col items-left justify-between">
             <p className="text-lg font-thin">
-              Full-Stack Engineer with a background in UI/UX, motion design, and 3D art. <br />
+              Full-Stack Developer with a background in UI/UX, motion design, and 3D art. <br />
               <br />
               Rooted in care, equity, and autonomy — 
               I am dedicated to building secure tools that empower communities.

@@ -5,7 +5,15 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState(""); // track active link
   const [isMenuOpen, setIsMenuOpen] = useState(false); // track menu open state
   const [isTransparent, setIsTransparent] = useState(true); // track transparency state
+  const [displayText, setDisplayText] = useState("Elya_"); // dynamic text for logo
+  const [isTyping, setIsTyping] = useState(false); // track typing animation
   const heroRef = useRef(null);
+
+  // Typing animation variables
+  const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist"];
+  const typingSpeed = 100; // milliseconds per character
+  const delayBetweenWords = 2000; // delay before next word starts typing
+  const cursorDelay = 500; // delay before showing cursor
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,6 +31,69 @@ const Navbar = () => {
       if (heroRef.current) {
         observer.unobserve(heroRef.current);
       }
+    };
+  }, []);
+
+  useEffect(() => {
+    let typingTimeout;
+    let erasingTimeout;
+    let nextWordTimeout;
+
+    const typeWords = async () => {
+      for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        setIsTyping(true);
+
+        // Typing effect
+        for (let j = 0; j <= word.length; j++) {
+          await new Promise((resolve) => {
+            typingTimeout = setTimeout(() => {
+              setDisplayText(`Elya_ ${word.substring(0, j)}`);
+              resolve();
+            }, typingSpeed);
+          });
+        }
+
+        setIsTyping(false);
+
+        // Pause after word is typed
+        await new Promise((resolve) => {
+          nextWordTimeout = setTimeout(resolve, delayBetweenWords);
+        });
+
+        // Erase effect
+        for (let j = word.length; j >= 0; j--) {
+          await new Promise((resolve) => {
+            erasingTimeout = setTimeout(() => {
+              setDisplayText(`Elya_ ${word.substring(0, j)}`);
+              resolve();
+            }, typingSpeed / 2);
+          });
+        }
+      }
+
+      // Reset to "Elya_" after typing all words
+      setIsTyping(true);
+      setDisplayText("Elya");
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          setDisplayText("Elya_");
+          resolve();
+        }, cursorDelay);
+      });
+      setIsTyping(false);
+
+      // Restart typing
+      typeWords();
+    };
+
+    typeWords();
+
+    // Cleanup timeouts on unmount
+    return () => {
+      clearTimeout(typingTimeout);
+      clearTimeout(erasingTimeout);
+      clearTimeout(nextWordTimeout);
     };
   }, []);
 
@@ -44,23 +115,21 @@ const Navbar = () => {
     <>
       <div ref={heroRef} id="hero"></div> {/* add this div to mark the Hero section */}
       <nav
-  className={`fixed top-0 left-0 w-full text-white py-2 md:py-3 px-6 z-50 transition-all duration-300 ${
-    isTransparent ? "bg-transparent border-transparent" : "bg-[#191B00] border-b border-white border-opacity-10"
-  }`}
->
+        className={`fixed top-0 left-0 w-full text-white py-2 md:py-3 px-6 z-50 transition-all duration-300 ${
+          isTransparent
+            ? "bg-transparent border-transparent"
+            : "bg-[#191B00] border-b border-white border-opacity-10"
+        }`}
+      >
         {/* container for E and menu/hamburger */}
         <div className="flex justify-between items-center">
-          {/* 'E' icon */}
+          {/* 'E' icon with typing effect */}
           <a href="#home" onClick={(e) => handleClick(e, "#home")} className="logo">
-            <span>Elya</span>
-            <span className="flashing-underscore">_</span>
+            <span>{displayText}</span>
           </a>
 
           {/* hamburger menu (hidden on desktop) */}
-          <button
-            className="md:hidden text-white"
-            onClick={toggleMenu}
-          >
+          <button className="md:hidden text-white" onClick={toggleMenu}>
             {isMenuOpen ? "✕" : "☰"}
           </button>
 

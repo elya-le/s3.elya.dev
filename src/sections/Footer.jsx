@@ -30,7 +30,7 @@ const Footer = () => {
         <span style={{ alignItems: "center", paddingBottom: "1px" }}>
         {new Date().getFullYear()}{" "}
         <a href="https://www.elya.dev" className="underline">
-          www.elya.dev
+          Elya.dev
         </a>{" "}
           — Designed & built by me, Elya
         </span>
