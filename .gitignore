@@ -1,6 +1,6 @@
 # Ignore hide.txt inside the /ignore directory
 /ignore/hide.txt
-
+.env
 
 # Logs
 logs
