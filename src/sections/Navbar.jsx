@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { navLinks } from "../constants/index.js"; // ensure this is correctly imported
+import { TiArrowLoop } from "react-icons/ti";
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState(""); // track active link
   const [isMenuOpen, setIsMenuOpen] = useState(false); // track menu open state
   const [isTransparent, setIsTransparent] = useState(true); // track transparency state
-  const [displayText, setDisplayText] = useState("Elya_"); // dynamic text for logo
+  const [displayText, setDisplayText] = useState("Elya"); // dynamic text for logo (no initial underscore here)
   const [isTyping, setIsTyping] = useState(false); // track typing animation
+  const [isFlashing, setIsFlashing] = useState(true); // track flashing underscore state
   const heroRef = useRef(null);
 
-  // Typing animation variables
+  // typing animation variables
   const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist"];
-  const typingSpeed = 100; // milliseconds per character
+  const typingSpeed = 70; // milliseconds per character
   const delayBetweenWords = 2000; // delay before next word starts typing
   const cursorDelay = 500; // delay before showing cursor
+  const flashDuration = 2000; // 2 seconds before typing starts
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,15 +43,25 @@ const Navbar = () => {
     let nextWordTimeout;
 
     const typeWords = async () => {
+      // flash underscore for 2 seconds before starting typing
+      setTimeout(() => setIsFlashing(false), flashDuration);
+
+      // wait for the flash duration before starting to type words
+      await new Promise((resolve) => setTimeout(resolve, flashDuration));
+
+      // Add the dash after the flashing is done
+      setDisplayText("Elya —");
+
+      // start typing words after the flash duration
       for (let i = 0; i < words.length; i++) {
         const word = words[i];
         setIsTyping(true);
 
-        // Typing effect
+        // typing effect
         for (let j = 0; j <= word.length; j++) {
           await new Promise((resolve) => {
             typingTimeout = setTimeout(() => {
-              setDisplayText(`Elya_ ${word.substring(0, j)}`);
+              setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during typing
               resolve();
             }, typingSpeed);
           });
@@ -56,40 +69,36 @@ const Navbar = () => {
 
         setIsTyping(false);
 
-        // Pause after word is typed
+        // pause after word is typed
         await new Promise((resolve) => {
           nextWordTimeout = setTimeout(resolve, delayBetweenWords);
         });
 
-        // Erase effect
+        // erase effect
         for (let j = word.length; j >= 0; j--) {
           await new Promise((resolve) => {
             erasingTimeout = setTimeout(() => {
-              setDisplayText(`Elya_ ${word.substring(0, j)}`);
+              setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during erasing
               resolve();
             }, typingSpeed / 2);
           });
         }
       }
 
-      // Reset to "Elya_" after typing all words
+      // stop after one loop, reset to the first word + icon
       setIsTyping(true);
-      setDisplayText("Elya");
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          setDisplayText("Elya_");
-          resolve();
-        }, cursorDelay);
-      });
+      setDisplayText([
+        "Elya — Full Stack Developer", 
+        <TiArrowLoop key="loop-icon" className="inline-block ml-2" />
+      ]);
       setIsTyping(false);
 
-      // Restart typing
-      typeWords();
+      // no more typing after the first loop
     };
 
     typeWords();
 
-    // Cleanup timeouts on unmount
+    // cleanup timeouts on unmount
     return () => {
       clearTimeout(typingTimeout);
       clearTimeout(erasingTimeout);
@@ -126,6 +135,7 @@ const Navbar = () => {
           {/* 'E' icon with typing effect */}
           <a href="#home" onClick={(e) => handleClick(e, "#home")} className="logo">
             <span>{displayText}</span>
+            {isFlashing && displayText === "Elya" && <span className="flashing-underscore">_</span>}
           </a>
 
           {/* hamburger menu (hidden on desktop) */}

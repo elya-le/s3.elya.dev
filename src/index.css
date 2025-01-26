@@ -56,7 +56,7 @@ main {
 }
 
 .flashing-underscore {
-  animation: flash 1s steps(1, start) infinite; 
+  animation: flash .8s steps(1, start) infinite; 
 }
 
 /* Keyframes for flashing effect */
