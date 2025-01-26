@@ -204,8 +204,7 @@ export const otherProjects = [
     `,
     liveLink: '',
     repoLink: '',
-    previewImg1: '/assets/aws1.gif',
-    previewImg2: '/assets/aws2.gif',
+  
     tags: [
       { id: 801, name: 'Cinema4D', color: '#393D00'}, 
       { id: 802, name: 'After Effects', color: '#393D00'}, 
