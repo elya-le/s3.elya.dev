@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div style={{ backgroundColor: "#191B00" }}> {/* Margin background container */}
       <footer
-        className="text-white py-4 text-center pb-10"
+        className="text-white py-4 text-center pb-6"
         style={{
           backgroundColor: "#191B00", // Footer background color
         }}

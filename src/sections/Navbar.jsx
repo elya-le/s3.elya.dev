@@ -44,7 +44,7 @@ const Navbar = () => {
     <>
       <div ref={heroRef} id="hero"></div> {/* add this div to mark the Hero section */}
       <nav
-  className={`fixed top-0 left-0 w-full text-white py-2 md:py-6 px-6 z-50 transition-all duration-300 ${
+  className={`fixed top-0 left-0 w-full text-white py-2 md:py-3 px-6 z-50 transition-all duration-300 ${
     isTransparent ? "bg-transparent border-transparent" : "bg-[#191B00] border-b border-white border-opacity-10"
   }`}
 >
