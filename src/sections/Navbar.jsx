@@ -105,7 +105,7 @@ const Navbar = () => {
       setTimeout(() => {
         setDisplayText([
           "Elya — Full Stack Developer ",
-          <TfiLoop key="loop-icon" className="inline-block ml-1" style={{ marginBottom: "1px", fontSize: "18px",}}/>,
+          <TfiLoop key="loop-icon" className="inline-block ml-1" style={{ marginBottom: "3px", fontSize: "15px",}}/>,
         ]);
       }, 200); // 1-second delay before showing the icon
     };
