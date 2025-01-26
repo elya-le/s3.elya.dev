@@ -12,7 +12,7 @@ const Navbar = () => {
   const heroRef = useRef(null);
 
   // typing animation variables
-  const words = ["Full", ];
+  const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist"];  
   const typingSpeed = 70; // milliseconds per character
   const delayBetweenWords = 2000; // delay before next word starts typing
   const cursorDelay = 500; // delay before showing cursor
@@ -37,63 +37,26 @@ const Navbar = () => {
     };
   }, []);
 
-  useEffect(() => {
-    let typingTimeout;
-    let erasingTimeout;
-    let nextWordTimeout;
+  const typeWords = async () => {
+    // flash underscore for 2 seconds before starting typing
+    setTimeout(() => setIsFlashing(false), flashDuration);
 
-    const typeWords = async () => {
-      // flash underscore for 2 seconds before starting typing
-      setTimeout(() => setIsFlashing(false), flashDuration);
+    // wait for the flash duration before starting to type words
+    await new Promise((resolve) => setTimeout(resolve, flashDuration));
 
-      // wait for the flash duration before starting to type words
-      await new Promise((resolve) => setTimeout(resolve, flashDuration));
+    // Add the dash after the flashing is done
+    setDisplayText("Elya —");
 
-      // Add the dash after the flashing is done
-      setDisplayText("Elya —");
-
-      // start typing words after the flash duration
-      for (let i = 0; i < words.length; i++) {
-        const word = words[i];
-        setIsTyping(true);
-
-        // typing effect
-        for (let j = 0; j <= word.length; j++) {
-          await new Promise((resolve) => {
-            typingTimeout = setTimeout(() => {
-              setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during typing
-              resolve();
-            }, typingSpeed);
-          });
-        }
-
-        setIsTyping(false);
-
-        // pause after word is typed
-        await new Promise((resolve) => {
-          nextWordTimeout = setTimeout(resolve, delayBetweenWords);
-        });
-
-        // erase effect
-        for (let j = word.length; j >= 0; j--) {
-          await new Promise((resolve) => {
-            erasingTimeout = setTimeout(() => {
-              setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during erasing
-              resolve();
-            }, typingSpeed / 2);
-          });
-        }
-      }
-
-      // stop after one loop, type out "Full Stack Developer"
+    // start typing words after the flash duration
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i];
       setIsTyping(true);
 
-      const finalText = "Full Stack Developer ";
-      // typing effect for the final "Full Stack Developer"
-      for (let i = 0; i <= finalText.length; i++) {
+      // typing effect
+      for (let j = 0; j <= word.length; j++) {
         await new Promise((resolve) => {
-          typingTimeout = setTimeout(() => {
-            setDisplayText("Elya — " + finalText.substring(0, i)); // typing the final text
+          setTimeout(() => {
+            setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during typing
             resolve();
           }, typingSpeed);
         });
@@ -101,24 +64,55 @@ const Navbar = () => {
 
       setIsTyping(false);
 
-      // add delay before showing the icon
-      setTimeout(() => {
-        setDisplayText([
-          "Elya — Full Stack Developer ",
-          <TfiLoop key="loop-icon" className="inline-block ml-1" style={{ marginBottom: "3px", fontSize: "15px",}}/>,
-        ]);
-      }, 200); // 1-second delay before showing the icon
-    };
+      // pause after word is typed
+      await new Promise((resolve) => {
+        setTimeout(resolve, delayBetweenWords);
+      });
 
-    typeWords();
+      // erase effect
+      for (let j = word.length; j >= 0; j--) {
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during erasing
+            resolve();
+          }, typingSpeed / 2);
+        });
+      }
+    }
+
+    // stop after one loop, type out "Full Stack Developer"
+    setIsTyping(true);
+
+    const finalText = "Full Stack Developer ";
+    // typing effect for the final "Full Stack Developer"
+    for (let i = 0; i <= finalText.length; i++) {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          setDisplayText("Elya — " + finalText.substring(0, i)); // typing the final text
+          resolve();
+        }, typingSpeed);
+      });
+    }
+
+    setIsTyping(false);
+
+    // add delay before showing the icon
+    setTimeout(() => {
+      setDisplayText([
+        "Elya — Full Stack Developer ",
+        <TfiLoop key="loop-icon" className="inline-block ml-1" style={{ marginBottom: "3px", fontSize: "15px" }} />,
+      ]);
+    }, 200); // 1-second delay before showing the icon
+  };
+
+  useEffect(() => {
+    typeWords(); // Initial typing effect
 
     // cleanup timeouts on unmount
     return () => {
-      clearTimeout(typingTimeout);
-      clearTimeout(erasingTimeout);
-      clearTimeout(nextWordTimeout);
+      clearTimeout();
     };
-  }, []);
+  }, []); // Empty dependency array ensures the effect runs only once after the initial mount
 
   const handleClick = (e, href) => {
     e.preventDefault();
@@ -128,6 +122,7 @@ const Navbar = () => {
       targetElement.scrollIntoView({ behavior: "smooth" }); // smooth scroll to section
     }
     setIsMenuOpen(false); // close menu after clicking a link
+    typeWords(); // Restart typing animation when logo is clicked
   };
 
   const toggleMenu = () => {
