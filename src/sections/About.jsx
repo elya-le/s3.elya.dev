@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiGithub } from "react-icons/fi";
+import { FiSun, FiMoon } from "react-icons/fi"; // import icons for Sun and Moon
+import { PiShootingStarThin, PiShootingStarFill, PiShootingStarBold, PiShootingStarDuotone } from "react-icons/pi";
+import { LuTurtle } from "react-icons/lu";
 import './About.css'; // Make sure your CSS file is imported here
+
 
 const About = ({ animationName, toggleAnimation }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -49,12 +53,12 @@ const About = ({ animationName, toggleAnimation }) => {
         className="flex flex-col lg:flex-row justify-center mx-auto"
         style={{
           width: responsiveDimensions.width,
-          height:"80px",
+          height: "80px",
         }}
       >
         {/* toggle overlay */}
         <div
-          className="border p-3 flex flex-col sm:p-5 w-full lg:w-[415px] lg:ml-auto md:w-[440px] md:ml-auto"
+          className="p-3 flex flex-col sm:p-5 w-full lg:w-[415px] lg:ml-auto md:w-[440px] md:ml-auto"
         >
           <label className="toggle-switch flex ml-auto mr-4">
             <input
@@ -63,7 +67,14 @@ const About = ({ animationName, toggleAnimation }) => {
               onChange={toggleAnimation} // toggleAnimation is passed as a prop
               className="hidden"
             />
-            <span className="slider"></span>
+            <span className="slider">
+              {/* Conditionally render the icons */}
+              {animationName === "Fast" ? (
+                <LuTurtle className="icon-slow" />
+              ) : (
+                <PiShootingStarDuotone className="icon-star-power" />
+              )}
+            </span>
           </label>
         </div>
       </div>
@@ -115,3 +126,4 @@ const About = ({ animationName, toggleAnimation }) => {
 };
 
 export default About;
+

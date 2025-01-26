@@ -25,6 +25,27 @@
   height: 0;
 }
 
+/* Icon styles for Sun and Moon */
+.icon-slow, .icon-star-power {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: white; /* Adjust color as per preference */
+  transition: 0.3s;
+}
+
+.icon-slow {
+  left: 12px; /* position it on the left side */
+  stroke-width: 1.3px;
+  transform: scaleX(-1) translateY(-11px);
+  /* fill: rgba(255, 255, 255, 0.5); */
+}
+
+.icon-star-power {
+  right: 12px; /* position it on the right side */
+}
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -32,7 +53,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #AAB4EE;
   transition: 0.4s;
   border-radius: 40px; /* adjust for a circular edge */
 }
@@ -50,7 +71,8 @@
 }
 
 input:checked + .slider {
-  background-color: #FFA500;
+  background-color: #FFB833;
+  /* background-color: #8390E6; */
 }
 
 input:checked + .slider:before {
