@@ -131,7 +131,7 @@ const NonCodeProjects = () => {
             {/* internal image carousel */}
             <div
               ref={carouselRef}
-              className="border whitespace-nowrap overflow-x-auto hide-scrollbar"
+              className="whitespace-nowrap overflow-x-auto hide-scrollbar"
               style={{
                 overflowX: "scroll", // enable horizontal scrolling
                 overflowY: "hidden",
@@ -168,6 +168,19 @@ const NonCodeProjects = () => {
                   </div>
                 ))}
             </div>
+            {/* Video Element if videoLink exists */}
+            {currentProject.videoLink && (
+            <div className="video-container mt-4">
+            <iframe
+              src={`${currentProject.videoLink}?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0`}
+              width="100%"
+              height="400"
+              style={{ borderRadius: "8px", border: "none" }}
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+            </div>
+            )}
             {/* project title and live link/github repo */}
             <div className="mt-4 flex justify-between items-center w-full">
               <p
@@ -266,5 +279,4 @@ const NonCodeProjects = () => {
 };
 
 export default NonCodeProjects;
-
 

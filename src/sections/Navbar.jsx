@@ -12,7 +12,7 @@ const Navbar = () => {
   const heroRef = useRef(null);
 
   // typing animation variables
-  const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist"];  
+  const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist", "Hi Papi!! Tank u - I wuv yewn, mhm!"];  
   const typingSpeed = 70; // milliseconds per character
   const delayBetweenWords = 2000; // delay before next word starts typing
   const cursorDelay = 500; // delay before showing cursor

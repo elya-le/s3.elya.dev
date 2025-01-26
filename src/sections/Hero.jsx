@@ -58,7 +58,7 @@ const Hero = ({ animationName }) => {
         rotation: [0.1, 0, 0], // light's rotation
         width: 1.0, // light's width
         height: 0.7, // light's height
-        intensity: 90, // brightness of the light
+        intensity: 150, // brightness of the light
       };
 
   // log debugging information
