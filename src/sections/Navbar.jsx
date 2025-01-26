@@ -85,15 +85,24 @@ const Navbar = () => {
         }
       }
 
-      // stop after one loop, reset to the first word + icon
+      // stop after one loop, type out "Full Stack Developer" and icon
       setIsTyping(true);
-      setDisplayText([
-        "Elya — Full Stack Developer", 
-        <TiArrowLoop key="loop-icon" className="inline-block ml-2" />
-      ]);
-      setIsTyping(false);
 
-      // no more typing after the first loop
+      // typing effect for the final "Full Stack Developer" and icon
+      const finalText = "Full Stack Developer ";
+      for (let i = 0; i <= finalText.length; i++) {
+        await new Promise((resolve) => {
+          typingTimeout = setTimeout(() => {
+            setDisplayText([
+              "Elya — " + finalText.substring(0, i), // typing the final text
+              <TiArrowLoop key="loop-icon" className="inline-block ml-2" /> // Icon part
+            ]);
+            resolve();
+          }, typingSpeed);
+        });
+      }
+
+      setIsTyping(false); // no more typing after the first loop
     };
 
     typeWords();
