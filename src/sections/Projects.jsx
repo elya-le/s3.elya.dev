@@ -6,10 +6,21 @@ const Projects = () => {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0); // state for current project
   const [screenWidth, setScreenWidth] = useState(window.innerWidth); // state to track screen width
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // state for internal image carousel
+  const [scrollPosition, setScrollPosition] = useState(0);
   const currentProject = myProjects[selectedProjectIndex]; // get current project data
   const carouselRef = useRef(null); // reference for the internal image carousel
   const scrollRef = useRef(null); // reference for the scroll animation
   const interactionTimeoutRef = useRef(null); // reference for interaction timeout
+  const projectsSectionRef = useRef(null);
+
+  // Add scroll position tracking
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.pageYOffset);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // update screen width on resize
   useEffect(() => {
@@ -133,43 +144,48 @@ const Projects = () => {
       }
     }
   };
+
   const getOverlapHeight = () => {
-    if (screenWidth > 1024) {
-      return "20vh"; // desktop overlap
-    } else if (screenWidth > 768) {
-      return "15vh"; // tablet overlap
-    } else {
-      return "10vh"; // mobile overlap
-    }
+    const viewportHeight = window.innerHeight;
+    return `${viewportHeight * 0.1}px`; // 20% of viewport height
+  };
+
+  const getParallaxOffset = () => {
+    if (!projectsSectionRef.current) return 0;
+    const sectionTop = projectsSectionRef.current.offsetTop;
+    const scrolled = Math.max(0, scrollPosition - sectionTop + window.innerHeight);
+    return Math.min(scrolled * 0.2, window.innerHeight * 0.2); // Maximum 20% parallax
   };
 
   return (
     <section
+      ref={projectsSectionRef}
       className="projects-section relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
       id="projects"
       style={{
-        marginTop: `-${getOverlapHeight()}`, // create negative margin for overlap
+        marginTop: `-${getOverlapHeight()}`,
         position: 'relative',
-        background: `linear-gradient(to bottom, transparent ${getOverlapHeight()}, #191B00 ${getOverlapHeight()})`, // gradient background for smooth transition
-        paddingTop: getOverlapHeight(), // add padding to compensate for overlap
+        background: 'transparent',
+        paddingTop: getOverlapHeight(),
+        transform: `translateY(${-getParallaxOffset()}px)`,
+        transition: 'transform 0.1s ease-out'
       }}
     >
-      {/* header dection for "Selected Projects" */}
-      <div className="relative z-20">
-        
-      </div>
+      {/* header section for "Selected Projects" */}
+
       <div
+        className=""
         style={{
           height: responsiveSectionDimensions.height,
           width: responsiveSectionDimensions.width,
         }}
       >
         <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
-          <p className="text-white text-lg sm:text-xl font-thin">Selected Projects</p>
+          <p className="text-white text-lg sm:text-3xl font-thin">Selected Projects</p>
         </div>
         {/* project grid container */}
         <div
-          className="relative bg-opacity-80 flex flex-col justify-center  bg-opacity-25 h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
+          className="relative bg-opacity-80 flex flex-col justify-center h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
           style={{
             backgroundColor: "#262900",
           }}
@@ -208,7 +224,7 @@ const Projects = () => {
                         position: "absolute",
                         top: 0,
                         left: 0,
-                        objectPosition: top,
+                        objectPosition: "top",
                         objectFit: "cover", // maintain image aspect ratio
                       }}
                     />

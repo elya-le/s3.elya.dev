@@ -48,11 +48,11 @@ const Hero = ({ animationName, toggleAnimation }) => {
   }, []);
 
   const getBasePosition = () => (screenWidth > 768 ? [-4, 3, 5] : [-8, 7, 7]);
-  const getCatScale = () => (screenWidth > 1024 ? 1 : screenWidth > 768 ? 1 : 1.5);
+  const getCatScale = () => (screenWidth > 1024 ? .7 : screenWidth > 768 ? 1 : 1.5);
 
   const rectLightSettings = screenWidth > 768 
     ? {
-        position: [-0.4, 1.4, 1.6],
+      position: [-0.7 * 0.7, 2.5 * 0.7, 1.6 * 0.7],
         rotation: [0.1, 0, 0],
         width: 1.2,
         height: 0.9,
@@ -72,13 +72,13 @@ const Hero = ({ animationName, toggleAnimation }) => {
   return (
     <section 
       id="home"
-      className="relative z-10 w-full h-[90vh] sm:h-[100vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
+      className="relative z-10 w-full h-[90vh] sm:h-[140vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
     >
       <div
         className="pl-7 absolute text-white bg-transparent z-20
-        left-1/2 md:left-[35%] lg:left-[32%]
+        left-1/2 md:left-[35%] lg:left-[37%]
         transform -translate-x-1/2 -translate-y-1/2 
-        top-[22%] md:top-[23%] lg:top-[35%]
+        top-[22%] md:top-[23%] lg:top-[25%]
         py-0 md:py-6
         px-4 md:px-6 lg:px-8
         "
@@ -102,7 +102,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
           UI/UX, motion design, 3D art and fabrication.
           <br className="hidden md:block" /><br />
           <span className="block md:inline pt-2">
-          Driven by beliefs rooted in care, equity and autonomy —
+          Driven by values rooted in care, equity, and autonomy —
           I am dedicated to building secure tools that empower communities.</span>
         </p>
         <div className="flex flex-row items-center space-x-3 mt-3 md:mt-8 lg:mt-10">
@@ -175,7 +175,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
           <Cat
             ref={catRef}
             animationName={animationName}
-            origin={[-0.5, -1.2, 0]}
+            origin={screenWidth < 768 ? [-.5, -1.2, 0] : [-.8, .2, 0]}
             scale={getCatScale()}
           />
         </Suspense>
@@ -187,12 +187,12 @@ const Hero = ({ animationName, toggleAnimation }) => {
 const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) => {
   const [baseX, baseY, baseZ] = basePosition;
 
-  const xEnd = screenWidth > 768 ? 5 : 8;
+  const xEnd = screenWidth > 768 ? 4.5 : 8;
   const yEnd = screenWidth > 768 ? -3 : -4;
   const zEnd = screenWidth > 768 ? 6.7 : 10;
 
   const startLookAt = screenWidth > 768 ? [-2, .9, 1] : [-0.5, 3, 0.5];
-  const endLookAt = screenWidth > 768 ? [1, 2, 0] : [0, 5.5, 0];
+  const endLookAt = screenWidth > 768 ? [.5, 1, -.2] : [0, 5.5, 0];
 
   useFrame(() => {
     if (cameraRef.current) {
