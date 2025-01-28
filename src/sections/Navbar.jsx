@@ -135,7 +135,7 @@ const Navbar = () => {
     <>
       <div ref={heroRef} id="hero"></div> {/* add this div to mark the Hero section */}
       <nav
-        className={`fixed top-0 left-0 w-full text-white py-2 md:py-3 px-6 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full text-white py-2 md:py-3 z-50 transition-all duration-300 ${
           isTransparent
             ? "bg-transparent border-transparent"
             : "bg-[#191B00] border-b border-white border-opacity-10"
@@ -150,7 +150,7 @@ const Navbar = () => {
           </a>
 
           {/* hamburger menu (hidden on desktop) */}
-          <button className="md:hidden text-white m-0 pb-1 flex items-center justify-center" onClick={toggleMenu}>
+          <button className="md:hidden text-white m-0 pb-1 px-4 flex items-center justify-center" onClick={toggleMenu}>
             {isMenuOpen ? "✕" : "☰"}
           </button>
 
@@ -178,7 +178,7 @@ const Navbar = () => {
         {/* links for mobile view (toggleable) */}
         <ul
           className={`${
-            isMenuOpen ? "block text-right mt-4" : "hidden"
+            isMenuOpen ? "block w-full text-right py-4 bg-[#262900]" : "hidden"
           } md:hidden`}
         >
           {navLinks.map((link) => (

@@ -20,11 +20,11 @@ const Hero = ({ animationName, toggleAnimation }) => {
   // dynamically calculate dimensions for the "Hi, I'm Elya" section
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
-      return { height: "440px", width: "630px" }; // fullscreen
+      return { height: "450px", width: "630px" }; // fullscreen
     } else if (screenWidth > 768) {
       return { height: "340px", width: "800px" }; // tablet
     } else {
-      return { height: "360px", width: "99%" }; // mobile
+      return { height: "240px", width: "99%" }; // mobile
     }
   };
 
@@ -72,36 +72,39 @@ const Hero = ({ animationName, toggleAnimation }) => {
   return (
     <section 
       id="home"
-      className="relative border border-white border-opacity-20 w-full h-[60vh] sm:h-[130vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
+      className="relative border border-white border-opacity-20 w-full h-[80vh] sm:h-[100vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
     >
       <div
         className="border border-white border-opacity-5 absolute text-white bg-transparent z-20
         left-1/2 md:left-1/2 lg:left-1/3
-        top-1/3 md:top-1/2 lg:top-1/3 
         transform -translate-x-1/2 -translate-y-1/2 
-        py-20 md:py-6 lg:py-8
+        top-[20%] md:top-[60%] lg:top-[40%]
+        py-0 md:py-6
         px-4 md:px-6 lg:px-8
         "
         style={{
           height: sectionDimensions.height,
           width: sectionDimensions.width,
+          // top: '20%', // Default for small screens
+          // '@media (min-width: 768px)': { top: '60%' }, // Medium screens
+          // '@media (min-width: 1024px)': { top: '40%' } // Large screens
           // left: "50%",
           // top: "50%",
           // transform: "translate(-50%, -50%)",
           // padding: screenWidth > 1024 ? "32px" : screenWidth > 768 ? "24px" : "16px",
         }}
       >
-        <h1 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 md:mb-6 lg:mb-8">
+        <h1 className="text-2xl md:text-4xl lg:text-6xl font-medium mb-1 md:mb-6 lg:mb-8">
           Hi, I'm Elya
         </h1>
-        <p className="text-l md:text-2xl lg:text-3xl font-thin">
+        <p className="text-l md:text-2xl lg:text-3xl md:font-thin lg:font-thin"> 
           A Full-Stack Developer with a background in UI/UX, motion design, and 3D art.
           <br className="hidden md:block" /><br />
           <span className="block md:inline pt-2">Rooted in care, equity, and autonomy —</span>
           <br className="hidden md:block" />
-          <span className="block mt-2 md:mt-0">I am dedicated to building secure tools that empower communities.</span>
+          <span className="block">I am dedicated to building secure tools that empower communities.</span>
         </p>
-        <div className="flex flex-row items-center space-x-3 mt-6 md:mt-8 lg:mt-10">
+        <div className="flex flex-row items-center space-x-3 mt-3 md:mt-8 lg:mt-10">
           <a
             href="https://github.com/elya-le"
             target="_blank"
@@ -138,7 +141,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
             </span>
           </label>
         </div>
-        <p className="text-l md:text-xl lg:text-xl font-thin pt-2">
+        <p className="text-l md:text-xl lg:text-xl lg:font-thin pt-2">
           Resume available upon request.
         </p>
       </div>
