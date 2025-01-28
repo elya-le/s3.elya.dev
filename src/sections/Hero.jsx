@@ -17,6 +17,17 @@ const Hero = ({ animationName, toggleAnimation }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
+  // dynamically calculate dimensions for the "Hi, I'm Elya" section
+  const getResponsiveSectionDimensions = () => {
+    if (screenWidth > 1024) {
+      return { height: "770px", width: "900px" }; // fullscreen
+    } else if (screenWidth > 768) {
+      return { height: "750px", width: "800px" }; // tablet
+    } else {
+      return { height: "680px", width: "99%" }; // mobile
+    }
+  };
+
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -31,7 +42,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
       const adjustedScrollFraction = Math.min((scrollTop / docHeight) * scrollFactor, 1);
       setScrollProgress(adjustedScrollFraction);
     };
-  
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -55,69 +66,76 @@ const Hero = ({ animationName, toggleAnimation }) => {
         intensity: 150,
       };
 
+  // dimensions for "Hi, I'm Elya" section based on screen size
+  const sectionDimensions = getResponsiveSectionDimensions();
+
   return (
     <section 
       id="home"
       className="relative border border-white border-opacity-20 w-full h-[60vh] sm:h-[130vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
     >
-    <div className="border border-white border-opacity-5 absolute 
-      w-[370px] md:w-[440px] lg:w-[630px]
-      left-1/2 md:left-1/3 lg:left-1/4 
-      top-1/2 md:top-1/4 lg:top-1/4
-      transform -translate-x-1/2 -translate-y-1/2 
-      px-4 md:px-6 lg:px-8
-      text-white 
-      bg-transparent z-20"
-    >
-      <h1 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 md:mb-6 lg:mb-8">
-        Hi, I'm Elya
-      </h1>
-      <p className="text-l md:text-2xl lg:text-3xl font-thin">
-        A Full-Stack Developer with a background in UI/UX, motion design, and 3D art.
-        <br className="hidden md:block" /><br />
-        <span className="block md:inline pt-2">Rooted in care, equity, and autonomy —</span>
-        <br className="hidden md:block" />
-        <span className="block mt-2 md:mt-0">I am dedicated to building secure tools that empower communities.</span>
-      </p>
-      <div className="flex flex-row items-center space-x-3 mt-6 md:mt-8 lg:mt-10">
-        <a
-          href="https://github.com/elya-le"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white text-sm inline-flex items-center border border-white rounded-full 
-            pl-3 pr-3 py-1.5 
-            transition-colors hover:bg-[#5F6600] bg-[#4C5200]
-            sm:w-auto justify-center sm:justify-start"
-        >
-          Github <span className="ml-1"><FiGithub /></span>
-        </a>
-        <a
-          href="mailto:elyaj.le@gmail.com"
-          className="text-white text-sm inline-flex items-center border border-white rounded-full 
-            pl-3 pr-3 py-1.5 
-            transition-colors hover:bg-[#5F6600] bg-[#4C5200]
-            sm:w-auto justify-center sm:justify-start"
-        >
-          Email <span className="ml-1"><AiOutlineMail /></span>
-        </a>
-        <label className=" toggle-switch flex items-center justify-center sm:justify-start w-full sm:w-auto">
-          <input
-            type="checkbox"
-            checked={animationName === "Fast"}
-            onChange={toggleAnimation}
-            className="hidden"
-          />
-          <span className="slider">
-            {animationName === "Fast" ? (
-              <LuTurtle className="icon-slow" />
-            ) : (
-              <PiShootingStarDuotone className="icon-star-power" />
-            )}
-          </span>
-        </label>
+      <div
+        className="border border-white border-opacity-5 absolute text-white bg-transparent z-20"
+        style={{
+          height: sectionDimensions.height,
+          width: sectionDimensions.width,
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          padding: screenWidth > 1024 ? "32px" : screenWidth > 768 ? "24px" : "16px",
+        }}
+      >
+        <h1 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 md:mb-6 lg:mb-8">
+          Hi, I'm Elya
+        </h1>
+        <p className="text-l md:text-2xl lg:text-3xl font-thin">
+          A Full-Stack Developer with a background in UI/UX, motion design, and 3D art.
+          <br className="hidden md:block" /><br />
+          <span className="block md:inline pt-2">Rooted in care, equity, and autonomy —</span>
+          <br className="hidden md:block" />
+          <span className="block mt-2 md:mt-0">I am dedicated to building secure tools that empower communities.</span>
+        </p>
+        <div className="flex flex-row items-center space-x-3 mt-6 md:mt-8 lg:mt-10">
+          <a
+            href="https://github.com/elya-le"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white text-sm inline-flex items-center border border-white rounded-full 
+              pl-3 pr-3 py-1.5 
+              transition-colors hover:bg-[#5F6600] bg-[#4C5200]
+              sm:w-auto justify-center sm:justify-start"
+          >
+            Github <span className="ml-1"><FiGithub /></span>
+          </a>
+          <a
+            href="mailto:elyaj.le@gmail.com"
+            className="text-white text-sm inline-flex items-center border border-white rounded-full 
+              pl-3 pr-3 py-1.5 
+              transition-colors hover:bg-[#5F6600] bg-[#4C5200]
+              sm:w-auto justify-center sm:justify-start"
+          >
+            Email <span className="ml-1"><AiOutlineMail /></span>
+          </a>
+          <label className="toggle-switch flex items-center justify-center sm:justify-start w-full sm:w-auto">
+            <input
+              type="checkbox"
+              checked={animationName === "Fast"}
+              onChange={toggleAnimation}
+              className="hidden"
+            />
+            <span className="slider">
+              {animationName === "Fast" ? (
+                <LuTurtle className="icon-slow" />
+              ) : (
+                <PiShootingStarDuotone className="icon-star-power" />
+              )}
+            </span>
+          </label>
         </div>
+        <p className="text-l md:text-2xl lg:text-3xl font-thin pt-2">
+          Resume available upon request.
+        </p>
       </div>
-      
       <Canvas
         className="w-full h-full z-10"
         style={{ height: "100%" }}
@@ -163,7 +181,7 @@ const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) =>
   const yEnd = screenWidth > 768 ? -6 : -6;
   const zEnd = screenWidth > 768 ? 6 : 8;
 
-  const startLookAt = screenWidth > 768 ? [-0.5, 0, .5] : [-0.5, 1, .5];
+  const startLookAt = screenWidth > 768 ? [-0.5, 0, 0.5] : [-0.5, 1, 0.5];
   const endLookAt = screenWidth > 768 ? [0, 0, 1] : [-1, 3, -1];
 
   useFrame(() => {
