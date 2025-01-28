@@ -20,11 +20,11 @@ const Hero = ({ animationName, toggleAnimation }) => {
   // dynamically calculate dimensions for the "Hi, I'm Elya" section
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
-      return { height: "450px", width: "630px" }; // fullscreen
-    } else if (screenWidth > 768) {
-      return { height: "340px", width: "600px" }; // tablet
+      return { height: "450px", width: "650px" }; // fullscreen
+    } else if (screenWidth > 668) {
+      return { height: "340px", width: "580px" }; // tablet
     } else {
-      return { height: "240px", width: "99%" }; // mobile
+      return { height: "240px", width: "400px" }; // mobile
     }
   };
 
@@ -76,9 +76,9 @@ const Hero = ({ animationName, toggleAnimation }) => {
     >
       <div
         className="pl-7 absolute text-white bg-transparent z-20
-        left-1/2 md:left-[40%] lg:left-1/3
+        left-1/2 md:left-[35%] lg:left-[32%]
         transform -translate-x-1/2 -translate-y-1/2 
-        top-[22%] md:top-[30%] lg:top-[40%]
+        top-[22%] md:top-[23%] lg:top-[35%]
         py-0 md:py-6
         px-4 md:px-6 lg:px-8
         "
@@ -98,11 +98,11 @@ const Hero = ({ animationName, toggleAnimation }) => {
           Hi, I'm Elya
         </h1>
         <p className="text-l md:text-2xl lg:text-3xl font-thin"> 
-          Full-Stack Developer with a background in <br />
-          UI/UX, motion design, 3D art & fabrication.
+          Full-Stack Developer with a background in<br />
+          UI/UX, motion design, 3D art and fabrication.
           <br className="hidden md:block" /><br />
           <span className="block md:inline pt-2">
-          Driven by beliefs rooted in care, equity & autonomy —
+          Driven by beliefs rooted in care, equity and autonomy —
           I am dedicated to building secure tools that empower communities.</span>
         </p>
         <div className="flex flex-row items-center space-x-3 mt-3 md:mt-8 lg:mt-10">
