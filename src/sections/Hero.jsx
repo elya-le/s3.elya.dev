@@ -78,7 +78,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
         className="absolute text-white bg-transparent z-20
         left-1/2 md:left-[40%] lg:left-1/3
         transform -translate-x-1/2 -translate-y-1/2 
-        top-[18%] md:top-[30%] lg:top-[40%]
+        top-[22%] md:top-[30%] lg:top-[40%]
         py-0 md:py-6
         px-4 md:px-6 lg:px-8
         "
@@ -94,10 +94,10 @@ const Hero = ({ animationName, toggleAnimation }) => {
           // padding: screenWidth > 1024 ? "32px" : screenWidth > 768 ? "24px" : "16px",
         }}
       >
-        <h1 className="text-xl md:text-4xl lg:text-6xl font-medium mb-1 md:mb-6 lg:mb-8">
+        <h1 className="text-xl md:text-4xl lg:text-6xl font mb-1 md:mb-6 lg:mb-8">
           Hi, I'm Elya
         </h1>
-        <p className="text-l md:text-2xl lg:text-3xl md:font-thin lg:font-thin"> 
+        <p className="text-l md:text-2xl lg:text-3xl font-thin"> 
           Full-Stack Developer with a background in UI/UX, motion design, and 3D art.
           <br className="hidden md:block" /><br />
           <span className="block md:inline pt-2">Rooted in care, equity, and autonomy —</span>
@@ -141,7 +141,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
             </span>
           </label>
         </div>
-        <p className="text-l md:text-xl lg:text-xl lg:font-thin pt-2">
+        <p className="text-l md:text-xl lg:text-xl font-thin pt-2">
           Resume available upon request.
         </p>
       </div>
@@ -186,12 +186,12 @@ const Hero = ({ animationName, toggleAnimation }) => {
 const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) => {
   const [baseX, baseY, baseZ] = basePosition;
 
-  const xEnd = screenWidth > 768 ? 4 : 3;
+  const xEnd = screenWidth > 768 ? 5 : 3;
   const yEnd = screenWidth > 768 ? -6 : -6;
-  const zEnd = screenWidth > 768 ? 6 : 8;
+  const zEnd = screenWidth > 768 ? 6.7 : 8;
 
   const startLookAt = screenWidth > 768 ? [-2, .9, 1] : [-0.5, 2, 0.5];
-  const endLookAt = screenWidth > 768 ? [0, 0, 1] : [-1, 3, -1];
+  const endLookAt = screenWidth > 768 ? [1, 0, 0] : [2, 4, 1];
 
   useFrame(() => {
     if (cameraRef.current) {
