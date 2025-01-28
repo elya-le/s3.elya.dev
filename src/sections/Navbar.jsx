@@ -13,7 +13,8 @@ const Navbar = () => {
   const heroRef = useRef(null);
 
   // typing animation variables
-  const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist"];
+  const words = [""];
+  // const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist"];  // <----------- comment back in
   const typingSpeed = 70; // milliseconds per character
   const delayBetweenWords = 2000; // delay before next word starts typing
   const cursorDelay = 500; // delay before showing cursor
@@ -46,7 +47,7 @@ const Navbar = () => {
     await new Promise((resolve) => setTimeout(resolve, flashDuration));
 
     // Add the dash after the flashing is done
-    setDisplayText("Elya —");
+    // setDisplayText("Elya —");  // <----------- comment back in
 
     // start typing words after the flash duration
     for (let i = 0; i < words.length; i++) {
@@ -57,7 +58,7 @@ const Navbar = () => {
       for (let j = 0; j <= word.length; j++) {
         await new Promise((resolve) => {
           setTimeout(() => {
-            setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during typing
+            // setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during typing  // <----------- comment back in
             resolve();
           }, typingSpeed);
         });
@@ -74,7 +75,7 @@ const Navbar = () => {
       for (let j = word.length; j >= 0; j--) {
         await new Promise((resolve) => {
           setTimeout(() => {
-            setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during erasing
+            // setDisplayText(`Elya — ${word.substring(0, j)}`); // remove underscore during erasing  // <----------- comment back in
             resolve();
           }, typingSpeed / 2);
         });
@@ -84,12 +85,12 @@ const Navbar = () => {
     // stop after one loop, type out "Full Stack Developer"
     setIsTyping(true);
 
-    const finalText = "Full Stack Developer ";
+    // const finalText = "Full Stack Developer ";  // <----------- comment back in
     // typing effect for the final "Full Stack Developer"
     for (let i = 0; i <= finalText.length; i++) {
       await new Promise((resolve) => {
         setTimeout(() => {
-          setDisplayText("Elya — " + finalText.substring(0, i)); // typing the final text
+          // setDisplayText("Elya — " + finalText.substring(0, i)); // typing the final text  // <----------- comment back in
           resolve();
         }, typingSpeed);
       });
@@ -100,8 +101,8 @@ const Navbar = () => {
     // add delay before showing the icon
     setTimeout(() => {
       setDisplayText([
-        "Elya — Full Stack Developer ",
-        <TfiLoop key="loop-icon" className="inline-block ml-1" style={{ marginBottom: "3px", fontSize: "15px" }} />,
+        // "Elya — Full Stack Developer ",  // <----------- comment back in
+        // <TfiLoop key="loop-icon" className="inline-block ml-1" style={{ marginBottom: "3px", fontSize: "15px" }} />,  // <----------- comment back in
       ]);
     }, 200); // 1-second delay before showing the icon
   };
@@ -144,8 +145,8 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* 'E' icon with typing effect */}
           <a href="#home" onClick={(e) => handleClick(e, "#home")} className="logo">
-            <span>{displayText}</span>
-            {isFlashing && displayText === "Elya" && <span className="flashing-underscore">_</span>}
+            {/* <span>{displayText}</span> */} {/* <-------- comment back in */} 
+            {/* {isFlashing && displayText === "Elya" && <span className="flashing-underscore">_</span>} */} {/* <-------- comment back in */} 
           </a>
 
           {/* hamburger menu (hidden on desktop) */}

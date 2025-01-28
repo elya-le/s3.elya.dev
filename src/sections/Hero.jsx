@@ -24,7 +24,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
     } else if (screenWidth > 768) {
       return { height: "340px", width: "800px" }; // tablet
     } else {
-      return { height: "680px", width: "99%" }; // mobile
+      return { height: "360px", width: "99%" }; // mobile
     }
   };
 
@@ -77,8 +77,9 @@ const Hero = ({ animationName, toggleAnimation }) => {
       <div
         className="border border-white border-opacity-5 absolute text-white bg-transparent z-20
         left-1/2 md:left-1/2 lg:left-1/3
-        top-1/2 md:top-1/2 lg:top-1/3 
+        top-1/3 md:top-1/2 lg:top-1/3 
         transform -translate-x-1/2 -translate-y-1/2 
+        py-20 md:py-6 lg:py-8
         px-4 md:px-6 lg:px-8
         "
         style={{
