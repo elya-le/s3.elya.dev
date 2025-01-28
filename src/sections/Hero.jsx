@@ -38,7 +38,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollFactor = 8;
+      const scrollFactor = 14;
       const adjustedScrollFraction = Math.min((scrollTop / docHeight) * scrollFactor, 1);
       setScrollProgress(adjustedScrollFraction);
     };
@@ -72,10 +72,10 @@ const Hero = ({ animationName, toggleAnimation }) => {
   return (
     <section 
       id="home"
-      className="relative border border-white border-opacity-20 w-full h-[90vh] sm:h-[100vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
+      className="relative z-10 w-full h-[90vh] sm:h-[100vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
     >
       <div
-        className="absolute text-white bg-transparent z-20
+        className="pl-7 absolute text-white bg-transparent z-20
         left-1/2 md:left-[40%] lg:left-1/3
         transform -translate-x-1/2 -translate-y-1/2 
         top-[22%] md:top-[30%] lg:top-[40%]
@@ -98,11 +98,12 @@ const Hero = ({ animationName, toggleAnimation }) => {
           Hi, I'm Elya
         </h1>
         <p className="text-l md:text-2xl lg:text-3xl font-thin"> 
-          Full-Stack Developer with a background in UI/UX, motion design, and 3D art.
+          Full-Stack Developer with a background in <br />
+          UI/UX, motion design, 3D art & fabrication.
           <br className="hidden md:block" /><br />
-          <span className="block md:inline pt-2">Rooted in care, equity, and autonomy —</span>
-          <br className="hidden md:block" />
-          <span className="block">I am dedicated to building secure tools that empower communities.</span>
+          <span className="block md:inline pt-2">
+          Driven by beliefs rooted in care, equity & autonomy —
+          I am dedicated to building secure tools that empower communities.</span>
         </p>
         <div className="flex flex-row items-center space-x-3 mt-3 md:mt-8 lg:mt-10">
           <a
@@ -186,12 +187,12 @@ const Hero = ({ animationName, toggleAnimation }) => {
 const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) => {
   const [baseX, baseY, baseZ] = basePosition;
 
-  const xEnd = screenWidth > 768 ? 5 : 3;
-  const yEnd = screenWidth > 768 ? -6 : -6;
-  const zEnd = screenWidth > 768 ? 6.7 : 8;
+  const xEnd = screenWidth > 768 ? 5 : 8;
+  const yEnd = screenWidth > 768 ? -3 : -4;
+  const zEnd = screenWidth > 768 ? 6.7 : 10;
 
-  const startLookAt = screenWidth > 768 ? [-2, .9, 1] : [-0.5, 2, 0.5];
-  const endLookAt = screenWidth > 768 ? [1, 0, 0] : [2, 4, 1];
+  const startLookAt = screenWidth > 768 ? [-2, .9, 1] : [-0.5, 3, 0.5];
+  const endLookAt = screenWidth > 768 ? [1, 2, 0] : [0, 5.5, 0];
 
   useFrame(() => {
     if (cameraRef.current) {

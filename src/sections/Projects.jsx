@@ -133,13 +133,31 @@ const Projects = () => {
       }
     }
   };
+  const getOverlapHeight = () => {
+    if (screenWidth > 1024) {
+      return "20vh"; // desktop overlap
+    } else if (screenWidth > 768) {
+      return "15vh"; // tablet overlap
+    } else {
+      return "10vh"; // mobile overlap
+    }
+  };
 
   return (
     <section
       className="projects-section relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
       id="projects"
+      style={{
+        marginTop: `-${getOverlapHeight()}`, // create negative margin for overlap
+        position: 'relative',
+        background: `linear-gradient(to bottom, transparent ${getOverlapHeight()}, #191B00 ${getOverlapHeight()})`, // gradient background for smooth transition
+        paddingTop: getOverlapHeight(), // add padding to compensate for overlap
+      }}
     >
       {/* header dection for "Selected Projects" */}
+      <div className="relative z-20">
+        
+      </div>
       <div
         style={{
           height: responsiveSectionDimensions.height,
@@ -151,7 +169,7 @@ const Projects = () => {
         </div>
         {/* project grid container */}
         <div
-          className="relative bg-opacity-80 flex flex-col justify-center bg-[#191B00] h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
+          className="relative bg-opacity-80 flex flex-col justify-center  bg-opacity-25 h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
           style={{
             backgroundColor: "#262900",
           }}
