@@ -22,7 +22,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
     if (screenWidth > 1024) {
       return { height: "450px", width: "630px" }; // fullscreen
     } else if (screenWidth > 768) {
-      return { height: "340px", width: "800px" }; // tablet
+      return { height: "340px", width: "600px" }; // tablet
     } else {
       return { height: "240px", width: "99%" }; // mobile
     }
@@ -38,7 +38,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollFactor = 4.6;
+      const scrollFactor = 8;
       const adjustedScrollFraction = Math.min((scrollTop / docHeight) * scrollFactor, 1);
       setScrollProgress(adjustedScrollFraction);
     };
@@ -47,7 +47,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const getBasePosition = () => (screenWidth > 768 ? [-4, 3, 5] : [-5, 4, 6]);
+  const getBasePosition = () => (screenWidth > 768 ? [-4, 3, 5] : [-8, 7, 7]);
   const getCatScale = () => (screenWidth > 1024 ? 1 : screenWidth > 768 ? 1 : 1.5);
 
   const rectLightSettings = screenWidth > 768 
@@ -72,13 +72,13 @@ const Hero = ({ animationName, toggleAnimation }) => {
   return (
     <section 
       id="home"
-      className="relative border border-white border-opacity-20 w-full h-[80vh] sm:h-[100vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
+      className="relative border border-white border-opacity-20 w-full h-[90vh] sm:h-[100vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
     >
       <div
-        className="border border-white border-opacity-5 absolute text-white bg-transparent z-20
-        left-1/2 md:left-1/2 lg:left-1/3
+        className="absolute text-white bg-transparent z-20
+        left-1/2 md:left-[40%] lg:left-1/3
         transform -translate-x-1/2 -translate-y-1/2 
-        top-[20%] md:top-[60%] lg:top-[40%]
+        top-[18%] md:top-[30%] lg:top-[40%]
         py-0 md:py-6
         px-4 md:px-6 lg:px-8
         "
@@ -94,11 +94,11 @@ const Hero = ({ animationName, toggleAnimation }) => {
           // padding: screenWidth > 1024 ? "32px" : screenWidth > 768 ? "24px" : "16px",
         }}
       >
-        <h1 className="text-2xl md:text-4xl lg:text-6xl font-medium mb-1 md:mb-6 lg:mb-8">
+        <h1 className="text-xl md:text-4xl lg:text-6xl font-medium mb-1 md:mb-6 lg:mb-8">
           Hi, I'm Elya
         </h1>
         <p className="text-l md:text-2xl lg:text-3xl md:font-thin lg:font-thin"> 
-          A Full-Stack Developer with a background in UI/UX, motion design, and 3D art.
+          Full-Stack Developer with a background in UI/UX, motion design, and 3D art.
           <br className="hidden md:block" /><br />
           <span className="block md:inline pt-2">Rooted in care, equity, and autonomy —</span>
           <br className="hidden md:block" />
@@ -190,7 +190,7 @@ const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) =>
   const yEnd = screenWidth > 768 ? -6 : -6;
   const zEnd = screenWidth > 768 ? 6 : 8;
 
-  const startLookAt = screenWidth > 768 ? [-0.5, 0, 0.5] : [-0.5, 1, 0.5];
+  const startLookAt = screenWidth > 768 ? [-2, .9, 1] : [-0.5, 2, 0.5];
   const endLookAt = screenWidth > 768 ? [0, 0, 1] : [-1, 3, -1];
 
   useFrame(() => {
