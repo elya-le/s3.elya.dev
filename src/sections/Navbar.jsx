@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { navLinks } from "../constants/index.js"; // ensure this is correctly imported
+import { Link } from "react-router-dom";  // Import Link correctly
+import { navLinks } from "../constants/index.js"; // Ensure this is correctly imported
 import { TfiLoop } from "react-icons/tfi";
 
 const Navbar = () => {
@@ -12,7 +13,7 @@ const Navbar = () => {
   const heroRef = useRef(null);
 
   // typing animation variables
-  const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist", "Hi Papi!! Tank u - I wuv yewn, mhm!"];  
+  const words = ["Full Stack Developer", "Motion Designer", "Fabricator", "3D Artist"];
   const typingSpeed = 70; // milliseconds per character
   const delayBetweenWords = 2000; // delay before next word starts typing
   const cursorDelay = 500; // delay before showing cursor
@@ -156,8 +157,9 @@ const Navbar = () => {
           <ul className="hidden md:flex space-x-4 items-center ml-auto">
             {navLinks.map((link) => (
               <li key={link.id}>
-                <a
-                  href={link.href}
+                {/* Updated to use Link for routing */}
+                <Link
+                  to={link.href}
                   onClick={(e) => handleClick(e, link.href)}
                   className={`px-4 py-2 ${
                     activeLink === link.href
@@ -166,7 +168,7 @@ const Navbar = () => {
                   } hover:text-white hover:opacity-100`}
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -180,8 +182,9 @@ const Navbar = () => {
         >
           {navLinks.map((link) => (
             <li key={link.id} className="my-2">
-              <a
-                href={link.href}
+              {/* Updated to use Link for routing */}
+              <Link
+                to={link.href}
                 onClick={(e) => handleClick(e, link.href)}
                 className={`px-4 py-2 ${
                   activeLink === link.href
@@ -190,7 +193,7 @@ const Navbar = () => {
                 } hover:text-white hover:opacity-100`}
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

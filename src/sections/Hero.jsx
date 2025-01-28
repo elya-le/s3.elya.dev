@@ -1,77 +1,125 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber"; // fiber for 3d rendering
-import { PerspectiveCamera } from "@react-three/drei"; // drei for easier 3d setups
-import { Suspense } from "react"; // react suspense for lazy loading
-import CanvasLoader from "../components/CanvasLoader"; // component to display a loader while 3d elements are loading
-import Cat from "../components/Cat.jsx"; // custom 3d cat model component
-import "./Hero.css"; // import specific styles for hero component
+import { Canvas, useFrame } from "@react-three/fiber";
+import { PerspectiveCamera } from "@react-three/drei";
+import { Suspense } from "react";
+import CanvasLoader from "../components/CanvasLoader";
+import Cat from "../components/Cat.jsx";
+import "./Hero.css";
+import { AiOutlineMail } from "react-icons/ai";
+import { FiGithub } from "react-icons/fi";
+import { LuTurtle } from "react-icons/lu";
+import { PiShootingStarDuotone } from "react-icons/pi";
 
-// hero component to render the 3d scene and toggle animation
-const Hero = ({ animationName }) => {
-  const rectLightRef = useRef(); // reference for the rectangle area light
-  const catRef = useRef(); // reference for the cat model
-  const cameraRef = useRef(); // reference for the perspectivecamera
-  const [scrollProgress, setScrollProgress] = useState(0); // track the user's scroll progress
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // track the current screen width
+const Hero = ({ animationName, toggleAnimation }) => {
+  const rectLightRef = useRef();
+  const catRef = useRef();
+  const cameraRef = useRef();
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  // handle screen resizing and update the state
   useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth); // update screen width
-    window.addEventListener("resize", handleResize); // add resize listener
-    return () => window.removeEventListener("resize", handleResize); // cleanup listener on unmount
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // track scroll progress to adjust the camera's position
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY; // current scroll position
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight; // total scrollable height
-      
-      // adjust the scroll fraction to amplify the effect of scrolling
-      const scrollFactor = 4.6; // decrease this value to require less scrolling
-      const adjustedScrollFraction = Math.min((scrollTop / docHeight) * scrollFactor, 1); // clamp to [0, 1]
-  
-      setScrollProgress(adjustedScrollFraction); // update scroll progress
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollFactor = 4.6;
+      const adjustedScrollFraction = Math.min((scrollTop / docHeight) * scrollFactor, 1);
+      setScrollProgress(adjustedScrollFraction);
     };
   
-    window.addEventListener("scroll", handleScroll); // add scroll listener
-    return () => window.removeEventListener("scroll", handleScroll); // cleanup listener on unmount
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // determine the base position of the camera based on screen width
-  const getBasePosition = () => (screenWidth > 768 ? [-4, 3, 5] : [-5, 4, 6]); // [x, y, z]
-
-  // determine the scale of the cat model based on screen width
+  const getBasePosition = () => (screenWidth > 768 ? [-4, 3, 5] : [-5, 4, 6]);
   const getCatScale = () => (screenWidth > 1024 ? 1 : screenWidth > 768 ? 1 : 1.5);
 
-  // settings for the rectangle area light based on screen width
   const rectLightSettings = screenWidth > 768 
     ? {
-        position: [-0.4, 1.4, 1.6], // light's position for larger screens
-        rotation: [0.1, 0, 0], // light's rotation
-        width: 1.2, // light's width
-        height: 0.9, // light's height
-        intensity: 30, // brightness of the light
+        position: [-0.4, 1.4, 1.6],
+        rotation: [0.1, 0, 0],
+        width: 1.2,
+        height: 0.9,
+        intensity: 30,
       }
     : {
-        position: [-0.532, 1.862, 2.428], // light's position for smaller screens
-        rotation: [0.1, 0, 0], // light's rotation
-        width: 1.0, // light's width
-        height: 0.7, // light's height
-        intensity: 150, // brightness of the light
+        position: [-0.532, 1.862, 2.428],
+        rotation: [0.1, 0, 0],
+        width: 1.0,
+        height: 0.7,
+        intensity: 150,
       };
-
-  // log debugging information
-  // console.log("screen width:", screenWidth);
-  // console.log("scroll progress:", scrollProgress);
 
   return (
     <section 
-    id="home"
-    className="relative w-full h-[60vh] sm:h-[130vh] bg-black bg-opacity-35 flex items-center justify-center z-10">
-      {/* canvas */}
+      id="home"
+      className="relative border border-white border-opacity-20 w-full h-[60vh] sm:h-[130vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
+    >
+    <div className="border border-white border-opacity-5 absolute 
+      w-[370px] md:w-[440px] lg:w-[630px]
+      left-1/2 md:left-1/3 lg:left-1/4 
+      top-1/2 md:top-1/4 lg:top-1/4
+      transform -translate-x-1/2 -translate-y-1/2 
+      px-4 md:px-6 lg:px-8
+      text-white 
+      bg-transparent z-20"
+    >
+      <h1 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 md:mb-6 lg:mb-8">
+        Hi, I'm Elya
+      </h1>
+      <p className="text-l md:text-2xl lg:text-3xl font-thin">
+        A Full-Stack Developer with a background in UI/UX, motion design, and 3D art.
+        <br className="hidden md:block" /><br />
+        <span className="block md:inline pt-2">Rooted in care, equity, and autonomy —</span>
+        <br className="hidden md:block" />
+        <span className="block mt-2 md:mt-0">I am dedicated to building secure tools that empower communities.</span>
+      </p>
+      <div className="flex flex-row items-center space-x-3 mt-6 md:mt-8 lg:mt-10">
+        <a
+          href="https://github.com/elya-le"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white text-sm inline-flex items-center border border-white rounded-full 
+            pl-3 pr-3 py-1.5 
+            transition-colors hover:bg-[#5F6600] bg-[#4C5200]
+            sm:w-auto justify-center sm:justify-start"
+        >
+          Github <span className="ml-1"><FiGithub /></span>
+        </a>
+        <a
+          href="mailto:elyaj.le@gmail.com"
+          className="text-white text-sm inline-flex items-center border border-white rounded-full 
+            pl-3 pr-3 py-1.5 
+            transition-colors hover:bg-[#5F6600] bg-[#4C5200]
+            sm:w-auto justify-center sm:justify-start"
+        >
+          Email <span className="ml-1"><AiOutlineMail /></span>
+        </a>
+        <label className=" toggle-switch flex items-center justify-center sm:justify-start w-full sm:w-auto">
+          <input
+            type="checkbox"
+            checked={animationName === "Fast"}
+            onChange={toggleAnimation}
+            className="hidden"
+          />
+          <span className="slider">
+            {animationName === "Fast" ? (
+              <LuTurtle className="icon-slow" />
+            ) : (
+              <PiShootingStarDuotone className="icon-star-power" />
+            )}
+          </span>
+        </label>
+        </div>
+      </div>
+      
       <Canvas
-        className="w-full h-full"
+        className="w-full h-full z-10"
         style={{ height: "100%" }}
         onPointerDown={(e) => e.stopPropagation()}
         onWheel={(e) => e.stopPropagation()}
@@ -82,7 +130,7 @@ const Hero = ({ animationName }) => {
             scrollProgress={scrollProgress}
             cameraRef={cameraRef}
             basePosition={getBasePosition()}
-            screenWidth={screenWidth} // pass screen width to camera zoom
+            screenWidth={screenWidth}
           />
           <color attach="background" args={["#191B00"]} />
           <rectAreaLight
@@ -108,39 +156,30 @@ const Hero = ({ animationName }) => {
   );
 };
 
-// component to manage camera movement with scroll
 const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) => {
   const [baseX, baseY, baseZ] = basePosition;
 
-  // set different end positions for desktop vs. mobile
-  const xEnd = screenWidth > 768 ? 4 : 3; 
-  const yEnd = screenWidth > 768 ? -6 : -6; 
+  const xEnd = screenWidth > 768 ? 4 : 3;
+  const yEnd = screenWidth > 768 ? -6 : -6;
   const zEnd = screenWidth > 768 ? 6 : 8;
 
-  // define distinct lookAt points for start and end of scroll
-  const startLookAt = screenWidth > 768 ? [-0.5, 0, .5] : [-0.5, 1, .5]; // initial look-at point
-  const endLookAt = screenWidth > 768 ? [0, 0, 1] : [-1, 3, -1]; // final look-at point for mobile
+  const startLookAt = screenWidth > 768 ? [-0.5, 0, .5] : [-0.5, 1, .5];
+  const endLookAt = screenWidth > 768 ? [0, 0, 1] : [-1, 3, -1];
 
   useFrame(() => {
     if (cameraRef.current) {
-      const progress = Math.min(Math.max(scrollProgress, 0), 1); // clamp progress to [0, 1]
+      const progress = Math.min(Math.max(scrollProgress, 0), 1);
 
-      // interpolate camera position based on scroll progress
-      const xPos = baseX + progress * xEnd; 
-      const yPos = baseY - progress * yEnd; 
-      const zPos = baseZ - progress * zEnd; 
+      const xPos = baseX + progress * xEnd;
+      const yPos = baseY - progress * yEnd;
+      const zPos = baseZ - progress * zEnd;
 
-      // interpolate `lookAt` position
       const currentLookAt = startLookAt.map(
         (start, index) => start + progress * (endLookAt[index] - start)
       );
 
-      // debugging logs
-      // console.log("camera position:", { xPos, yPos, zPos });
-      // console.log("look-at point:", currentLookAt);
-
-      cameraRef.current.position.set(xPos, yPos, zPos); // update camera position
-      cameraRef.current.lookAt(...currentLookAt); // update camera look-at point
+      cameraRef.current.position.set(xPos, yPos, zPos);
+      cameraRef.current.lookAt(...currentLookAt);
     }
   });
 

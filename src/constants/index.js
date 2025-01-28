@@ -1,14 +1,13 @@
 export const navLinks = [
   { id: 1, name: "Code Projects", href: "#projects" },
   { id: 2, name: "Contact", href: "#contact" },
-  { id: 3, name: "Other Projects", href: "#non-code-projects" },
-  // { id: 4, name: "Github", href: "https://github.com/elya-le" },
+  { id: 3, name: "Additional Work", href: "/non-code-projects" }, // Ensure this points to your route
 ];
 
 export const myProjects = [
   {
     title: 'Communication App',
-    desc: 'Online community space with real-time messaging, custom servers and channels',
+    desc: 'Online community space with real-time messaging, custom servers and channels.',
     subdesc: 
     `Focus: <span class="font-thin">Learning and implementing real-time communication with web sockets. (2-week build deadline)</span><br><br>
 Result: <span class="font-thin"> Delivered a precise, high-quality web app while expanding my technical skills, and proficiency in real-time communication systems. (3 feature CRUD)</span>`,
@@ -30,7 +29,7 @@ Result: <span class="font-thin"> Delivered a precise, high-quality web app while
   },
   {
     title: 'E-commerce Platform',
-    desc: 'Buy and sell online marketplace for unique, handmade and vintage items',
+    desc: 'Online marketplace for unique, handmade and vintage items.',
     subdesc: `Focus: <span class="font-thin"> Team collaboration, asynchronous development, version control, and feature integration. (2-week build deadline)</span><br><br>
 Result: <span class="font-thin"> Delivered a React web app using agile workflows and pull requests to ensure cohesion and conflict resolution. (4 feature CRUD)</span>
 `,
@@ -52,7 +51,7 @@ Result: <span class="font-thin"> Delivered a React web app using agile workflows
   },
   {
     title: 'Event Platform',
-    desc: 'Connecting dog owners through event discovery, planning and community organization',
+    desc: 'Connecting dog owners through event discovery, planning and community organization.',
     subdesc: 
     `Focus:<span class="font-thin"> First independent full-stack social platform. (4-week build deadline)</span><br><br>
 Result:<span class="font-thin"> A fully functional app that equips users in organizing and joining local meetups, showcasing my proficiency in backend and frontend integration. (2 feature CRUD)</span>`,
@@ -74,7 +73,7 @@ Result:<span class="font-thin"> A fully functional app that equips users in orga
   },
   {
     title: 'Current Portfolio Site',
-    desc: 'Combining my love for 3D modeling, motion design and web development',
+    desc: 'Combining my love for 3D modeling, motion design, and web development.',
     subdesc:
     `Focus:<span class="font-thin"> Challenge myself to learn Three.js, Tailwind and Blender to design and build Elya.dev.<br><br>
 Result:<span class="font-thin"> A clean, interactive site that highlights 3D elements and innovative design techniques.`,
@@ -99,21 +98,21 @@ export const otherProjects = [
     desc: ' ',
     subdesc: 
     `
-    <p>Client: <span class="font-thin">Personal Project</span><br><br>
-      My Role: <span class="font-thin">Artist, Lead Fabricator, Project Manager
+    <p>
+      Role: <span class="font-thin">Project Manager, Creative Director
     </span><br><br>
     <span class="font-thin">
       Designed an art installation for Burning Man, combining woodworking, CAD design, and collaborative fabrication.
-    </span><br><br>
-      Key Responsibilities: 
-    <span class="font-thin"><br> 
-      - Utilized CAD tools for design and construction.<br> 
-      - Led the woodworking and assembly.<br> 
-      - Ensured structural integrity and artistic cohesion.
-    </span><br><br>
       Lighting Engineer & Sponsor: <span class="font-thin">Richerd Chan 
-    `,
+      `,
     // — Extra special thanks to my family Kari, Jessie, Santana, Jason, Olivia, Kevin, Belinda, Ray, Ryan, and AFC for the support in this build.
+      // </span><br><br>
+      //   Key Responsibilities: 
+      // <span class="font-thin"><br> 
+      //   - Utilized CAD tools for design and construction.<br> 
+      //   - Led the woodworking and assembly.<br> 
+      //   - Ensured structural integrity and artistic cohesion.
+      // </span><br><br>
     liveLink: '',
     repoLink: '',
     // videoLink: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_2018.MOV', // added video link
@@ -138,19 +137,19 @@ export const otherProjects = [
     subdesc: 
     `
     <p>Client: <span class="font-thin">Verizon | iHeart Radio</span><br><br>
-    My Role: <span class="font-thin">Fabrication Lead</span><br>
+    Role: <span class="font-thin">Fabrication Lead</span><br>
     <span class="font-thin">In partnership with <a href="https://www.hellothereyou.com/" style="text-decoration: underline;">HelloThereYou</a> & <a href="https://www.instagram.com/bymadelinejo/" style="text-decoration: underline;">Madeline Jo</a></span><br><br>
     <span class="font-thin">
     Built custom activations for top brands, providing an engaging photo/video experience for event attendees.
     </span><br><br>
-    Key Responsibilities: <span class="font-thin"><br>
-      - Fabrication, design, curation of props and materials<br>
-      - Align branding and visuals for share-worthy photos
-    </span><br><br>
     <span class="font-thin">
-      Extra special thanks to Patrick for entrusting me with taking on a bigger role with these activations.
+    Extra special thanks to Patrick for entrusting me with taking on a bigger role with these activations.
     </span>
     `,
+    // Key Responsibilities: <span class="font-thin"><br>
+    //   - Fabrication, design, curation of props and materials<br>
+    //   - Align branding and visuals for share-worthy photos
+    // </span><br><br>
     liveLink: '',
     repoLink: '',
     videoLink: "https://player.vimeo.com/video/495062523?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
@@ -173,12 +172,12 @@ export const otherProjects = [
     <span class="font-thin">
     This project defined WaFd Bank’s visual identity in their Seattle headquarters with 12-foot video walls in the Main Entry and an 8-foot video wall in the Interior Lobby, featuring 50+ custom animations.
     </span><br><br>
-    Key Responsibilities: <span class="font-thin"><br>
-    - Delivered 50+ animations under tight deadlines<br>
-    - Maintained consistent visual identity<br>
-    - Ensured seamless integration for a high-impact installation<br>
-    </span></p>
     `,
+    // Key Responsibilities: <span class="font-thin"><br>
+    // - Delivered 50+ animations under tight deadlines<br>
+    // - Maintained consistent visual identity<br>
+    // - Ensured seamless integration for a high-impact installation<br>
+    // </span></p>
     liveLink: '',
     repoLink: '',
     videoLink: "https://player.vimeo.com/video/494869220?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",

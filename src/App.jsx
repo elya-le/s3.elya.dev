@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Use Routes instead of Switch
 import Navbar from "./sections/Navbar.jsx";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
-import About from "./sections/About";
+// import About from "./sections/About";
 import FormSpree from "./sections/FormSpree.jsx";  
 import NonCodeProjects from "./sections/NonCodeProjects"; 
 import Footer from "./sections/Footer.jsx";
@@ -19,17 +20,31 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-    <Navbar />
-    <main>
-      <Hero animationName={animationName} toggleAnimation={toggleAnimation} />
-      <About animationName={animationName} toggleAnimation={toggleAnimation} />
-      <Projects />
-      <FormSpree />
-      <NonCodeProjects />
-    </main>
-    <Footer />
-  </div>
+    <Router> {/* wrap everything in Router */}
+      <div className="App">
+        <Navbar />
+        <main>
+          <Routes>
+            {/* Home Page (Hero, About, Projects, FormSpree all on the same page) */}
+            <Route 
+              path="/" 
+              element={
+                <>
+                  <Hero animationName={animationName} toggleAnimation={toggleAnimation} />
+                  {/* <About animationName={animationName} toggleAnimation={toggleAnimation} /> */}
+                  <Projects />
+                  <FormSpree />
+                </>
+              } 
+            />
+            
+            {/* Non-Code Projects Page (separate page for non-code projects) */}
+            <Route path="/non-code-projects" element={<NonCodeProjects />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 };
 
