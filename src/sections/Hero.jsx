@@ -118,7 +118,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
             Github <span className="ml-1"><FiGithub /></span>
           </a>
           <a
-            href="mailto:elyaj.le@gmail.com"
+            href="mailto:hello@elya.dev"
             className="text-white text-sm inline-flex items-center border border-white rounded-full 
               pl-3 pr-3 py-1.5 
               transition-colors hover:bg-[#5F6600] bg-[#4C5200]
