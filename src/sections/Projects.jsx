@@ -61,7 +61,7 @@ const Projects = () => {
     } else if (screenWidth > 768) {
       return { height: "750px", width: "800px" }; // tablet
     } else {
-      return { height: "680px", width: "99%" }; // mobile
+      return { height: "650px", width: "99%" }; // mobile
     }
   };
 
@@ -154,7 +154,7 @@ const Projects = () => {
     if (!projectsSectionRef.current) return 0;
     const sectionTop = projectsSectionRef.current.offsetTop;
     const scrolled = Math.max(0, scrollPosition - sectionTop + window.innerHeight);
-    return Math.min(scrolled * 0.2, window.innerHeight * 0.2); // Maximum 20% parallax
+    return Math.min(scrolled * 0.4, window.innerHeight * 0.1); // Maximum 20% parallax
   };
 
   return (

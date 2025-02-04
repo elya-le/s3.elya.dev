@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RiSendPlaneLine } from 'react-icons/ri'; // For the send button icon
+import { RiSendPlaneLine } from 'react-icons/ri'; // for the send button icon
 
 const ContactForm = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -17,7 +17,7 @@ const ContactForm = () => {
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
       return { height: "400px", width: "900px" }; // fullscreen
-    } else if (screenWidth > 768) {
+    } else if (screenWidth > 715) {
       return { height: "400px", width: "800px" }; // tablet
     } else {
       return { height: "700px", width: "99%" }; // mobile
@@ -59,7 +59,7 @@ const ContactForm = () => {
 
   return (
     <section 
-      className="contact-section flex flex-col items-center justify-center bg-[#191B00] p-4"
+      className="contact-section flex flex-col items-center justify-center bg-[#191B00] p-4 -mt-24"
       id="contact">
       <div
         style={{
@@ -67,7 +67,7 @@ const ContactForm = () => {
           width: responsiveSectionDimensions.width,
         }}>
         <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
-          <p className="text-white text-lg sm:text-xl font-thin">Lets build together!</p>
+          <p className="text-white text-lg sm:text-xl font-thin">Lets build together!!</p>
         </div>
         <div className="w-full flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
           <div className="w-full sm:w-1/2 bg-[#262900] p-6">

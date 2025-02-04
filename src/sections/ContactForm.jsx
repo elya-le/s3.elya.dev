@@ -87,7 +87,7 @@ const ContactForm = () => {
 
   return (
     <section 
-      className="border flex flex-col items-center justify-center bg-[#191B00] p-4"
+      className="border-4 border-blue-500  flex flex-col items-center justify-center bg-[#191B00] p-4"
       // id="contact"
     >
       <div
@@ -129,7 +129,6 @@ const ContactForm = () => {
                 />
               </div>
               <div className="relative">
-                
                 <input
                   type="email"
                   id="email"

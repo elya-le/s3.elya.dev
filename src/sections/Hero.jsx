@@ -72,13 +72,13 @@ const Hero = ({ animationName, toggleAnimation }) => {
   return (
     <section 
       id="home"
-      className="relative z-10 w-full h-[90vh] sm:h-[140vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
+      className="relative z-10 w-full h-[100vh] sm:h-[120vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
     >
       <div
         className="pl-7 absolute text-white bg-transparent z-20
         left-1/2 md:left-[35%] lg:left-[37%]
         transform -translate-x-1/2 -translate-y-1/2 
-        top-[22%] md:top-[23%] lg:top-[25%]
+        top-[22%] md:top-[23%] lg:top-[38%]
         py-0 md:py-6
         px-4 md:px-6 lg:px-8
         "
@@ -191,8 +191,8 @@ const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) =>
   const yEnd = screenWidth > 768 ? -3 : -4;
   const zEnd = screenWidth > 768 ? 6.7 : 10;
 
-  const startLookAt = screenWidth > 768 ? [-2, .9, 1] : [-0.5, 3, 0.5];
-  const endLookAt = screenWidth > 768 ? [.5, 1, -.2] : [0, 5.5, 0];
+  const startLookAt = screenWidth > 768 ? [-2, 1.0, .2] : [-0.5, 3, 0.5];
+  const endLookAt = screenWidth > 768 ? [.5, 1, .4] : [0, .5, 0];
 
   useFrame(() => {
     if (cameraRef.current) {
