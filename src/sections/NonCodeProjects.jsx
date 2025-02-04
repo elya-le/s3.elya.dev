@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { GoArrowUpRight, GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { otherProjects } from "../constants/index.js";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
@@ -31,11 +31,11 @@ const NonCodeProjects = () => {
 
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
-      return { height: "930px", width: "900px" };
+      return { height: "630px", width: "900px" };
     } else if (screenWidth > 768) {
-      return { height: "960px", width: "800px" };
+      return { height: "660px", width: "800px" };
     } else {
-      return { height: "800px", width: "99%" };
+      return { height: "600px", width: "99%" };
     }
   };
 
@@ -45,20 +45,31 @@ const NonCodeProjects = () => {
     } else if (screenWidth > 768) {
       return { height: 350, width: 600 };
     } else {
-      return { height: 260, width: 390 };
+      return { height: 290, width: 390 };
     }
   };
 
   const getResponsiveSubdescHeight = () => {
     if (screenWidth > 1024) {
-      return "360px";
+      return "160px";
     } else if (screenWidth > 768) {
       return "390px";
     } else {
-      return "300px";
+      return "140px";
     }
   };
 
+  const getResponsiveVideoSize = () => {
+    if (screenWidth > 1024) {
+      return { height: "480px", width: "900px" };
+    } else if (screenWidth > 768) {
+      return { height: "400px", width: "700px" };
+    } else {
+      return { height: "200px", width: "100%" };
+    }
+  };
+  
+  const responsiveVideoSize = getResponsiveVideoSize();
   const responsiveSectionDimensions = getResponsiveSectionDimensions();
   const responsiveImageSize = getResponsiveImageSize();
   const subdescHeight = getResponsiveSubdescHeight();
@@ -118,19 +129,20 @@ const NonCodeProjects = () => {
   };
 
   return (
-    <section
-      className="non-code-projects relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
-      id="non-code-projects"
-    >
-      <div
-        style={{
-          height: responsiveSectionDimensions.height,
-          width: responsiveSectionDimensions.width,
-        }}
+    <div className="min-h-screen bg-[#191B00] pt-20">
+      <section
+        className="non-code-projects relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
+        id="non-code-projects"
       >
-        <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
-          <p className="text-white text-lg sm:text-xl font-thin">Selected Projects (Not Code Focused)</p>
-        </div>
+        <div
+          style={{
+            height: responsiveSectionDimensions.height,
+            width: responsiveSectionDimensions.width,
+          }}
+        >
+          <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
+            <p className="text-white text-lg sm:text-xl font-thin">Non-Code Projects</p>
+          </div>
         <div
           className="relative bg-opacity-80 flex flex-col justify-center bg-[#191B00] h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
           style={{ backgroundColor: "#262900" }}
@@ -169,31 +181,31 @@ const NonCodeProjects = () => {
                   </div>
                 ))}
 
-              {videoSrc && (
-                <div className="border video-container mt-4">
-                  <iframe
-                    src={`${videoSrc}?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0`}
-                    width="100%"
-                    height="400"
-                    style={{ borderRadius: "8px", border: "none" }}
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              )}
+                {videoSrc && (
+                  <div className="video-container mt-4" style={{ width: responsiveVideoSize.width }}>
+                    <iframe
+                      src={`${videoSrc}?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0`}
+                      width="100%"
+                      height={responsiveVideoSize.height}
+                      style={{ borderRadius: "8px", border: "none" }}
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                )}
 
-              {currentProject.videoLink && (
-                <div className="border border-white border-opacity-10 video-container mt-4">
-                  <iframe
-                    src={`${currentProject.videoLink}?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0`}
-                    width="100%"
-                    height="400"
-                    style={{ borderRadius: "8px", border: "none" }}
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              )}
+                {currentProject.videoLink && (
+                  <div className="video-container mt-4" style={{ width: responsiveVideoSize.width }}>
+                    <iframe
+                      src={`${currentProject.videoLink}?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0`}
+                      width="100%"
+                      height={responsiveVideoSize.height}
+                      style={{ borderRadius: "8px", border: "none" }}
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                )}
             </div>
             <div className="mt-4 flex justify-between items-center w-full">
               <p
@@ -276,6 +288,7 @@ const NonCodeProjects = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

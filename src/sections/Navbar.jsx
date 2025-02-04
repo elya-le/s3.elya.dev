@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";  // Import Link correctly
+import { Link , useNavigate} from "react-router-dom";  // Import Link correctly
 import { navLinks } from "../constants/index.js"; // Ensure this is correctly imported
 import { TfiLoop } from "react-icons/tfi";
 
@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isTyping, setIsTyping] = useState(false); // track typing animation
   const [isFlashing, setIsFlashing] = useState(true); // track flashing underscore state
   const heroRef = useRef(null);
+  const navigate = useNavigate();
 
   // typing animation variables
   const words = [""];
@@ -119,17 +120,39 @@ const Navbar = () => {
   const handleClick = (e, href) => {
     e.preventDefault();
     setActiveLink(href);
-    const targetElement = document.querySelector(href);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" }); // smooth scroll to section
+    
+    if (href.startsWith('/')) {
+      // This is a route, use navigate
+      navigate(href);
+    } else {
+      // This is a scroll target, use scrollIntoView
+      if (window.location.pathname === '/') {
+        // On home page, scroll directly
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        // Not on home page, navigate home first then scroll
+        navigate('/');
+        setTimeout(() => {
+          const targetElement = document.querySelector(href);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      }
     }
-    setIsMenuOpen(false); // close menu after clicking a link
-    typeWords(); // Restart typing animation when logo is clicked
+    
+    setIsMenuOpen(false);
+    typeWords();
   };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  
 
   return (
     <>
