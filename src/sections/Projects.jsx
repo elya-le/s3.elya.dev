@@ -187,7 +187,7 @@ const Projects = () => {
         <div
           className="relative bg-opacity-80 flex flex-col justify-center h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
           style={{
-            backgroundColor: "#262900",
+            backgroundColor: "var(--bg-secondary)",
           }}
         >
           <div className="p-1 flex-1 w-full">
@@ -246,7 +246,7 @@ const Projects = () => {
                     href={currentProject.repoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
+                    className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]"
                   >
                     Github <GoArrowUpRight className="text-lg font-thin ml-1" />
                   </a>
@@ -257,7 +257,7 @@ const Projects = () => {
                       onClick={(e) => handleLiveLinkClick(e, currentProject.liveLink)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
+                      className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]"
                     >
                       Live Link <GoArrowUpRight className="text-lg font-thin ml-1" />
                     </a>

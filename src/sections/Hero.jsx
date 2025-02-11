@@ -4,7 +4,7 @@ import { PerspectiveCamera } from "@react-three/drei";
 import { Suspense } from "react";
 import CanvasLoader from "../components/CanvasLoader";
 import Cat from "../components/Cat.jsx";
-import "./Hero.css";
+// import "./Hero.css";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiGithub } from "react-icons/fi";
 import { LuTurtle } from "react-icons/lu";
@@ -112,7 +112,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
             rel="noopener noreferrer"
             className="text-white text-sm inline-flex items-center border border-white rounded-full 
               pl-3 pr-3 py-1.5 
-              transition-colors hover:bg-[#5F6600] bg-[#4C5200]
+              transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]
               sm:w-auto justify-center sm:justify-start"
           >
             Github <span className="ml-1"><FiGithub /></span>
@@ -121,7 +121,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
             href="mailto:hello@elya.dev"
             className="text-white text-sm inline-flex items-center border border-white rounded-full 
               pl-3 pr-3 py-1.5 
-              transition-colors hover:bg-[#5F6600] bg-[#4C5200]
+              transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]
               sm:w-auto justify-center sm:justify-start"
           >
             Email <span className="ml-1"><AiOutlineMail /></span>

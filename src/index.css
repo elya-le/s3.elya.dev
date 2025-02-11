@@ -1,16 +1,30 @@
-/* colors reference 
-background: #191B00
-table: #262900
-input text: #2C2F03
-button: #4C5200
-button hover: #5F6600
-*/
-
 @import url('https://fonts.cdnfonts.com/css/general-sans');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 
+:root {
+  --bg-primary: #191B00;
+  --bg-secondary: #262900;
+  --bg-input: #2C2F03;
+  --bg-button: #4C5200;
+  --bg-button-hover: #5F6600;
+}
+ */
+
+
+/* colors reference */
+:root {
+  --bg-primary: #191B00;
+  --bg-secondary: #262900;
+  --bg-input: #2C2F03;
+  --bg-button: #4C5200;
+  --bg-button-hover: #5F6600;
+  --bg-secondary-hover: #FFB01F;
+}
+
 
 * {
   scroll-behavior: smooth;
@@ -23,60 +37,58 @@ button hover: #5F6600
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* ensure the body takes the full viewport height */
-  scroll-behavior: smooth;  /* Enables smooth scrolling for the entire page */
+  height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: #191B00;
+  background: var(--bg-primary);
   font-family: 'General Sans', sans-serif;
   color: #FFFFFF;
 }
 
 #root {
   display: flex;
-  flex-direction: column; /* sets the root container to be vertical */
-  min-height: 100vh; /* makes sure it takes up the full height of the viewport */
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .App {
   display: flex;
-  flex-direction: column; /* stack elements vertically */
-  flex-grow: 1; /* allows the main content to take up all available space */
+  flex-direction: column;
+  flex-grow: 1;
 }
 
-
-
 main {
-  flex: 1; /* makes the main content grow and take up available space */
+  flex: 1;
 }
 
 .projects-section {
   overflow: visible;
 }
 
+/* Flashing underscore animation */
 .flashing-underscore {
-  animation: flash .8s steps(1, start) infinite; 
+  animation: flash .8s steps(1, start) infinite;
 }
 
-/* Keyframes for flashing effect */
 @keyframes flash {
   0%, 100% {
-    opacity: 1; /* Visible */
+    opacity: 1;
   }
   50% {
-    opacity: 0; /* Hidden */
+    opacity: 0;
   }
 }
 
-/* input Autofill Fix */
+/* Input Autofill Fix */
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
-  background-color: #262900 !important;
+  background-color: var(--bg-secondary) !important;
   color: white !important;
-  -webkit-box-shadow: 0 0 0px 1000px #262900 inset !important;
-  border-color: #262900!important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg-secondary) inset !important;
+  border-color: var(--bg-secondary) !important;
 }
 
 input:-webkit-autofill::first-line,
@@ -85,11 +97,12 @@ select:-webkit-autofill::first-line {
   color: white !important;
 }
 
+
+
 /* tailwind utility customizations */
 @layer utilities {
   .c-space {
     @apply sm:px-10 px-5;
-    
   }
 
   .head-text {
@@ -97,18 +110,18 @@ select:-webkit-autofill::first-line {
   }
 
   .nav {
-    @apply flex justify-between; /* Ensure the navbar is using flex and spacing items out */
+    @apply flex justify-between;
   }
 
   .nav-ul {
-    @apply text-neutral-400 hover:text-white font-generalsans max-sm:hover:bg-[#262900] max-sm:w-full py-2 max-sm:px-5;
-    background-color: #262900; /* Set initial background color */
-    @apply ml-auto; /* Align the navigation to the right */
+    @apply text-neutral-400 hover:text-white font-generalsans max-sm:hover:bg-[var(--bg-secondary)] max-sm:w-full py-2 max-sm:px-5;
+    background-color: var(--bg-secondary);
+    @apply ml-auto;
   }
 
   .nav-li {
-    @apply text-neutral-400 hover:text-white font-generalsans max-sm:hover:bg-[#262900] max-sm:w-full py-2 max-sm:px-5;
-    background-color: #262900; /* Set initial background color */
+    @apply text-neutral-400 hover:text-white font-generalsans max-sm:hover:bg-[var(--bg-secondary)] max-sm:w-full py-2 max-sm:px-5;
+    background-color: var(--bg-secondary);
   }
 
   .nav-li_a {
@@ -117,48 +130,31 @@ select:-webkit-autofill::first-line {
 
   .nav-sidebar {
     @apply absolute left-0 right-0 transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
-    background-color: #262900; /* Set initial background color */
-  }
-}
-/* keyframes for animations */
-@keyframes wave-animation {
-  0% {
-    transform: rotate(0deg);
-  }
-  15% {
-    transform: rotate(14deg);
-  }
-  30% {
-    transform: rotate(-8deg);
-  }
-  40% {
-    transform: rotate(14deg);
-  }
-  50% {
-    transform: rotate(-4deg);
-  }
-  60% {
-    transform: rotate(10deg);
-  }
-  70% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(0deg);
+    background-color: var(--bg-secondary);
   }
 }
 
-/* Ensure Footer is always visible */
+/* keyframes for animations */
+@keyframes wave-animation {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(14deg); }
+  30% { transform: rotate(-8deg); }
+  40% { transform: rotate(14deg); }
+  50% { transform: rotate(-4deg); }
+  60% { transform: rotate(10deg); }
+  70% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
 footer {
-  background-color: #191B00;
+  background-color: var(--bg-primary);
   text-align: center;
   padding: 20px;
   color: white;
-  position: relative; /* ensure it's positioned at the bottom of the layout */
-  margin-top: auto; /* pushes footer to the bottom if there is space */
+  position: relative;
+  margin-top: auto;
 }
 
-/* hero section */
 .hero-section {
   position: relative;
   height: 100vh;
@@ -171,24 +167,132 @@ footer {
   top: 0;
   height: 100vh;
   width: 100%;
-  z-index: 0; /* stays as the background */
+  z-index: 0;
 }
 
-/* Projects Section */
-/* .projects-section {
-  border: 1px solid blue;
-  position: relative;
-  height: auto;
-  padding: 10px 10px;
-} */
-
 .hide-scrollbar {
-  scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Opera */
+  display: none;
 }
 
 
+/* Toggle Container */
+
+/* Hero.css consolidation */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.slider {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 32px; /* Default width for button */
+  height: 32px;
+  background: var(--bg-button);
+  border: 1px solid white;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.icon-slow,
+.icon-star-power {
+  color: white;
+  font-size: 1rem;
+}
+
+.toggle-container {
+  height: 36px;
+  width: 110px !important;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 10px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px ;
+  height: 30px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  width: 62px !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color:  #FFB833;
+  width: 62px !important;
+}
+
+input:checked + .slider:before {
+  transform: translateX(30px);
+
+  
+}
+
+.icon-slow, .icon-star-power {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: white; 
+  transition: 0.3s;
+}
+
+.icon-slow {
+  left: 12px; 
+  stroke-width: 1.3px;
+  transform: scaleX(-1) translateY(-11px);
+
+}
+
+.icon-star-power {
+  right: 12px; 
+}
+
+/* Toggle Icons */
+.toggle-icon {
+  margin-right: 8px;
+  font-size: 16px;
+  color: #555;
+}

@@ -59,7 +59,7 @@ const ContactForm = () => {
 
   return (
     <section 
-      className="contact-section flex flex-col items-center justify-center bg-[#191B00] p-4 -mt-24"
+      className="contact-section flex flex-col items-center justify-center bg-[var(--bg-primary)] p-4 -mt-24"
       id="contact">
       <div
         style={{
@@ -70,7 +70,7 @@ const ContactForm = () => {
           <p className="text-white text-lg sm:text-xl font-thin">Lets build together!!</p>
         </div>
         <div className="w-full flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-          <div className="w-full sm:w-1/2 bg-[#262900] p-6">
+          <div className="w-full sm:w-1/2 bg-[var(--bg-secondary)] p-6">
             <img
               src="/assets/Elya_PhotonDesk2019.jpg"
               alt="Elya Photon Desk 2019"
@@ -81,7 +81,7 @@ const ContactForm = () => {
               }}
             />
           </div>
-          <div className="w-full sm:w-1/2 bg-[#262900] p-6">
+          <div className="w-full sm:w-1/2 bg-[var(--bg-secondary)] p-6">
             <h2 className="text-2xl font-bold mb-6 text-left"></h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
               {/* Email input */}
@@ -91,7 +91,7 @@ const ContactForm = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="mt-1 block w-full px-3 py-2 focus:outline-none focus:ring-white focus:border-white sm:text-sm peer bg-[#2C2F03] border border-white border-opacity-10 focus:border-opacity-100 placeholder-white placeholder-opacity-30"
+                  className="mt-1 block w-full px-3 py-2 focus:outline-none focus:ring-white focus:border-white sm:text-sm peer bg-[var(--bg-input)] border border-white border-opacity-10 focus:border-opacity-100 placeholder-white placeholder-opacity-30"
                   placeholder="Email"
                   style={{ borderRadius: '0px', color: 'white' }}
                   required
@@ -105,7 +105,7 @@ const ContactForm = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows="4"
-                  className="mt-1 block w-full px-3 py-2 focus:outline-none focus:ring-white focus:border-white sm:text-sm peer bg-[#2C2F03] border border-white border-opacity-10 focus:border-opacity-100 placeholder-white placeholder-opacity-30"
+                  className="mt-1 block w-full px-3 py-2 focus:outline-none focus:ring-white focus:border-white sm:text-sm peer bg-[var(--bg-input)] border border-white border-opacity-10 focus:border-opacity-100 placeholder-white placeholder-opacity-30"
                   placeholder="Message"
                   style={{ borderRadius: '0px', color: 'white' }}
                   required
@@ -127,7 +127,7 @@ const ContactForm = () => {
                 <div>
                   <button
                     type="submit"
-                    className="text-white text-sm inline-flex items-center border border-white border-opacity-50 rounded-full pl-4 pr-4 py-1.5 transition-colors bg-[#4C5200] hover:bg-[#5F6600]"
+                    className="text-white text-sm inline-flex items-center border border-white border-opacity-50 rounded-full pl-4 pr-4 py-1.5 transition-colors bg-[var(--bg-button)] hover:bg-[var(--bg-button-hover)]"
                     disabled={loading}
                   >
                     {loading ? 'Sending...' : 'Send'} <RiSendPlaneLine className="pl-1.5" size={18} />

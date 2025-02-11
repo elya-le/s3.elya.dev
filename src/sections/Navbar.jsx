@@ -161,7 +161,7 @@ const Navbar = () => {
         className={`fixed top-0 left-0 w-full text-white py-2 md:py-3 z-50 transition-all duration-300 ${
           isTransparent
             ? "bg-transparent border-transparent"
-            : "bg-[#191B00] border-b border-white border-opacity-10"
+            : "bg-[var(--bg-primary)] border-b border-white border-opacity-10"
         }`}
       >
         {/* container for E and menu/hamburger */}
@@ -201,7 +201,7 @@ const Navbar = () => {
         {/* links for mobile view (toggleable) */}
         <ul
           className={`${
-            isMenuOpen ? "block w-full text-right py-4 bg-[#262900]" : "hidden"
+            isMenuOpen ? "block w-full text-right py-4 bg-[var(--bg-secondary)]" : "hidden"
           } md:hidden`}
         >
           {navLinks.map((link) => (

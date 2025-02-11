@@ -1,8 +1,9 @@
+/* 
 import React from "react";
 
 const Footer = () => {
   return (
-    <div style={{ backgroundColor: "#191B00" }}> {/* Margin background container */}
+    <div style={{ backgroundColor: "#191B00" }}> 
       <footer
         className="text-white py-4 text-center"
         style={{
@@ -22,3 +23,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
+*/

@@ -129,7 +129,7 @@ const NonCodeProjects = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#191B00] pt-20">
+    <div className="min-h-screen bg-[var(--bg-primary)] pt-20">
       <section
         className="non-code-projects relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
         id="non-code-projects"
@@ -144,8 +144,8 @@ const NonCodeProjects = () => {
             <p className="text-white text-lg sm:text-xl font-thin">Non-Code Projects</p>
           </div>
         <div
-          className="relative bg-opacity-80 flex flex-col justify-center bg-[#191B00] h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
-          style={{ backgroundColor: "#262900" }}
+          className="relative bg-opacity-80 flex flex-col justify-center bg-[var(--bg-primary)] h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
+          style={{ backgroundColor: "var(--bg-secondary)" }}
         >
           <div className="p-1 flex-1 w-full">
             <div
@@ -221,7 +221,7 @@ const NonCodeProjects = () => {
                     href={currentProject.repoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
+                    className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[#4C5200]"
                   >
                     Github <GoArrowUpRight className="text-lg font-thin ml-1" />
                   </a>
@@ -231,7 +231,7 @@ const NonCodeProjects = () => {
                     onClick={(e) => handleLiveLinkClick(e, currentProject.liveLink)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[#5F6600] bg-[#4C5200]"
+                    className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[#4C5200]"
                   >
                     Live Link <GoArrowUpRight className="text-lg font-thin ml-1" />
                   </a>
