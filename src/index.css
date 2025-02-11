@@ -195,8 +195,9 @@ footer {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin-top: -3px;
   width: 32px; /* Default width for button */
-  height: 32px;
+  height: 34px;
   background: var(--bg-button);
   border: 1px solid white;
   border-radius: 30px;
@@ -224,7 +225,7 @@ footer {
 .toggle-switch {
   position: relative;
   display: inline-block;
-  width: 60px ;
+  width: 64px ;
   height: 30px;
 }
 
@@ -237,14 +238,13 @@ footer {
 .slider {
   position: absolute;
   cursor: pointer;
-  width: 62px !important;
+  width: 64px !important;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: ;
   transition: 0.4s;
-
 }
 
 .slider:before {
@@ -252,8 +252,8 @@ footer {
   content: "";
   height: 24px;
   width: 24px;
-  left: 3px;
-  bottom: 3px;
+  left: 4px;
+  bottom: 4px;
   background-color: white;
   transition: 0.4s;
   border-radius: 50%;
@@ -261,7 +261,7 @@ footer {
 
 input:checked + .slider {
   background-color:  #FFB833;
-  width: 62px !important;
+  width: 64px !important;
 }
 
 input:checked + .slider:before {
@@ -276,18 +276,18 @@ input:checked + .slider:before {
   transform: translateY(-50%);
   font-size: 20px;
   color: white; 
-  transition: 0.3s;
+
 }
 
 .icon-slow {
-  left: 12px; 
+  left: 8px; 
   stroke-width: 1.3px;
   transform: scaleX(-1) translateY(-11px);
 
 }
 
 .icon-star-power {
-  right: 12px; 
+  right: 8px; 
 }
 
 /* Toggle Icons */
