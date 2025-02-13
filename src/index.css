@@ -249,10 +249,20 @@ input:checked + .slider:before {
   color: var(--toggle-icon);
 }
 
+/* Ensuring icons don't jump */
+.icon-slow, .icon-star-power {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--toggle-icon);
+  transition: 0.3s ease-in-out; /* Smooth appearance */
+}
+
 .icon-slow {
   left: 8px;
   stroke-width: 1.3px;
-  transform: scaleX(-1) translateY(-11px);
+  transform: scaleX(-1) translateY(-50%);
 }
 
 .icon-star-power {
