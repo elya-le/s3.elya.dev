@@ -147,8 +147,11 @@ const Hero = ({ animationName, toggleAnimation }) => {
           Resume available upon request.
         </p>
       </div>
-      <div className="absolute bottom-[25vh] z-30
-        left-8 
+      <div className="absolute z-30
+        bottom-[20vh]  /* Default for mobile */ 
+        left-8       /* Default for mobile */
+        md:bottom-[25vh]  /* Medium screens and up */
+        md:right-auto    /* Clear right positioning */
         md:left-[calc(35%-290px)] 
         lg:left-[calc(38.5%-325px)]">
           <PageArrow scrollProgress={scrollProgress} />

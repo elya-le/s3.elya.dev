@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { RiSendPlaneLine } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoArrowUpRight } from 'react-icons/go';
+import HorizontalArrow from "./HorizontalArrow.jsx";
 
 const ContactForm = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const ContactForm = () => {
     } else if (screenWidth > 715) {
       return { height: "500px", width: "800px" }; // tablet
     } else {
-      return { height: "750px", width: "99%" }; // mobile
+      return { height: "770px", width: "99%" }; // mobile
     }
   };
   
@@ -138,7 +139,7 @@ const ContactForm = () => {
           </div>
         </div>
         {/* Link to non-code projects */}
-        <div className="w-full text-center mt-4">
+        <div className="w-full flex justify-center mt-4"> {/* Added wrapper for centering */}
           <Link 
             to="/non-code-projects"
             onClick={(e) => {
@@ -146,9 +147,14 @@ const ContactForm = () => {
               navigate('/non-code-projects');
               window.scrollTo(0, 0);
             }}
-            className="text-white text-lg sm:text-xl font-thin hover:opacity-80 transition-opacity duration-300 inline-flex items-center gap-2 underline decoration-[0.5px]  underline-offset-4"
+            className="text-white text-lg sm:text-xl font-thin hover:opacity-80 transition-opacity duration-300 inline-flex items-center gap-4 p-4"
           > 
-            Check out my non-code projects <GoArrowUpRight className="text-white transition-colors -ml-2 mt-1" />
+            <span className="underline decoration-[0.5px] underline-offset-4">
+              Other Projects
+            </span>
+            <div className="w-24 h-8 flex items-center justify-center -ml-3">
+              <HorizontalArrow />
+            </div>
           </Link>
         </div>
       </div>
