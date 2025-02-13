@@ -9,6 +9,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { FiGithub } from "react-icons/fi";
 import { LuTurtle } from "react-icons/lu";
 import { PiShootingStarDuotone } from "react-icons/pi";
+import { GoArrowDown } from "react-icons/go";
 
 const Hero = ({ animationName, toggleAnimation }) => {
   const rectLightRef = useRef();
@@ -72,8 +73,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
   return (
     <section 
       id="home"
-      className="relative z-10 w-full h-[100vh] sm:h-[120vh] bg-black bg-opacity-35 flex items-center justify-center z-10"
-    >
+      className="relative z-10 w-full h-[100vh] sm:h-[120vh] bg-black bg-opacity-35 flex items-center justify-center z-10">
       <div
         className="pl-7 absolute text-white bg-transparent z-20
         left-1/2 md:left-[35%] lg:left-[37%]
@@ -145,6 +145,12 @@ const Hero = ({ animationName, toggleAnimation }) => {
         <p className="text-l md:text-xl lg:text-xl font-thin pt-2">
           Resume available upon request.
         </p>
+      </div>
+      <div className="absolute bottom-[25vh] z-30
+        left-8 
+        md:left-[calc(35%-290px)] 
+        lg:left-[calc(38.5%-325px)]">
+          <GoArrowDown className="text-2xl text-white transition-colors animate-bounce" />
       </div>
       <Canvas
         className="w-full h-full z-10"
