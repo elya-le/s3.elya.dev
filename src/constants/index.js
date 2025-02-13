@@ -133,7 +133,7 @@ export const otherProjects = [
     ]
   },
   {
-    title: 'Photo & Video Booth Activations',
+    title: 'Photo/Video Booth & Activations',
     desc: '',
     subdesc: 
     `
@@ -153,7 +153,8 @@ export const otherProjects = [
     // </span><br><br>
     liveLink: '',
     repoLink: '',
-    videoLink: "https://player.vimeo.com/video/495062523?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    previewImg1: 'https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019_small.GIF',
+    //videoLink: "https://player.vimeo.com/video/495062523?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
     tags: [
       { id: 601, name: 'SketchUp', color: '#393D00'}, 
       { id: 602, name: 'Fabrication', color: '#393D00' },
