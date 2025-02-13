@@ -16,7 +16,7 @@ const PageArrow = () => {
           strokeDasharray="100"
           strokeDashoffset="100"
           style={{
-            animation: 'drawLine 2s ease-out forwards'
+            animation: 'mainLine 2.5s ease-out infinite'
           }}
         />
         {/* Left side of arrowhead */}
@@ -26,7 +26,7 @@ const PageArrow = () => {
           strokeDasharray="30"
           strokeDashoffset="30"
           style={{
-            animation: 'drawLine 0.5s ease-out 1.5s forwards'
+            animation: 'arrowLine 2.5s ease-out infinite'
           }}
         />
         {/* Right side of arrowhead */}
@@ -36,16 +36,24 @@ const PageArrow = () => {
           strokeDasharray="30"
           strokeDashoffset="30"
           style={{
-            animation: 'drawLine 0.5s ease-out 1.5s forwards'
+            animation: 'arrowLine 2.5s ease-out infinite'
           }}
         />
       </svg>
       <style jsx>{`
-        @keyframes drawLine {
-          to {
-            stroke-dashoffset: 0;
-          }
+        @keyframes mainLine {
+          0% { stroke-dashoffset: 100; opacity: 1; }
+          50% { stroke-dashoffset: 0; opacity: 1; }
+          85% { stroke-dashoffset: 0; opacity: 1; }
+          90% { stroke-dashoffset: 0; opacity: 0; }
+          100% { stroke-dashoffset: 100; opacity: 0; }
         }
+        @keyframes arrowLine {
+          0%, 40% { stroke-dashoffset: 30; opacity: 1; }
+          60% { stroke-dashoffset: 0; opacity: 1; }
+          85% { stroke-dashoffset: 0; opacity: 1; }
+          90% { stroke-dashoffset: 0; opacity: 0; }
+          100% { stroke-dashoffset: 30; opacity: 0; }
       `}</style>
     </div>
   );
