@@ -57,7 +57,7 @@ const NonCodeProjects = () => {
     } else if (screenWidth > 768) {
       return "140px";
     } else {
-      return "140px";
+      return "180px";
     }
   };
 
