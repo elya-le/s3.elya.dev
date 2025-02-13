@@ -10,6 +10,7 @@ import { FiGithub } from "react-icons/fi";
 import { LuTurtle } from "react-icons/lu";
 import { PiShootingStarDuotone } from "react-icons/pi";
 import { GoArrowDown } from "react-icons/go";
+import PageArrow from "./PageArrow.jsx";
 
 const Hero = ({ animationName, toggleAnimation }) => {
   const rectLightRef = useRef();
@@ -150,7 +151,8 @@ const Hero = ({ animationName, toggleAnimation }) => {
         left-8 
         md:left-[calc(35%-290px)] 
         lg:left-[calc(38.5%-325px)]">
-          <GoArrowDown className="text-2xl text-white transition-colors animate-bounce" />
+          {/* <GoArrowDown className="text-2xl text-white transition-colors animate-bounce" /> */}
+          <PageArrow />
       </div>
       <Canvas
         className="w-full h-full z-10"
