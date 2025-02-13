@@ -25,7 +25,7 @@ const HorizontalArrow = () => {
       >
         <path
           d="M20 0 L20 75"
-          className="stroke-1 fill-none"
+          className={`stroke-1 ${animationComplete ? 'fill-white' : 'fill-none'}`}
           strokeDasharray="75"
           strokeDashoffset={animationComplete ? '0' : '75'}
           style={{
@@ -34,7 +34,7 @@ const HorizontalArrow = () => {
         />
         <path
           d="M12 67 L20 75"
-          className="stroke-1 fill-none"
+          className={`stroke-1 ${animationComplete ? 'fill-white' : 'fill-none'}`}
           strokeDasharray="15"
           strokeDashoffset={animationComplete ? '0' : '15'}
           style={{
@@ -43,7 +43,7 @@ const HorizontalArrow = () => {
         />
         <path
           d="M28 67 L20 75"
-          className="stroke-1 fill-none"
+          className={`stroke-1 ${animationComplete ? 'fill-white' : 'fill-none'}`}
           strokeDasharray="15"
           strokeDashoffset={animationComplete ? '0' : '15'}
           style={{
@@ -56,15 +56,13 @@ const HorizontalArrow = () => {
           0% { stroke-dashoffset: 75; opacity: 1; }
           50% { stroke-dashoffset: 0; opacity: 1; }
           85% { stroke-dashoffset: 0; opacity: 1; }
-          90% { stroke-dashoffset: 0; opacity: 0; }
-          91%, 100% { stroke-dashoffset: 75; opacity: 0; }
+          90%, 100% { stroke-dashoffset: 0; opacity: 1; }
         }
         @keyframes horizontalArrow {
           0%, 40% { stroke-dashoffset: 15; opacity: 1; }
           60% { stroke-dashoffset: 0; opacity: 1; }
           85% { stroke-dashoffset: 0; opacity: 1; }
-          90% { stroke-dashoffset: 0; opacity: 0; }
-          91%, 100% { stroke-dashoffset: 15; opacity: 0; }
+          90%, 100% { stroke-dashoffset: 0; opacity: 1; }
         }
       `}</style>
     </div>
