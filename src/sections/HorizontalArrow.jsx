@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const HorizontalArrow = () => {
+const HorizontalArrow = ({ direction = 'right' }) => {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
@@ -14,17 +14,17 @@ const HorizontalArrow = () => {
   return (
     <div className="flex items-center justify-center w-full h-full">
       <svg
-        width="40"
-        height="90"
-        viewBox="0 0 33 120"
+        width="90"
+        height="33"
+        viewBox="0 0 120 33"
         className="stroke-white"
         style={{
-          transform: 'rotate(-90deg) translateX(-4px)',
+          transform: direction === 'left' ? 'rotate(180deg)' : 'rotate(0deg)',
           transformOrigin: 'center'
         }}
       >
         <path
-          d="M20 0 L20 75"
+          d="M0 20 L75 20"
           className={`stroke-1 ${animationComplete ? 'fill-white' : 'fill-none'}`}
           strokeDasharray="75"
           strokeDashoffset={animationComplete ? '0' : '75'}
@@ -33,7 +33,7 @@ const HorizontalArrow = () => {
           }}
         />
         <path
-          d="M12 67 L20 75"
+          d="M67 12 L75 20"
           className={`stroke-1 ${animationComplete ? 'fill-white' : 'fill-none'}`}
           strokeDasharray="15"
           strokeDashoffset={animationComplete ? '0' : '15'}
@@ -42,7 +42,7 @@ const HorizontalArrow = () => {
           }}
         />
         <path
-          d="M28 67 L20 75"
+          d="M67 28 L75 20"
           className={`stroke-1 ${animationComplete ? 'fill-white' : 'fill-none'}`}
           strokeDasharray="15"
           strokeDashoffset={animationComplete ? '0' : '15'}

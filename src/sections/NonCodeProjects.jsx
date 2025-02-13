@@ -5,6 +5,7 @@ import { GetObjectCommand } from "@aws-sdk/client-s3";
 import s3Client from "/src/awsConfig.js";
 import AspectRatioImage from "./AspectRatioImage";
 import { Link, useNavigate } from 'react-router-dom';
+import HorizontalArrow from "./HorizontalArrow";
 
 const NonCodeProjects = () => {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
@@ -284,8 +285,8 @@ const NonCodeProjects = () => {
               </button>
             </div>
           </div>
-
-          <div className="w-full text-center mb-2 sm:mb-4">
+          {/* Link to ode projects */}
+          <div className="w-full flex justify-center mt-4">
             <Link 
               to="/#projects"
               onClick={(e) => {
@@ -298,18 +299,16 @@ const NonCodeProjects = () => {
                   }
                 }, 100);
               }}
-              className="text-white text-lg sm:text-xl font-thin mt-6 hover:opacity-80 transition-opacity duration-300 inline-flex items-center gap-2 underline decoration-[0.5px]  underline-offset-4"
+              className="text-white text-lg sm:text-xl font-thin hover:opacity-80 transition-opacity duration-300 inline-flex items-center gap-4 p-4 -ml-9"
             > 
-              <GoArrowUpLeft className="text-white transition-colors -mr-2 mt-1" /> Back to my code projects
+              <div className="w-24 h-8 flex items-center justify-center mt-2">
+                <HorizontalArrow direction="left" />
+              </div>
+              <span className="underline decoration-[0.5px] underline-offset-4 -ml-3">
+                CodeProjects
+              </span>
             </Link>
           </div>
-            {/* <Link 
-              to="/#projects"
-              className="text-white text-lg sm:text-xl font-thin mt-6 underline hover:opacity-80 transition-opacity duration-300 inline-flex items-center gap-2"
-            > 
-            <GoArrowLeft className="text-white transition-colors" />
-            Back to my code projects
-            </Link> */}
         </div>
       </section>
     </div>
