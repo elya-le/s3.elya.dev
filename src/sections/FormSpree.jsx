@@ -150,7 +150,7 @@ const ContactForm = () => {
             className="text-white text-lg sm:text-xl font-thin hover:opacity-80 transition-opacity duration-300 inline-flex items-center gap-4 p-4"
           > 
             <span className="underline decoration-[0.5px] underline-offset-4">
-              Other Projects
+              Non-Code Projects
             </span>
             <div className="w-24 h-8 flex items-center justify-center -ml-3">
               <HorizontalArrow />

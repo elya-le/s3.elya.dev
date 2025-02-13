@@ -32,6 +32,10 @@ const NonCodeProjects = () => {
     fetchVideo();
   }, [currentProject.videoLink]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
       return { height: "630px", width: "900px" };
@@ -305,7 +309,7 @@ const NonCodeProjects = () => {
                 <HorizontalArrow direction="left" />
               </div>
               <span className="underline decoration-[0.5px] underline-offset-4 -ml-3">
-                CodeProjects
+                Code Projects
               </span>
             </Link>
           </div>

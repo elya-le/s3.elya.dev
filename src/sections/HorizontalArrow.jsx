@@ -2,17 +2,50 @@ import React, { useEffect, useState } from 'react';
 
 const HorizontalArrow = ({ direction = 'right' }) => {
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimationComplete(true);
-    }, 9000); // 3 times the animation duration (3 * 3s = 9s)
+    // function to check if element is in view
+    const checkElementVisibility = () => {
+      const element = document.querySelector('.horizontal-arrow-container');
+      if (!element) return;
+
+      const rect = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // check if the element is near the bottom of the viewport
+      const isNearBottom = rect.bottom <= windowHeight && rect.bottom > 0;
+      
+      if (isNearBottom && !isVisible) {
+        setIsVisible(true);
+      }
+    };
+
+    // add scroll event listener
+    window.addEventListener('scroll', checkElementVisibility);
+    
+    // initial check
+    checkElementVisibility();
+
+    // cleanup
+    return () => {
+      window.removeEventListener('scroll', checkElementVisibility);
+    };
+  }, [isVisible]);
+
+  useEffect(() => {
+    let timer;
+    if (isVisible) {
+      timer = setTimeout(() => {
+        setAnimationComplete(true);
+      }, 9000); // 3 times the animation duration (3 * 3s = 9s)
+    }
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isVisible]);
 
   return (
-    <div className="flex items-center justify-center w-full h-full">
+    <div className="horizontal-arrow-container flex items-center justify-center w-full h-full">
       <svg
         width="90"
         height="33"
@@ -29,7 +62,7 @@ const HorizontalArrow = ({ direction = 'right' }) => {
           strokeDasharray="75"
           strokeDashoffset={animationComplete ? '0' : '75'}
           style={{
-            animation: animationComplete ? 'none' : 'horizontalLine 3s ease-out 3'
+            animation: (isVisible && !animationComplete) ? 'horizontalLine 3s ease-out 3' : 'none'
           }}
         />
         <path
@@ -38,7 +71,7 @@ const HorizontalArrow = ({ direction = 'right' }) => {
           strokeDasharray="15"
           strokeDashoffset={animationComplete ? '0' : '15'}
           style={{
-            animation: animationComplete ? 'none' : 'horizontalArrow 3s ease-out 3'
+            animation: (isVisible && !animationComplete) ? 'horizontalArrow 3s ease-out 3' : 'none'
           }}
         />
         <path
@@ -47,7 +80,7 @@ const HorizontalArrow = ({ direction = 'right' }) => {
           strokeDasharray="15"
           strokeDashoffset={animationComplete ? '0' : '15'}
           style={{
-            animation: animationComplete ? 'none' : 'horizontalArrow 3s ease-out 3'
+            animation: (isVisible && !animationComplete) ? 'horizontalArrow 3s ease-out 3' : 'none'
           }}
         />
       </svg>
