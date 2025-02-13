@@ -75,7 +75,7 @@ Result:<span class="font-thin"> A fully functional app that equips users in orga
     title: 'Current Portfolio Site',
     desc: 'Combining my love for 3D modeling, motion design, and web development.',
     subdesc:
-    `Focus:<span class="font-thin"> Challenge myself to learn Three.js, Tailwind and Blender to design and build Elya.dev.<br><br>
+    `Focus:<span class="font-thin"> Challenge myself to learn Three.js, Tailwind and Blender to design and build Elya.dev.</span><br><br>
 Result:<span class="font-thin"> A clean, interactive site that highlights 3D elements and innovative design techniques.`,
     liveLink: '',
     repoLink: 'https://github.com/elya-le/Elya.dev',
@@ -99,10 +99,10 @@ export const otherProjects = [
     subdesc: 
     `
     <p>
-      Role: <span class="font-thin">Project Manager, Creative Director
+      Role: <span class="font-thin">Artist, Project Manager, Creative Director
     </span><br><br>
     <span class="font-thin">
-      Designed an art installation for Burning Man, combining woodworking, CAD design, and collaborative fabrication.
+      Designed an art installation for Burning Man, combining woodworking, CAD design, and collaborative fabrication.<br><br>
       Lighting Engineer & Sponsor: <span class="font-thin">Richerd Chan 
       `,
     // — Extra special thanks to my family Kari, Jessie, Santana, Jason, Olivia, Kevin, Belinda, Ray, Ryan, and AFC for the support in this build.
@@ -117,8 +117,9 @@ export const otherProjects = [
     repoLink: '',
     // videoLink: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_2018.MOV', // added video link
     // previewImg: '/assets/aws1.gif',
-    previewImg1: '/assets/odonata11.jpg',
-    previewImg2: '/assets/odonata12.jpg',
+    previewImg1: 'https://s3.us-east-2.amazonaws.com/elya.dev/odonata.GIF',
+    previewImg2: '/assets/odonata11.jpg',
+    previewImg3: '/assets/odonata12.jpg',
     // previewImg3: '/assets/odonata2.png',
     // previewImg4: '/assets/odonata10.jpg',
     // previewImg5: '/assets/odonata3.jpg',
@@ -137,11 +138,11 @@ export const otherProjects = [
     subdesc: 
     `
     <p>Client: <span class="font-thin">Verizon | iHeart Radio</span><br><br>
-    Role: <span class="font-thin">Fabrication Lead</span><br>
-    <span class="font-thin">In partnership with <a href="https://www.hellothereyou.com/" style="text-decoration: underline;">HelloThereYou</a> & <a href="https://www.instagram.com/bymadelinejo/" style="text-decoration: underline;">Madeline Jo</a></span><br><br>
+    Role: <span class="font-thin">Fabrication Lead</span>
+    <span class="font-thin">— In partnership with <a href="https://www.hellothereyou.com/" style="text-decoration: underline;">HelloThereYou</a> & <a href="https://www.instagram.com/bymadelinejo/" style="text-decoration: underline;">Madeline Jo</a></span><br><br>
     <span class="font-thin">
     Built custom activations for top brands, providing an engaging photo/video experience for event attendees.
-    </span><br><br>
+    </span>
     <span class="font-thin">
     Extra special thanks to Patrick for entrusting me with taking on a bigger role with these activations.
     </span>
@@ -168,7 +169,7 @@ export const otherProjects = [
     subdesc: 
     `
     Client: <span class="font-thin">Washington Federal Credit Union</span><br><br>
-    My Role: <span class="font-thin">Motion Designer</span><br><br>
+    Role: <span class="font-thin">Motion Designer</span><br><br>
     <span class="font-thin">
     This project defined WaFd Bank’s visual identity in their Seattle headquarters with 12-foot video walls in the Main Entry and an 8-foot video wall in the Interior Lobby, featuring 50+ custom animations.
     </span><br><br>
@@ -195,12 +196,9 @@ export const otherProjects = [
     subdesc: 
     `
     Client: <span class="font-thin">Amazon | </span><span class="font-thin"><a href="https://www.instagram.com/amazonhome/" style="text-decoration: underline;">Amazon Home</a></span><br><br> 
-    My Role: <span class="font-thin">Visual Design, Motion Lead</span><br><br> 
-    <span class="font-thin"> Created 2D motion assets for Amazon Home, driving significant follower growth and boosting brand visibility across platforms. </span><br><br> 
-    Key Responsibilities: <span class="font-thin"><br>
-    - Designed daily motion assets under tight deadlines<br>
-    - Collaborated with the team to maintain brand consistency<br>
-    - Optimized content for engagement across multiple platforms<br> </span>
+    Role: <span class="font-thin">Visual Design, Motion Lead</span><br><br> 
+    <span class="font-thin"> Created daily 2D/3D assets for Amazon Home's social platforms, driving follower growth while maintaining brand consistency and optimizing content engagement across channels. </span><br><br> 
+    
     `,
     liveLink: '',
     repoLink: '',
@@ -219,14 +217,9 @@ export const otherProjects = [
     subdesc: 
     `
     Client: <span class="font-thin">AWS Summit</span><br><br>
-    My Role: <span class="font-thin">Motion Designer</span><br><br>
+    Role: <span class="font-thin">Motion Designer</span><br><br>
     <span class="font-thin">
       Created 2D/3D motion assets for the annual AWS Summit, enhancing presentations and driving engagement with aligned animations.
-    </span><br><br>
-    Key Responsibilities: <span class="font-thin"><br>
-      - Designed motion assets for event presentations<br>
-      - Worked with teams to ensure visual consistency with brand themes<br>
-      - Delivered optimized assets for event displays<br>
     </span>
     `,
     liveLink: '',
@@ -246,17 +239,10 @@ export const otherProjects = [
     desc: '',
     subdesc: 
     `
-    <p>Client: <span class="font-thin">Personal Project</span><br><br>
-      My Role: <span class="font-thin">Designer, Builder</span><br>
+      Role: <span class="font-thin">Designer, Builder</span><br><br>
     <span class="font-thin">
       Designed and built a custom couch for a new apartment, incorporating woodworking, CAD design, and upholstery techniques to craft a functional and aesthetic piece of furniture.
     </span><br><br>
-      Key Responsibilities: 
-    <span class="font-thin"><br>
-      - Learned Rhino basics to develop CAD plans<br>
-      - Built a durable wooden frame as a carpenter<br>
-      - Sewed and upholstered custom cover & cushions<br>
-    </span><br>
     <span class="font-thin">
       Extra special thanks to Stefano for cheering me on and being a big brain to problem solve with.
     </span>

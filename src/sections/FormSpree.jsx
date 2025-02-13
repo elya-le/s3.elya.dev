@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { RiSendPlaneLine } from 'react-icons/ri'; // for the send button icon
+import { RiSendPlaneLine } from 'react-icons/ri';
+import { Link, useNavigate } from 'react-router-dom';
+import { GoArrowUpRight } from 'react-icons/go';
 
 const ContactForm = () => {
+  const navigate = useNavigate();
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [formData, setFormData] = useState({ email: '', message: '' });
   const [status, setStatus] = useState('');
@@ -13,18 +16,17 @@ const ContactForm = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
-      return { height: "400px", width: "900px" }; // fullscreen
+      return { height: "500px", width: "900px" }; // fullscreen
     } else if (screenWidth > 715) {
-      return { height: "400px", width: "800px" }; // tablet
+      return { height: "500px", width: "800px" }; // tablet
     } else {
-      return { height: "700px", width: "99%" }; // mobile
+      return { height: "750px", width: "99%" }; // mobile
     }
   };
+  
   const responsiveSectionDimensions = getResponsiveSectionDimensions();
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,13 +62,15 @@ const ContactForm = () => {
   return (
     <section 
       className="contact-section flex flex-col items-center justify-center bg-[var(--bg-primary)] p-4 -mt-24"
-      id="contact">
+      id="contact"
+    >
       <div
         style={{
           height: responsiveSectionDimensions.height,
           width: responsiveSectionDimensions.width,
-        }}>
-        <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
+        }}
+      >
+        <div className="w-full text-left pl-3 sm:pl-6 sm:mb-10 mb-4">
           <p className="text-white text-lg sm:text-xl font-thin">Lets build together!!</p>
         </div>
         <div className="w-full flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -75,16 +79,15 @@ const ContactForm = () => {
               src="/assets/Elya_PhotonDesk2019.jpg"
               alt="Elya Photon Desk 2019"
               style={{
-                width: '100%', // or any specific width
-                height: '300px', // or any specific height
-                objectFit: 'cover', // 'cover', 'contain', 'fill', 'none', 'scale-down'
+                width: '100%',
+                height: '300px',
+                objectFit: 'cover',
               }}
             />
           </div>
           <div className="w-full sm:w-1/2 bg-[var(--bg-secondary)] p-6">
             <h2 className="text-2xl font-bold mb-6 text-left"></h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
-              {/* Email input */}
               <div className="relative">
                 <input
                   type="email"
@@ -98,7 +101,6 @@ const ContactForm = () => {
                 />
               </div>
 
-              {/* Message input */}
               <div className="relative">
                 <textarea
                   name="message"
@@ -112,7 +114,6 @@ const ContactForm = () => {
                 ></textarea>
               </div>
 
-              {/* Status message */}
               <div className="flex justify-between items-center">
                 <div className="flex-1 flex items-center">
                   {status && (
@@ -123,7 +124,6 @@ const ContactForm = () => {
                   )}
                 </div>
 
-                {/* Submit button */}
                 <div>
                   <button
                     type="submit"
@@ -136,6 +136,20 @@ const ContactForm = () => {
               </div>
             </form>
           </div>
+        </div>
+        {/* Link to non-code projects */}
+        <div className="w-full text-center mt-4">
+          <Link 
+            to="/non-code-projects"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/non-code-projects');
+              window.scrollTo(0, 0);
+            }}
+            className="text-white text-lg sm:text-xl font-thin hover:opacity-80 transition-opacity duration-300 inline-flex items-center gap-2 underline decoration-[0.5px]  underline-offset-4"
+          > 
+            Check out my non-code projects <GoArrowUpRight className="text-white transition-colors -ml-2 mt-1" />
+          </Link>
         </div>
       </div>
     </section>

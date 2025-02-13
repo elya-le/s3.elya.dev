@@ -23,6 +23,13 @@
   --bg-button: #4C5200;
   --bg-button-hover: #5F6600;
   --bg-secondary-hover: #FFB01F;
+
+   /* Toggle Switch Colors */
+  --toggle-bg: #ccc;
+  --toggle-bg-checked: #FFB833;
+  --toggle-knob: white;
+  --toggle-icon: white;
+  --toggle-icon-hover: var(--bg-secondary-hover);
 }
 
 
@@ -186,47 +193,9 @@ footer {
 .toggle-switch {
   position: relative;
   display: inline-block;
-  cursor: pointer;
-}
-
-.slider {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-top: -3px;
-  width: 32px; /* Default width for button */
-  height: 34px;
-  background: var(--bg-button);
-  border: 1px solid white;
-  border-radius: 30px;
-  transition: all 0.3s ease;
-}
-
-.icon-slow,
-.icon-star-power {
-  color: white;
-  font-size: 1rem;
-}
-
-.toggle-container {
-  height: 36px;
-  width: 110px !important;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-right: 10px;
-  padding: 5px;
-  box-sizing: border-box;
-}
-
-/* Toggle Switch */
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 64px ;
+  width: 64px;
   height: 30px;
+  cursor: pointer;
 }
 
 .toggle-switch input {
@@ -239,12 +208,14 @@ footer {
   position: absolute;
   cursor: pointer;
   width: 64px !important;
+  height: 30px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ;
+  background-color: var(--toggle-bg);
   transition: 0.4s;
+  border-radius: 30px;
 }
 
 .slider:before {
@@ -254,20 +225,17 @@ footer {
   width: 24px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--toggle-knob);
   transition: 0.4s;
   border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color:  #FFB833;
-  width: 64px !important;
+  background-color: var(--toggle-bg-checked);
 }
 
 input:checked + .slider:before {
   transform: translateX(30px);
-
-  
 }
 
 .icon-slow, .icon-star-power {
@@ -275,24 +243,25 @@ input:checked + .slider:before {
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-  color: white; 
-
+  color: var(--toggle-icon);
 }
 
 .icon-slow {
-  left: 8px; 
+  left: 8px;
   stroke-width: 1.3px;
   transform: scaleX(-1) translateY(-11px);
-
 }
 
 .icon-star-power {
-  right: 8px; 
+  right: 8px;
 }
 
-/* Toggle Icons */
 .toggle-icon {
   margin-right: 8px;
   font-size: 16px;
-  color: #555;
+  color: var(--toggle-icon);
+}
+
+.toggle-icon:hover {
+  color: var(--toggle-icon-hover);
 }
