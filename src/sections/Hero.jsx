@@ -151,8 +151,8 @@ const Hero = ({ animationName, toggleAnimation }) => {
         left-8 
         md:left-[calc(35%-290px)] 
         lg:left-[calc(38.5%-325px)]">
+          <PageArrow scrollProgress={scrollProgress} />
           {/* <GoArrowDown className="text-2xl text-white transition-colors animate-bounce" /> */}
-          <PageArrow />
       </div>
       <Canvas
         className="w-full h-full z-10"

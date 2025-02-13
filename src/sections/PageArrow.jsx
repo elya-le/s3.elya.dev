@@ -1,8 +1,11 @@
 import React from 'react';
 
-const PageArrow = () => {
+const PageArrow = ({ scrollProgress }) => {
+  // Stop animation when scrollProgress is greater than a certain threshold
+  const shouldAnimate = scrollProgress < 0.1; // Adjust this threshold as needed
+
   return (
-    <div>
+    <div style={{ opacity: shouldAnimate ? 1 : 0 }}>
       <svg 
         width="20" 
         height="60" 
@@ -16,7 +19,7 @@ const PageArrow = () => {
           strokeDasharray="100"
           strokeDashoffset="100"
           style={{
-            animation: 'mainLine 2.5s ease-out infinite'
+            animation: shouldAnimate ? 'mainLine 2.5s ease-out infinite' : 'none'
           }}
         />
         {/* Left side of arrowhead */}
@@ -26,7 +29,7 @@ const PageArrow = () => {
           strokeDasharray="30"
           strokeDashoffset="30"
           style={{
-            animation: 'arrowLine 2.5s ease-out infinite'
+            animation: shouldAnimate ? 'arrowLine 2.5s ease-out infinite' : 'none'
           }}
         />
         {/* Right side of arrowhead */}
@@ -36,7 +39,7 @@ const PageArrow = () => {
           strokeDasharray="30"
           strokeDashoffset="30"
           style={{
-            animation: 'arrowLine 2.5s ease-out infinite'
+            animation: shouldAnimate ? 'arrowLine 2.5s ease-out infinite' : 'none'
           }}
         />
       </svg>
@@ -54,6 +57,7 @@ const PageArrow = () => {
           85% { stroke-dashoffset: 0; opacity: 1; }
           90% { stroke-dashoffset: 0; opacity: 0; }
           100% { stroke-dashoffset: 30; opacity: 0; }
+        }
       `}</style>
     </div>
   );
