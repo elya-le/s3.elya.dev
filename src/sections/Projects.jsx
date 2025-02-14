@@ -12,6 +12,7 @@ const Projects = () => {
   const scrollRef = useRef(null); // reference for the scroll animation
   const interactionTimeoutRef = useRef(null); // reference for interaction timeout
   const projectsSectionRef = useRef(null);
+  const videoRef = useRef(null);
 
   // Add scroll position tracking
   useEffect(() => {
@@ -44,6 +45,15 @@ const Projects = () => {
 
     return () => cancelAnimationFrame(scrollRef.current); // Clean up the animation frame on component unmount
   }, []);
+
+  // auto loop video
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Video play failed:", error);
+      });
+    }
+  }, [currentProject.videoLink]); // Re-run when video source changes
 
   // pause auto-scroll on interaction
   const pauseAutoScroll = () => {
@@ -201,35 +211,82 @@ const Projects = () => {
                 cursor: "pointer",
               }}
             >
-              {Object.keys(currentProject)
-                .filter((key) => key.startsWith("previewImg"))
-                .map((key, index) => (
+            {Object.keys(currentProject)
+            .filter((key) => key.startsWith("previewImg") || key === "videoLink")
+            .map((key, index) => {
+              if (key === "videoLink") {
+                return (
                   <div
                     key={index}
                     style={{
-                      display: "inline-block", // display images inline
+                      display: "inline-block",
                       verticalAlign: "top",
-                      marginRight: "10px", // spacing between images
-                      height: `${responsiveImageSize.height}px`, // dynamically apply height
-                      width: `${responsiveImageSize.width}px`, // dynamically apply width
-                      // border: "1px solid #fff", 
-                      position: "relative", // for aspect ratio
+                      marginRight: "10px",
+                      height: `${responsiveImageSize.height}px`,
+                      width: `${responsiveImageSize.width}px`,
+                      position: "relative",
                     }}
-                    onClick={() => handleImageClick(index)} // attach click handler
                   >
-                    <img
-                      src={currentProject[key]}
-                      alt={`${currentProject.title} screenshot ${index + 1}`}
+                    <video
+                      ref={videoRef}
+                      autoPlay={true}
+                      loop={true}
+                      muted={true}
+                      playsInline={true}
+                      onLoadedData={(e) => {
+                        const video = e.target;
+                        video.play()
+                          .then(() => console.log("Video playing"))
+                          .catch(err => console.log("Video play error:", err));
+                      }}
+                      onError={(e) => {
+                        console.log("Video error:", e);
+                      }}
                       style={{
                         position: "absolute",
                         top: 0,
                         left: 0,
-                        objectPosition: "top",
-                        objectFit: "cover", // maintain image aspect ratio
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
                       }}
-                    />
+                    >
+                      <source 
+                        src={currentProject[key]} 
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
-                ))}
+                );
+              }
+              return (
+                <div
+                  key={index}
+                  style={{
+                    display: "inline-block",
+                    verticalAlign: "top",
+                    marginRight: "10px",
+                    height: `${responsiveImageSize.height}px`,
+                    width: `${responsiveImageSize.width}px`,
+                    position: "relative",
+                  }}
+                  onClick={() => handleImageClick(index)}
+                >
+                  <img
+                    src={currentProject[key]}
+                    alt={`${currentProject.title} screenshot ${index + 1}`}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      objectPosition: "top",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              );
+            })}
             </div>
             {/* project title and live link/github repo */}
             <div className="mt-4 flex justify-between items-center w-full">

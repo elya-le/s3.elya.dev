@@ -13,7 +13,6 @@ export const myProjects = [
 Result: <span class="font-thin"> Delivered a precise, high-quality web app while expanding my technical skills, and proficiency in real-time communication systems. (3 feature CRUD)</span>`,
     liveLink: 'https://elya-le-banter.onrender.com',
     repoLink: 'https://github.com/elya-le/Banter/',
-    videoLink: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_2018.MOV',
     previewImg1: '/assets/banter1.png',
     previewImg2: '/assets/banter2.png',
     previewImg3: '/assets/banter3.png',
@@ -105,25 +104,23 @@ export const otherProjects = [
       Designed an art installation for Burning Man, combining woodworking, CAD design, and collaborative fabrication.<br><br>
       Lighting Engineer & Sponsor: <span class="font-thin">Richerd Chan 
       `,
-    // — Extra special thanks to my family Kari, Jessie, Santana, Jason, Olivia, Kevin, Belinda, Ray, Ryan, and AFC for the support in this build.
-      // </span><br><br>
-      //   Key Responsibilities: 
-      // <span class="font-thin"><br> 
-      //   - Utilized CAD tools for design and construction.<br> 
-      //   - Led the woodworking and assembly.<br> 
-      //   - Ensured structural integrity and artistic cohesion.
-      // </span><br><br>
-    liveLink: '',
-    repoLink: '',
-    // videoLink: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_2018.MOV', // added video link
-    // previewImg: '/assets/aws1.gif',
-    previewImg1: 'https://s3.us-east-2.amazonaws.com/elya.dev/odonata.GIF',
-    previewImg2: '/assets/odonata11.jpg',
-    previewImg3: '/assets/odonata12.jpg',
+      videos: [
+        {
+          url: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_Paralax.mp4',
+          title: 'Parallax View'
+        },
+        {
+          url: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_BS_2018.mp4', 
+          title: 'Secondary View'
+        }
+      ],
+
+    // previewImg2: '/assets/odonata11.jpg',
+    // previewImg3: '/assets/odonata12.jpg',
     // previewImg3: '/assets/odonata2.png',
     // previewImg4: '/assets/odonata10.jpg',
     // previewImg5: '/assets/odonata3.jpg',
-    previewImg6: '/assets/odonata14.jpg',
+    // previewImg6: '/assets/odonata14.jpg',
     tags: [
       { id: 501, name: 'SketchUp', color: '#393D00'}, 
       { id: 502, name: 'Fabrication', color: '#393D00'}, 
@@ -133,7 +130,7 @@ export const otherProjects = [
     ]
   },
   {
-    title: 'Photo/Video Booth & Activations',
+    title: 'Fabrication | Activations',
     desc: '',
     subdesc: 
     `
@@ -147,21 +144,14 @@ export const otherProjects = [
     Extra special thanks to Patrick for entrusting me with taking on a bigger role with these activations.
     </span>
     `,
-    // Key Responsibilities: <span class="font-thin"><br>
-    //   - Fabrication, design, curation of props and materials<br>
-    //   - Align branding and visuals for share-worthy photos
-    // </span><br><br>
-    liveLink: '',
-    repoLink: '',
-    previewImg1: 'https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019_small.GIF',
-    //videoLink: "https://player.vimeo.com/video/495062523?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    videoLink: "https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019.mp4",
     tags: [
-      { id: 601, name: 'SketchUp', color: '#393D00'}, 
-      { id: 602, name: 'Fabrication', color: '#393D00' },
+      { id: 601, name: 'CAD', color: '#393D00'}, 
+      { id: 602, name: 'Project Management', color: '#393D00' },
       { id: 603, name: 'Installation', color: '#393D00' },
       { id: 604, name: 'Woodworking', color: '#393D00'},
-      { id: 605, name: 'Project Management', color: '#393D00' },
-      { id: 606, name: 'CAD', color: '#393D00' },
+      { id: 605, name: 'Upholstery', color: '#393D00' },
+  
     ],
   },
   {
@@ -175,14 +165,7 @@ export const otherProjects = [
     This project defined WaFd Bank’s visual identity in their Seattle headquarters with 12-foot video walls in the Main Entry and an 8-foot video wall in the Interior Lobby, featuring 50+ custom animations.
     </span><br><br>
     `,
-    // Key Responsibilities: <span class="font-thin"><br>
-    // - Delivered 50+ animations under tight deadlines<br>
-    // - Maintained consistent visual identity<br>
-    // - Ensured seamless integration for a high-impact installation<br>
-    // </span></p>
-    liveLink: '',
-    repoLink: '',
-    videoLink: "https://player.vimeo.com/video/494869220?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    videoLink: "https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019.mp4",
     tags: [
       { id: 701, name: 'After Effects', color: '#393D00'}, 
       { id: 702, name: 'Illustrator', color: '#393D00' },
@@ -201,9 +184,7 @@ export const otherProjects = [
     <span class="font-thin"> Created daily 2D/3D assets for Amazon Home's social platforms, driving follower growth while maintaining brand consistency and optimizing content engagement across channels. </span><br><br> 
     
     `,
-    liveLink: '',
-    repoLink: '',
-    videoLink: "https://player.vimeo.com/video/589222917?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    videoLink: "https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019.mp4",
     tags: [
       { id: 801, name: 'Cinema4D', color: '#393D00'}, 
       { id: 802, name: 'After Effects', color: '#393D00'}, 
@@ -223,8 +204,6 @@ export const otherProjects = [
       Created 2D/3D motion assets for the annual AWS Summit, enhancing presentations and driving engagement with aligned animations.
     </span>
     `,
-    liveLink: '',
-    repoLink: '',
     previewImg1: '/assets/aws1.gif',
     previewImg2: '/assets/aws2.gif',
     tags: [
@@ -248,8 +227,6 @@ export const otherProjects = [
       Extra special thanks to Stefano for cheering me on and being a big brain to problem solve with.
     </span>
     `,
-    liveLink: '',
-    repoLink: '',
     previewImg1: '/assets/aws1.gif',
     previewImg2: '/assets/aws2.gif',
     tags: [

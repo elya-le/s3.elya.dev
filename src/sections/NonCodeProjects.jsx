@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { GoArrowUpRight,  GoArrowUpLeft, GoArrowLeft, GoArrowRight } from "react-icons/go";
+import { GoArrowUpRight, GoArrowUpLeft, GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { otherProjects } from "../constants/index.js";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import s3Client from "/src/awsConfig.js";
@@ -11,7 +11,10 @@ const NonCodeProjects = () => {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [videoSrc, setVideoSrc] = useState(null);
+  const [videoSources, setVideoSources] = useState([]);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef(null);
   const currentProject = otherProjects[selectedProjectIndex];
   const carouselRef = useRef(null);
   const navigate = useNavigate();
@@ -22,15 +25,50 @@ const NonCodeProjects = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Handle video loading and cleanup
   useEffect(() => {
-    const fetchVideo = async () => {
-      if (currentProject.videoLink) {
-        const videoBody = await getVideoFromS3(currentProject.videoLink);
-        setVideoSrc(URL.createObjectURL(videoBody));
+    // Cleanup previous video URLs
+    videoSources.forEach(src => {
+      if (src) URL.revokeObjectURL(src);
+    });
+    setVideoSources([]);
+    setCurrentVideoIndex(0);
+
+    const fetchVideos = async () => {
+      if (currentProject.videos) {
+        const sources = await Promise.all(
+          currentProject.videos.map(async (video) => {
+            try {
+              const videoBody = await getVideoFromS3(video.url);
+              return videoBody ? URL.createObjectURL(videoBody) : null;
+            } catch (error) {
+              console.error("Error fetching video:", error);
+              return null;
+            }
+          })
+        );
+        setVideoSources(sources.filter(Boolean));
+      } else if (currentProject.videoLink) {
+        // Handle legacy single video format
+        try {
+          const videoBody = await getVideoFromS3(currentProject.videoLink);
+          if (videoBody) {
+            setVideoSources([URL.createObjectURL(videoBody)]);
+          }
+        } catch (error) {
+          console.error("Error fetching video:", error);
+        }
       }
     };
-    fetchVideo();
-  }, [currentProject.videoLink]);
+
+    fetchVideos();
+
+    return () => {
+      videoSources.forEach(src => {
+        if (src) URL.revokeObjectURL(src);
+      });
+    };
+  }, [selectedProjectIndex]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -68,11 +106,24 @@ const NonCodeProjects = () => {
 
   const getResponsiveVideoSize = () => {
     if (screenWidth > 1024) {
-      return { height: "480px", width: "900px" };
+      const width = 840;
+      return { width: `${width}px`, height: `${(width * 9) / 16}px` };
     } else if (screenWidth > 768) {
-      return { height: "400px", width: "700px" };
+      const width = 700;
+      return { width: `${width}px`, height: `${(width * 9) / 16}px` };
     } else {
-      return { height: "200px", width: "100%" };
+      return { 
+        width: "100%", 
+        height: `${(screenWidth * 9) / 16}px` 
+      };
+    }
+  };
+
+  const handleVideoSwitch = () => {
+    if (videoSources.length > 1) {
+      setCurrentVideoIndex((prev) => 
+        (prev + 1) % videoSources.length
+      );
     }
   };
 
@@ -125,9 +176,19 @@ const NonCodeProjects = () => {
   };
 
   const getVideoFromS3 = async (key) => {
-    const command = new GetObjectCommand({ Bucket: "elya.dev", Key: key });
-    const response = await s3Client.send(command);
-    return response.Body;
+    try {
+      const cleanKey = key.replace('https://s3.us-east-2.amazonaws.com/elya.dev/', '');
+      const command = new GetObjectCommand({ 
+        Bucket: "elya.dev", 
+        Key: cleanKey
+      });
+      const response = await s3Client.send(command);
+      const blob = await response.Body.transformToByteArray();
+      return new Blob([blob], { type: 'video/mp4' });
+    } catch (error) {
+      console.error("Error fetching video:", error);
+      return null;
+    }
   };
 
   const responsiveVideoSize = getResponsiveVideoSize();
@@ -168,7 +229,6 @@ const NonCodeProjects = () => {
                       className="inline-block align-top mr-2.5"
                       style={{
                         width: responsiveImageSize.width,
-                        // paddingTop: `${(9 / 16) * 100}%`,
                         position: "relative",
                       }}
                       onClick={() => handleImageClick(index)}
@@ -179,32 +239,41 @@ const NonCodeProjects = () => {
                       />
                     </div>
                   ))}
-
-                {videoSrc && (
-                  <div className="video-container mt-4 inline-block" style={{ width: responsiveVideoSize.width }}>
+                  
+                {videoSources.length > 0 && (
+                  <div 
+                    className="video-container mt-4 inline-block" 
+                    style={{ width: responsiveVideoSize.width }}
+                  >
                     <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
-                      <iframe
-                        src={`${videoSrc}?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0`}
-                        className="absolute inset-0 w-full h-full rounded-lg"
-                        style={{ border: "none" }}
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
-                      />
+                      <video
+                        ref={videoRef}
+                        key={videoSources[currentVideoIndex]}
+                        className="absolute inset-0 w-full h-full"
+                        autoPlay
+                        loop
+                        playsInline
+                        muted={isMuted}
+                        style={{ objectFit: 'cover' }}
+                      >
+                        <source src={videoSources[currentVideoIndex]} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                      {currentVideoIndex === 1 && (
+                        <button
+                          onClick={() => {
+                            setIsMuted(!isMuted);
+                            if (videoRef.current) {
+                              videoRef.current.muted = !isMuted;
+                            }
+                          }}
+                          className="absolute bottom-4 right-4 px-3 py-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-70 transition-all"
+                        >
+                          {isMuted ? "Click for sound" : "Mute"}
+                        </button>
+                      )}
                     </div>
-                  </div>
-                )}
-
-                {currentProject.videoLink && (
-                  <div className="video-container mt-4 inline-block" style={{ width: responsiveVideoSize.width }}>
-                    <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
-                      <iframe
-                        src={`${currentProject.videoLink}?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0`}
-                        className="absolute inset-0 w-full h-full rounded-lg"
-                        style={{ border: "none" }}
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
+                  
                   </div>
                 )}
               </div>
@@ -217,7 +286,23 @@ const NonCodeProjects = () => {
                 >
                   {currentProject.title}
                 </p>
-                <div className="links">
+                <div className="links flex gap-2">
+                  {videoSources.length > 1 && (
+                    <button
+                      onClick={handleVideoSwitch}
+                      className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[#4C5200]"
+                    >
+                      {currentVideoIndex === 0 ? (
+                        <>
+                          Behind the scenes video <GoArrowUpRight className="text-lg font-thin ml-1" />
+                        </>
+                      ) : (
+                        <>
+                          Back to Parallax <GoArrowLeft className="text-lg font-thin ml-1" />
+                        </>
+                      )}
+                    </button>
+                  )}
                   {currentProject.repoLink && currentProject.title === "Current Portfolio Site" ? (
                     <a
                       href={currentProject.repoLink}
