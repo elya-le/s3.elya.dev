@@ -14,6 +14,8 @@ const NonCodeProjects = () => {
   const [videoSources, setVideoSources] = useState([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentPlaceholder, setCurrentPlaceholder] = useState('');
   const videoRef = useRef(null);
   const currentProject = otherProjects[selectedProjectIndex];
   const carouselRef = useRef(null);
@@ -27,7 +29,8 @@ const NonCodeProjects = () => {
 
   // Handle video loading and cleanup
   useEffect(() => {
-    // Cleanup previous video URLs
+    setIsLoading(true);
+    
     videoSources.forEach(src => {
       if (src) URL.revokeObjectURL(src);
     });
@@ -36,6 +39,11 @@ const NonCodeProjects = () => {
 
     const fetchVideos = async () => {
       if (currentProject.videos) {
+        // Set initial placeholder immediately
+        if (currentProject.videos[0]?.placeholder) {
+          setCurrentPlaceholder(currentProject.videos[0].placeholder);
+        }
+
         const sources = await Promise.all(
           currentProject.videos.map(async (video) => {
             try {
@@ -48,15 +56,17 @@ const NonCodeProjects = () => {
           })
         );
         setVideoSources(sources.filter(Boolean));
+        setIsLoading(false);
       } else if (currentProject.videoLink) {
-        // Handle legacy single video format
         try {
           const videoBody = await getVideoFromS3(currentProject.videoLink);
           if (videoBody) {
             setVideoSources([URL.createObjectURL(videoBody)]);
           }
+          setIsLoading(false);
         } catch (error) {
           console.error("Error fetching video:", error);
+          setIsLoading(false);
         }
       }
     };
@@ -121,9 +131,13 @@ const NonCodeProjects = () => {
 
   const handleVideoSwitch = () => {
     if (videoSources.length > 1) {
-      setCurrentVideoIndex((prev) => 
-        (prev + 1) % videoSources.length
-      );
+      const nextIndex = (currentVideoIndex + 1) % videoSources.length;
+      setCurrentVideoIndex(nextIndex);
+      // Update placeholder when switching videos
+      if (currentProject.videos[nextIndex]?.placeholder) {
+        setCurrentPlaceholder(currentProject.videos[nextIndex].placeholder);
+      }
+      setIsLoading(true);
     }
   };
 
@@ -273,6 +287,22 @@ const NonCodeProjects = () => {
                         </button>
                       )}
                     </div>
+                    {videoSources.length > 1 && (
+                      <button
+                        onClick={handleVideoSwitch}
+                        className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[#4C5200]"
+                      >
+                        {currentVideoIndex === 0 ? (
+                          <>
+                            Behind the scenes video <GoArrowUpRight className="text-lg font-thin ml-1" />
+                          </>
+                        ) : (
+                          <>
+                            Back to Parallax <GoArrowLeft className="text-lg font-thin ml-1" />
+                          </>
+                        )}
+                      </button>
+                    )}
                   </div>
                 )}
               </div>
@@ -293,11 +323,11 @@ const NonCodeProjects = () => {
                     >
                       {currentVideoIndex === 0 ? (
                         <>
-                          Behind the scenes video 
+                          Behind the scenes video <GoArrowUpRight className="text-lg font-thin ml-1" />
                         </>
                       ) : (
                         <>
-                          <GoArrowLeft className="text-lg font-thin ml-1" />
+                          Back to Parallax <GoArrowLeft className="text-lg font-thin ml-1" />
                         </>
                       )}
                     </button>
@@ -373,6 +403,9 @@ const NonCodeProjects = () => {
               </button>
             </div>
           </div>
+
+
+
           {/* Link to ode projects */}
           <div className="w-full flex justify-center mt-4">
             <Link 
