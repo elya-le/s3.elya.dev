@@ -273,7 +273,6 @@ const NonCodeProjects = () => {
                         </button>
                       )}
                     </div>
-                  
                   </div>
                 )}
               </div>
@@ -294,11 +293,11 @@ const NonCodeProjects = () => {
                     >
                       {currentVideoIndex === 0 ? (
                         <>
-                          Behind the scenes video <GoArrowUpRight className="text-lg font-thin ml-1" />
+                          Behind the scenes video 
                         </>
                       ) : (
                         <>
-                          Back to Parallax <GoArrowLeft className="text-lg font-thin ml-1" />
+                          <GoArrowLeft className="text-lg font-thin ml-1" />
                         </>
                       )}
                     </button>

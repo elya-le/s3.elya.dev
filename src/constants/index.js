@@ -107,11 +107,13 @@ export const otherProjects = [
       videos: [
         {
           url: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_Paralax.mp4',
-          title: 'Parallax View'
+          title: 'Parallax View',
+          placeholder: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_LoadingPhoto.png',
         },
         {
           url: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_BS_2018.mp4', 
-          title: 'Secondary View'
+          title: 'Secondary View',
+          placeholder: 'https://s3.us-east-2.amazonaws.com/elya.dev/OdanataBS_LoadingPhoto.JPG',
         }
       ],
 
