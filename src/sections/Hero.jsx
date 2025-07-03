@@ -76,7 +76,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
       id="home"
       className="relative z-10 w-full h-[100vh] sm:h-[120vh] bg-black bg-opacity-35 flex items-center justify-center z-10">
       <div
-        className="pl-7 absolute text-white bg-transparent z-20
+        className="pl-7 absolute text-black bg-transparent z-20
         left-1/2 md:left-[35%] lg:left-[37%]
         transform -translate-x-1/2 -translate-y-1/2 
         top-[22%] md:top-[23%] lg:top-[38%]
@@ -111,7 +111,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
             href="https://github.com/elya-le"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white text-sm inline-flex items-center border border-white rounded-full 
+            className="text-grey text-sm inline-flex items-center border rounded-full 
               pl-3 pr-3 py-1.5 
               transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]
               sm:w-auto justify-center sm:justify-start"
@@ -120,7 +120,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
           </a>
           <a
             href="mailto:hello@elya.dev"
-            className="text-white text-sm inline-flex items-center border border-white rounded-full 
+            className="text-grey text-sm inline-flex items-center border rounded-full 
               pl-3 pr-3 py-1.5 
               transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]
               sm:w-auto justify-center sm:justify-start"
@@ -162,6 +162,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
         style={{ height: "100%" }}
         onPointerDown={(e) => e.stopPropagation()}
         onWheel={(e) => e.stopPropagation()}
+        shadows 
       >
         <Suspense fallback={<CanvasLoader />}>
           <PerspectiveCamera makeDefault ref={cameraRef} />
@@ -171,24 +172,31 @@ const Hero = ({ animationName, toggleAnimation }) => {
             basePosition={getBasePosition()}
             screenWidth={screenWidth}
           />
-          <color attach="background" args={["#191B00"]} />
-          <rectAreaLight
-            ref={rectLightRef}
-            position={rectLightSettings.position}
-            rotation={rectLightSettings.rotation}
-            width={rectLightSettings.width}
-            height={rectLightSettings.height}
-            intensity={rectLightSettings.intensity}
-            color={"#6F74F7"}
+          <color attach="background" args={["#90D5FF"]} />
+
+          <ambientLight intensity={1} color={"#ffffff"} />
+          <directionalLight 
+            position={[5, 10, 5]} 
+            intensity={1} 
+            color={"#ffffff"}   
+            castShadow 
+            shadow-mapSize={[2048, 2048]}
           />
-          <ambientLight intensity={0.1} color={"#ffffff"} />
-          <directionalLight position={[5, 10, 5]} intensity={0.01} color={"#ffffff"} castShadow />
           <Cat
             ref={catRef}
             animationName={animationName}
             origin={screenWidth < 768 ? [-.5, -1.2, 0] : [-.8, .2, 0]}
             scale={getCatScale()}
           />
+          {/* invisible shadow floor */}
+          <mesh 
+            rotation={[-Math.PI / 2, 0, 0]} 
+            position={[0, -.07, 0]} 
+            receiveShadow
+          >
+            <planeGeometry args={[50, 50]} />
+            <shadowMaterial transparent opacity={0.3} />
+          </mesh>
         </Suspense>
       </Canvas>
     </section>
@@ -226,3 +234,15 @@ const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) =>
 };
 
 export default Hero;
+
+
+
+{/* <rectAreaLight
+  ref={rectLightRef}
+  position={rectLightSettings.position}
+  rotation={rectLightSettings.rotation}
+  width={rectLightSettings.width}
+  height={rectLightSettings.height}
+  intensity={rectLightSettings.intensity}
+  color={"#6F74F7"}
+/> */}

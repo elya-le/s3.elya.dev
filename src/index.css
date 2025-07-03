@@ -6,6 +6,7 @@
 
 /* 
 :root {
+
   --bg-primary: #191B00;
   --bg-secondary: #262900;
   --bg-input: #2C2F03;
@@ -17,18 +18,18 @@
 
 /* colors reference */
 :root {
-  --bg-primary: #191B00;
-  --bg-secondary: #262900;
+  --bg-primary: #90D5FF;
+  --bg-secondary: #77B1D4;
   --bg-input: #2C2F03;
-  --bg-button: #4C5200;
-  --bg-button-hover: #5F6600;
+  --bg-button: #517891;
+  --bg-button-hover: #517891;
   --bg-secondary-hover: #FFB01F;
 
    /* Toggle Switch Colors */
-  --toggle-bg: #d7d0dd;
+  --toggle-bg: #732323;
   --toggle-bg-checked: #FFB833;
   --toggle-knob: white;
-  --toggle-icon: white;
+  --toggle-icon: black;
   --toggle-icon-hover: var(--bg-secondary-hover);
 }
 
@@ -51,7 +52,7 @@ html, body {
 body {
   background: var(--bg-primary);
   font-family: 'General Sans', sans-serif;
-  color: #FFFFFF;
+  color:black;
 }
 
 #root {
@@ -93,7 +94,7 @@ input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
   background-color: var(--bg-secondary) !important;
-  color: white !important;
+  color: black !important;
   -webkit-box-shadow: 0 0 0px 1000px var(--bg-secondary) inset !important;
   border-color: var(--bg-secondary) !important;
 }
@@ -101,7 +102,7 @@ select:-webkit-autofill {
 input:-webkit-autofill::first-line,
 textarea:-webkit-autofill::first-line,
 select:-webkit-autofill::first-line {
-  color: white !important;
+  color: black !important;
 }
 
 
