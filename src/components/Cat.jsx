@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1, ...props }, ref) => {
   const group = useRef(); // local reference for the group
-  const { nodes, materials, animations } = useGLTF("public/assets/cat_22_lowpoly_modifiers.glb"); // Updated path
+  const { nodes, materials, animations } = useGLTF("assets/cat_22_lowpoly_modifiers.glb"); // Updated path
   const { actions } = useAnimations(animations, group);
 
   // forward the ref to the parent
@@ -53,7 +53,6 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
             {/* Collar */}
             <mesh
               name="Collar"
-         
               receiveShadow
               geometry={nodes.Collar.geometry}
               material={materials.Collar}
@@ -526,7 +525,7 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
 });
 
 // Preload the model - Updated path
-useGLTF.preload("public/assets/cat_22_lowpoly_modifiers.glb");
+useGLTF.preload("assets/cat_22_lowpoly_modifiers.glb");
 
 export default Cat;
 
