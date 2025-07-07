@@ -9,13 +9,62 @@ import { FiGithub } from "react-icons/fi";
 import { LuTurtle } from "react-icons/lu";
 import { PiShootingStarDuotone } from "react-icons/pi";
 import PageArrow from "./PageArrow.jsx";
+import * as THREE from "three";
 
 const Hero = ({ animationName, toggleAnimation }) => {
   const rectLightRef = useRef();
   const catRef = useRef();
   const cameraRef = useRef();
+  const directionalLightRef = useRef();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile devices
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent;
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+      const isSmallScreen = window.innerWidth <= 768;
+      setIsMobile(isMobileDevice || isSmallScreen);
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // configure shadow settings after light is created for shadow performance
+  // and to ensure it works well on mobile devices
+  useEffect(() => {
+    if (directionalLightRef.current) {
+      const light = directionalLightRef.current;
+      
+      // mobile-specific shadow settings
+      if (isMobile) {
+        light.shadow.camera.near = 0.01;  // much closer near plane
+        light.shadow.camera.far = 25;
+        light.shadow.bias = -0.005;       // more aggressive bias
+        light.shadow.normalBias = 0.1;    // migher normal bias
+        light.shadow.mapSize.setScalar(512); // even lower resolution for testing
+      } else {
+        light.shadow.camera.near = 0.1;
+        light.shadow.camera.far = 50;
+        light.shadow.bias = -0.0001;
+        light.shadow.normalBias = 0.02;
+        light.shadow.mapSize.setScalar(2048);
+      }
+      
+      // Set shadow camera bounds
+      light.shadow.camera.left = -15;
+      light.shadow.camera.right = 15;
+      light.shadow.camera.top = 15;
+      light.shadow.camera.bottom = -15;
+      
+      // Update the shadow camera
+      light.shadow.camera.updateProjectionMatrix();
+    }
+  }, [isMobile]);
 
   // Responsive dimensions using CSS custom properties approach
   const getContentStyles = () => {
@@ -48,7 +97,7 @@ const Hero = ({ animationName, toggleAnimation }) => {
       return {
         ...baseStyles,
         left: '50%',
-        top: '22%',
+        top: '15%',
         width: '400px',
         height: '240px',
       };
@@ -199,11 +248,11 @@ const Hero = ({ animationName, toggleAnimation }) => {
 
           <ambientLight intensity={1} color={"#ffffff"} />
           <directionalLight 
+            ref={directionalLightRef}
             position={[5, 10, 5]} 
             intensity={1} 
             color={"#ffffff"}   
             castShadow 
-            shadow-mapSize={[2048, 2048]}
           />
           <Cat
             ref={catRef}
@@ -211,14 +260,14 @@ const Hero = ({ animationName, toggleAnimation }) => {
             origin={screenWidth < 768 ? [-0.5, -1.2, 0] : [-0.8, 0.2, 0]}
             scale={getCatScale()}
           />
-          {/* Shadow floor */}
+          {/* Shadow floor - adjusted position for mobile */}
           <mesh 
             rotation={[-Math.PI / 2, 0, 0]} 
-            position={[0, -0.07, 0]} 
+            position={[0, isMobile ? -1.5 : -0.07, 0]} 
             receiveShadow
           >
             <planeGeometry args={[50, 50]} />
-            <shadowMaterial transparent opacity={0.3} />
+            <shadowMaterial transparent opacity={0.4} />
           </mesh>
         </Suspense>
       </Canvas>
@@ -257,7 +306,3 @@ const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) =>
 };
 
 export default Hero;
-
-
-
-

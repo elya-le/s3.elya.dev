@@ -54,7 +54,7 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
           } else if (originalMaterial.name === "OrangeStripeFlat" || originalMaterial.name === "OrangeBodyFlat") {
             materialColor = new THREE.Color(0xff9933); // Orange for stripes and body
           } else if (child.name === "Pot" || child.name === "PotF") {
-            materialColor = new THREE.Color(0x8B4513); // Brown for pot
+            materialColor = new THREE.Color(0x654321); // Brown for pot
           } else if (child.name === "GroupStripesCurve121") {
             materialColor = new THREE.Color(0x000000); // Black stripes
           } else if (child.name === "GroupStripesCurve121_1") {
@@ -139,7 +139,7 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
             <skinnedMesh
               name="Body"
               geometry={nodes.Body.geometry}
-              material={new THREE.MeshBasicMaterial({ color: 0xff6600 })} // Force orange color
+              material={new THREE.MeshBasicMaterial({ color: 0xff8c42 })} // force orange color
               skeleton={nodes.Body.skeleton}
               castShadow
             />
@@ -187,7 +187,7 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
             castShadow
             receiveShadow
             geometry={nodes.Pot.geometry}
-            material={new THREE.MeshBasicMaterial({ color: 0x8B4513 })} // Force brown color
+            material={new THREE.MeshBasicMaterial({ color: 0x654321 })} // force brown color
             position={[1.937, 0, 1.081]}
           />
           <mesh
@@ -235,7 +235,7 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
             castShadow
             receiveShadow
             geometry={nodes.Soil.geometry}
-            material={materials["Material.011"]}
+            material={new THREE.MeshBasicMaterial({ color: 0x3d2914 })} // darker brown than pot
             position={[1.937, 0.643, 1.075]}
           />
           <mesh
