@@ -20,8 +20,8 @@
   --color-text-inverse: #FFFFFF;   /* Text on dark backgrounds */
   
   /* Projects section text colors */
-  --color-projects-header: #bbbbbb     /* "Selected Projects" header */
-  --color-projects-title: #ffffff;      /* Project titles */
+  --color-projects-header: black;     /* "Selected Projects" header */
+  --color-projects-title: black;      /* Project titles */
   --color-projects-description: #000000; /* Project descriptions */
   --color-projects-subdesc: #000000;    /* Project subdescriptions */
   --color-projects-button-text: #ffffff; /* Project button text */
@@ -40,7 +40,7 @@
   --color-noncode-nav: #000000;         /* Back navigation text */
   
   /* === OTHER COLORS === */
-  --color-border: #517891;         /* Border color */
+  --button-border-color: #517891;         /* Border color */
   --color-surface: #FFFFFF;        /* Cards, buttons surface */
   --color-shadow: rgba(0,0,0,0.1); /* Shadows */
   
@@ -54,7 +54,7 @@
   --projects-bg-button-hover: #90D5FF; 
 
   /* Universal project tag colors */
-  --color-tag-background: #517891;    /* All tag backgrounds */
+  --color-tag-background: #90D5FF;    /* All project tag backgrounds */
   --color-tag-text: #ffffff;          /* All tag text */
   
   /* Special button colors */
@@ -202,6 +202,8 @@ main {
 
 /* ===== COMPONENT CLASSES ===== */
 .btn {
+
+  height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -209,8 +211,8 @@ main {
   font-size: var(--text-sm);
   font-weight: var(--font-weight-normal);
   color: var(--color-text-primary);
-  background-color: var(--color-neutral);
-  border: var(--border-width) solid var(--color-border);
+  background-color: var(--color-primary);
+  border: var(--border-width) solid var(--button-border-color);
   border-radius: var(--border-radius-full);
   cursor: pointer;
   transition: all var(--transition-normal);
@@ -220,7 +222,6 @@ main {
 
 .btn:hover {
   background-color: var(--color-accent);
-  transform: translateY(-1px);
 }
 
 .btn:active {
@@ -566,6 +567,7 @@ input:checked + .slider:before {
   padding: 4px 12px;
   font-size: var(--text-sm);
   font-weight: var(--font-weight-thin);
+  border: 1px solid var(--button-border-color);
   border-radius: 9999px;
   background-color: var(--color-tag-background);
   color: var(--color-tag-text);
@@ -1048,7 +1050,7 @@ select:-webkit-autofill {
   background-color: var(--color-secondary) !important;
   color: var(--color-text-primary) !important;
   -webkit-box-shadow: 0 0 0px 1000px var(--color-secondary) inset !important;
-  border-color: var(--color-border) !important;
+  border-color: var(--button-border-color) !important;
 }
 
 .hide-scrollbar {
