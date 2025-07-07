@@ -30,18 +30,37 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
           // Clone the material to avoid modifying the original
           const originalMaterial = child.material;
           
+          // Debug logging for nose
+          if (child.name === "Nose") {
+            console.log("Nose material:", originalMaterial);
+            console.log("Nose material name:", originalMaterial.name);
+            console.log("Nose material emissive:", originalMaterial.emissive);
+          }
+          
           // Get the color from the material - handle different material types
           let materialColor = new THREE.Color(0xffffff); // default white
           
-          // Handle specific materials by name first
-          if (child.name === "Body" && materials.OrangeBodyFlat) {
-            materialColor = new THREE.Color(0xff6600); // Orange color for cat body
+          // Handle specific materials by name and mesh name
+          if (child.name === "Body") {
+            materialColor = new THREE.Color(0xff8c42); // Orange color for cat body
+          } else if (child.name === "Nose") {
+            materialColor = new THREE.Color(0xffc0cb); // Pink color for nose
+          } else if (child.name.includes("Brow")) {
+            materialColor = new THREE.Color(0xff8c42); // Orange color for brows to match OrangeStripeFlat
           } else if (originalMaterial.name === "BlackOutline" || child.name.includes("Outline")) {
             materialColor = new THREE.Color(0x000000); // Black for outlines
-          } else if (originalMaterial.name === "OrangeStripeFlat") {
-            materialColor = new THREE.Color(0xff6600); // Orange for stripes
+          } else if (originalMaterial.name === "PinkNose") {
+            materialColor = new THREE.Color(0xe6567a); // Pink for nose
+          } else if (originalMaterial.name === "OrangeStripeFlat" || originalMaterial.name === "OrangeBodyFlat") {
+            materialColor = new THREE.Color(0xff9933); // Orange for stripes and body
           } else if (child.name === "Pot" || child.name === "PotF") {
             materialColor = new THREE.Color(0x8B4513); // Brown for pot
+          } else if (child.name === "GroupStripesCurve121") {
+            materialColor = new THREE.Color(0x000000); // Black stripes
+          } else if (child.name === "GroupStripesCurve121_1") {
+            materialColor = new THREE.Color(0xff8c42); // Orange stripes
+          } else if (originalMaterial.emissive && originalMaterial.emissive.getHex() !== 0x000000) {
+            materialColor = originalMaterial.emissive.clone(); // Use emissive color for emissive materials
           } else if (originalMaterial.color) {
             materialColor = originalMaterial.color.clone();
           } else if (originalMaterial.emissive) {
@@ -76,7 +95,7 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
         }
       });
     }
-  }, [materials]);
+  }, [materials, nodes]); // Add nodes dependency to ensure this runs after materials are loaded
 
   return (
     <group {...props} ref={group} dispose={null} scale={scale}>
@@ -95,7 +114,7 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
             castShadow
             receiveShadow
             geometry={nodes.Nose.geometry}
-            material={materials.PinkNose}
+            material={materials.PinkNose} 
             position={[0, 2.534, 0.568]}
           />
           <mesh
@@ -451,14 +470,14 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
               castShadow
               receiveShadow
               geometry={nodes.GroupStripesCurve121.geometry}
-              material={new THREE.MeshBasicMaterial({ color: 0x000000 })} // Force black color
+              material={new THREE.MeshBasicMaterial({ color: 0x000000 })} // Force black color for stripes
             />
             <mesh
               name="GroupStripesCurve121_1"
               castShadow
               receiveShadow
               geometry={nodes.GroupStripesCurve121_1.geometry}
-              material={new THREE.MeshBasicMaterial({ color: 0xff6600 })} // Force orange color
+              material={new THREE.MeshBasicMaterial({ color: 0xcc5500 })} // Force darker orange color for stripe base
             />
           </group>
           <group name="CollarF" rotation={[Math.PI / 2, 0, 0]}>
@@ -551,48 +570,36 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
           </group>
           <mesh
             name="CupO"
-            castShadow
-            receiveShadow
             geometry={nodes.CupO.geometry}
             material={materials.BlackOutline}
             rotation={[Math.PI / 2, 0, 0]}
           />
           <mesh
             name="DeskO"
-            castShadow
-            receiveShadow
             geometry={nodes.DeskO.geometry}
             material={materials.BlackOutline}
             rotation={[Math.PI / 2, 0, 0]}
           />
           <mesh
             name="DirtO"
-            castShadow
-            receiveShadow
             geometry={nodes.DirtO.geometry}
             material={materials.BlackOutline}
             rotation={[Math.PI / 2, 0, 0]}
           />
           <mesh
             name="PillowO"
-            castShadow
-            receiveShadow
             geometry={nodes.PillowO.geometry}
             material={materials.BlackOutline}
             rotation={[Math.PI / 2, 0, 0]}
           />
           <mesh
             name="PotO"
-            castShadow
-            receiveShadow
             geometry={nodes.PotO.geometry}
             material={materials.BlackOutline}
             rotation={[Math.PI / 2, 0, 0]}
           />
           <mesh
             name="Outline"
-            castShadow
-            receiveShadow
             geometry={nodes.Outline.geometry}
             material={materials.BlackOutline}
             rotation={[Math.PI / 2, 0, 0]}
