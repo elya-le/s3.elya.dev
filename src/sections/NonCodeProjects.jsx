@@ -177,18 +177,6 @@ const NonCodeProjects = () => {
     setCurrentImageIndex(0);
   };
 
-  const handleLiveLinkClick = (e, link) => {
-    if (screenWidth <= 768) {
-      e.preventDefault();
-      const userConfirmed = window.confirm(
-        "This project is best viewed on a desktop. Mobile experience will be limited. Proceed anyway?"
-      );
-      if (userConfirmed) {
-        window.open(link, "_blank");
-      }
-    }
-  };
-
   const getVideoFromS3 = async (key) => {
     try {
       const cleanKey = key.replace('https://s3.us-east-2.amazonaws.com/elya.dev/', '');
@@ -211,9 +199,9 @@ const NonCodeProjects = () => {
   const subdescHeight = getResponsiveSubdescHeight();
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] pt-20 mb-24">
+    <div className="min-h-screen pt-20 mb-24" style={{ backgroundColor: "var(--color-primary)" }}>
       <section
-        className="non-code-projects relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
+        className="non-code-projects"
         id="non-code-projects"
       >
         <div
@@ -222,25 +210,29 @@ const NonCodeProjects = () => {
             width: responsiveSectionDimensions.width,
           }}
         >
-          <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
-            <p className="text-white text-lg sm:text-xl font-thin">Non-Code Projects</p>
+          <div className="projects-header-text">
+            <p className={screenWidth > 640 ? "text-xl" : "text-lg"}>Non-Code Projects</p>
           </div>
+          
           <div
-            className="relative bg-opacity-80 flex flex-col justify-center bg-[var(--bg-primary)] h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
-            style={{ backgroundColor: "var(--bg-secondary)" }}
+            className="noncode-projects-main-container"
+            style={{
+              height: responsiveSectionDimensions.height,
+              width: responsiveSectionDimensions.width,
+              backgroundColor: "var(--projects-bg-secondary)"
+            }}
           >
             <div className="p-1 flex-1 w-full">
               <div
                 ref={carouselRef}
-                className="whitespace-nowrap overflow-x-auto hide-scrollbar"
-                style={{ overflowX: "scroll", overflowY: "hidden", cursor: "pointer" }}
+                className="projects-image-carousel"
               >
                 {Object.keys(currentProject)
                   .filter((key) => key.startsWith("previewImg"))
                   .map((key, index) => (
                     <div
                       key={index}
-                      className="inline-block align-top mr-2.5"
+                      className="noncode-img-item inline-block align-top mr-2.5"
                       style={{
                         width: responsiveImageSize.width,
                         position: "relative",
@@ -256,19 +248,18 @@ const NonCodeProjects = () => {
                   
                 {videoSources.length > 0 && (
                   <div 
-                    className="video-container mt-4 inline-block" 
+                    className="noncode-video-container" 
                     style={{ width: responsiveVideoSize.width }}
                   >
-                    <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+                    <div className="noncode-video-wrapper">
                       <video
                         ref={videoRef}
                         key={videoSources[currentVideoIndex]}
-                        className="absolute inset-0 w-full h-full"
+                        className="noncode-video-element"
                         autoPlay
                         loop
                         playsInline
                         muted={isMuted}
-                        style={{ objectFit: 'cover' }}
                       >
                         <source src={videoSources[currentVideoIndex]} type="video/mp4" />
                         Your browser does not support the video tag.
@@ -281,132 +272,91 @@ const NonCodeProjects = () => {
                               videoRef.current.muted = !isMuted;
                             }
                           }}
-                          className="absolute bottom-4 right-4 px-3 py-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-70 transition-all"
+                          className="noncode-mute-button"
                         >
                           {isMuted ? "Click for sound" : "Mute"}
                         </button>
                       )}
                     </div>
-                    {videoSources.length > 1 && (
-                      <button
-                        onClick={handleVideoSwitch}
-                        className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[#4C5200]"
-                      >
-                        {currentVideoIndex === 0 ? (
-                          <>
-                            Behind the scenes video <GoArrowUpRight className="text-lg font-thin ml-1" />
-                          </>
-                        ) : (
-                          <>
-                            Back to Parallax <GoArrowLeft className="text-lg font-thin ml-1" />
-                          </>
-                        )}
-                      </button>
-                    )}
                   </div>
                 )}
               </div>
               
-              <div className="mt-4 flex justify-between items-center w-full">
-                <p
-                  className={`text-white font-medium ${
-                    screenWidth > 1024 ? "text-2xl" : "text-xl"
-                  }`}
-                >
+              <div className="project-header-row">
+                <p className={`project-title-text ${screenWidth > 1024 ? "text-2xl" : "text-xl"}`}>
                   {currentProject.title}
                 </p>
-                <div className="links flex gap-2">
+                <div className="noncode-link-container">
                   {videoSources.length > 1 && (
                     <button
                       onClick={handleVideoSwitch}
-                      className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[#4C5200]"
+                      className="project-link-button noncode-button"
                     >
                       {currentVideoIndex === 0 ? (
                         <>
-                          Behind the scenes video <GoArrowUpRight className="text-lg font-thin ml-1" />
+                          Behind the scenes video <GoArrowUpRight className="project-link-icon" />
                         </>
                       ) : (
                         <>
-                          Back to Parallax <GoArrowLeft className="text-lg font-thin ml-1" />
+                          Back to Parallax <GoArrowLeft className="project-link-icon" />
                         </>
                       )}
                     </button>
                   )}
-                  {currentProject.repoLink && currentProject.title === "Current Portfolio Site" ? (
-                    <a
-                      href={currentProject.repoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[#4C5200]"
-                    >
-                      Github <GoArrowUpRight className="text-lg font-thin ml-1" />
-                    </a>
-                  ) : currentProject.liveLink ? (
-                    <a
-                      href={currentProject.liveLink}
-                      onClick={(e) => handleLiveLinkClick(e, currentProject.liveLink)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[#4C5200]"
-                    >
-                      Live Link <GoArrowUpRight className="text-lg font-thin ml-1" />
-                    </a>
-                  ) : null}
                 </div>
               </div>
               
-              <p className="mt-2 text-white font-thin text-sm sm:text-base md:text-lg lg:text-lg">
+              <p className={`project-description-text ${screenWidth > 768 ? "md:text-lg lg:text-lg" : "text-sm"} ${screenWidth > 640 ? "sm:text-base" : ""}`}>
                 {currentProject.desc}
               </p>
+              
               <div
-                className="subdesc mt-4 text-sm sm:text-base md:text-lg lg:text-lg"
+                className={`noncode-subdesc-content project-subdesc-content ${screenWidth > 768 ? "md:text-lg lg:text-lg" : "text-sm"} ${screenWidth > 640 ? "sm:text-base" : ""}`}
                 dangerouslySetInnerHTML={{ __html: currentProject.subdesc }}
                 style={{ height: subdescHeight }}
               ></div>
-              <div className="tags my-4 flex flex-wrap gap-2">
+              
+              <div className="project-tags-container">
                 {currentProject.tags.map((tag) => (
                   <span
                     key={tag.id}
-                    className="px-3 py-1 text-sm font-thin rounded-full text-white"
-                    style={{
-                      backgroundColor: tag.color,
-                      color: tag.textColor || "#ffffff",
-                    }}
+                    className="project-tag-item"
                   >
                     {tag.name}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="flex justify-between items-center px-1 pb-1 w-full">
+            
+            <div className="project-navigation-row">
               <button
-                className="text-lg flex items-center"
+                className="project-nav-button"
                 onClick={() => handleNavigation("previous")}
               >
-                <GoArrowLeft className="ml-1 text-white transition-colors" />
+                <GoArrowLeft className="project-nav-icon" />
               </button>
-              <div className="flex gap-2">
+              
+              <div className="project-dots-container">
                 {otherProjects.map((_, index) => (
                   <span
                     key={index}
-                    className={`w-2 h-2 rounded-full border ${
-                      index === selectedProjectIndex ? "bg-white border-white" : "border-white"
+                    className={`project-dot ${
+                      index === selectedProjectIndex ? "project-dot-active" : "project-dot-inactive"
                     }`}
                   ></span>
                 ))}
               </div>
+              
               <button
-                className="text-lg flex items-center"
+                className="project-nav-button"
                 onClick={() => handleNavigation("next")}
               >
-                <GoArrowRight className="mr-1 text-grey transition-colors" />
+                <GoArrowRight className="project-nav-icon" />
               </button>
             </div>
           </div>
 
-
-
-          {/* Link to ode projects */}
+          {/* Link to code projects */}
           <div className="w-full flex justify-center mt-4">
             <Link 
               to="/#projects"
@@ -420,12 +370,12 @@ const NonCodeProjects = () => {
                   }
                 }, 100);
               }}
-              className="text-white text-lg sm:text-xl font-thin hover:opacity-80 transition-opacity duration-300 inline-flex items-center gap-4 p-4 -ml-9"
+              className="noncode-back-link"
             > 
-              <div className="w-24 h-8 flex items-center justify-center mt-2">
+              <div className="noncode-back-arrow">
                 <HorizontalArrow direction="left" />
               </div>
-              <span className="underline decoration-[0.5px] underline-offset-4 -ml-3">
+              <span className="noncode-back-text">
                 Code Projects
               </span>
             </Link>

@@ -19,11 +19,11 @@ const ContactForm = () => {
 
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
-      return { height: "500px", width: "900px" }; // fullscreen
+      return { height: "500px", width: "900px" };
     } else if (screenWidth > 715) {
-      return { height: "500px", width: "800px" }; // tablet
+      return { height: "500px", width: "800px" };
     } else {
-      return { height: "770px", width: "99%" }; // mobile
+      return { height: "770px", width: "99%" };
     }
   };
   
@@ -62,7 +62,7 @@ const ContactForm = () => {
 
   return (
     <section 
-      className="contact-section flex flex-col items-center justify-center bg-[var(--bg-primary)] p-4 -mt-24"
+      className="contact-section"
       id="contact"
     >
       <div
@@ -71,75 +71,69 @@ const ContactForm = () => {
           width: responsiveSectionDimensions.width,
         }}
       >
-        <div className="w-full text-left pl-3 sm:pl-6 sm:mb-10 mb-4">
-          <p className="text-white text-lg sm:text-xl font-thin">Lets build together!!</p>
+        <div className="contact-header-text">
+          <p className={screenWidth > 715 ? "text-xl" : "text-lg"}>Lets build together!!</p>
         </div>
-        <div className="w-full flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-          <div className="w-full sm:w-1/2 bg-[var(--bg-secondary)] p-6">
+        
+        <div className="contact-main-container">
+          <div className="contact-image-section">
             <img
               src="/assets/Elya_PhotonDesk2019.jpg"
               alt="Elya Photon Desk 2019"
-              style={{
-                width: '100%',
-                height: '300px',
-                objectFit: 'cover',
-              }}
+              className="contact-image"
             />
           </div>
-          <div className="w-full sm:w-1/2 bg-[var(--bg-secondary)] p-6">
-            <h2 className="text-2xl font-bold mb-6 text-left"></h2>
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="relative">
+          
+          <div className="contact-form-section">
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <div className="contact-input-group">
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="mt-1 block w-full px-3 py-2 focus:outline-none focus:ring-white focus:border-white sm:text-sm peer bg-[var(--bg-input)] border border-white border-opacity-10 focus:border-opacity-100 placeholder-white placeholder-opacity-30"
+                  className="contact-input"
                   placeholder="Email"
-                  style={{ borderRadius: '0px', color: 'white' }}
                   required
                 />
               </div>
 
-              <div className="relative">
+              <div className="contact-input-group">
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   rows="4"
-                  className="mt-1 block w-full px-3 py-2 focus:outline-none focus:ring-white focus:border-white sm:text-sm peer bg-[var(--bg-input)] border border-white border-opacity-10 focus:border-opacity-100 placeholder-white placeholder-opacity-30"
+                  className="contact-textarea"
                   placeholder="Message"
-                  style={{ borderRadius: '0px', color: 'white' }}
                   required
                 ></textarea>
               </div>
 
-              <div className="flex justify-between items-center">
-                <div className="flex-1 flex items-center">
+              <div className="contact-form-footer">
+                <div className="contact-status-message">
                   {status && (
-                    <p
-                      className="inline-flex items-center text-white text-left text-sm"
-                      dangerouslySetInnerHTML={{ __html: status }}
-                    ></p>
+                    <p dangerouslySetInnerHTML={{ __html: status }}></p>
                   )}
                 </div>
 
                 <div>
                   <button
                     type="submit"
-                    className="text-white text-sm inline-flex items-center border border-white border-opacity-50 rounded-full pl-4 pr-4 py-1.5 transition-colors bg-[var(--bg-button)] hover:bg-[var(--bg-button-hover)]"
+                    className="contact-submit-button"
                     disabled={loading}
                   >
-                    {loading ? 'Sending...' : 'Send'} <RiSendPlaneLine className="pl-1.5" size={18} />
+                    {loading ? 'Sending...' : 'Send'} 
+                    <RiSendPlaneLine size={18} />
                   </button>
                 </div>
               </div>
             </form>
           </div>
         </div>
+        
         {/* Link to non-code projects */}
-        <div className="w-full flex justify-center mt-4"> {/* Added wrapper for centering */}
+        <div className="w-full flex justify-center mt-4">
           <Link 
             to="/non-code-projects"
             onClick={(e) => {
@@ -147,12 +141,12 @@ const ContactForm = () => {
               navigate('/non-code-projects');
               window.scrollTo(0, 0);
             }}
-            className="text-white text-lg sm:text-xl font-thin hover:opacity-80 transition-opacity duration-300 inline-flex items-center gap-4 p-4"
+            className="contact-nav-link"
           > 
-            <span className="underline decoration-[0.5px] underline-offset-4">
+            <span className="contact-nav-text">
               Non-Code Projects
             </span>
-            <div className="w-24 h-8 flex items-center justify-center -ml-3">
+            <div className="contact-nav-arrow">
               <HorizontalArrow />
             </div>
           </Link>

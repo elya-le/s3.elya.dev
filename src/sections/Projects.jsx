@@ -3,18 +3,18 @@ import { myProjects } from "../constants/index.js";
 import { GoArrowUpRight, GoArrowLeft, GoArrowRight } from "react-icons/go";
 
 const Projects = () => {
-  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0); // state for current project
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // state to track screen width
-  const [currentImageIndex, setCurrentImageIndex] = useState(0); // state for internal image carousel
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const currentProject = myProjects[selectedProjectIndex]; // get current project data
-  const carouselRef = useRef(null); // reference for the internal image carousel
-  const scrollRef = useRef(null); // reference for the scroll animation
-  const interactionTimeoutRef = useRef(null); // reference for interaction timeout
+  const currentProject = myProjects[selectedProjectIndex];
+  const carouselRef = useRef(null);
+  const scrollRef = useRef(null);
+  const interactionTimeoutRef = useRef(null);
   const projectsSectionRef = useRef(null);
   const videoRef = useRef(null);
 
-  // Add scroll position tracking
+  // add scroll position tracking
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.pageYOffset);
@@ -27,23 +27,23 @@ const Projects = () => {
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize); // clean up event listener
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // auto-scroll functionality
   useEffect(() => {
     const scroll = () => {
       if (carouselRef.current) {
-        carouselRef.current.scrollLeft += 1; // Adjust the scroll speed as needed
+        carouselRef.current.scrollLeft += 1;
         if (carouselRef.current.scrollLeft >= carouselRef.current.scrollWidth - carouselRef.current.clientWidth) {
-          carouselRef.current.scrollLeft = 0; // Reset scroll position to create a loop
+          carouselRef.current.scrollLeft = 0;
         }
       }
       scrollRef.current = requestAnimationFrame(scroll);
     };
     scrollRef.current = requestAnimationFrame(scroll);
 
-    return () => cancelAnimationFrame(scrollRef.current); // Clean up the animation frame on component unmount
+    return () => cancelAnimationFrame(scrollRef.current);
   }, []);
 
   // auto loop video
@@ -53,7 +53,7 @@ const Projects = () => {
         console.log("Video play failed:", error);
       });
     }
-  }, [currentProject.videoLink]); // Re-run when video source changes
+  }, [currentProject.videoLink]);
 
   // pause auto-scroll on interaction
   const pauseAutoScroll = () => {
@@ -61,43 +61,43 @@ const Projects = () => {
     clearTimeout(interactionTimeoutRef.current);
     interactionTimeoutRef.current = setTimeout(() => {
       scrollRef.current = requestAnimationFrame(scroll);
-    }, 3000); // Resume auto-scroll after 3 seconds of inactivity
+    }, 3000);
   };
 
   // dynamically calculate dimensions based on screen size
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
-      return { height: "770px", width: "900px" }; // fullscreen
+      return { height: "770px", width: "900px" };
     } else if (screenWidth > 768) {
-      return { height: "750px", width: "800px" }; // tablet
+      return { height: "750px", width: "800px" };
     } else {
-      return { height: "650px", width: "99%" }; // mobile
+      return { height: "650px", width: "99%" };
     }
   };
 
   const getResponsiveImageSize = () => {
     if (screenWidth > 1024) {
-      return { height: 348, width: 500 }; // fullscreen
+      return { height: 348, width: 500 };
     } else if (screenWidth > 768) {
-      return { height: 308, width: 440 }; // tablet
+      return { height: 308, width: 440 };
     } else {
-      return { height: 218, width: 310 }; // mobile
+      return { height: 218, width: 310 };
     }
   };
 
   const getResponsiveSubdescHeight = () => {
     if (screenWidth > 1024) {
-      return "145px"; // height for desktop
+      return "145px";
     } else if (screenWidth > 768) {
-      return "140px"; // height for tablet
+      return "140px";
     } else {
-      return "140px"; // height for mobile
+      return "140px";
     }
   };
 
   const responsiveSectionDimensions = getResponsiveSectionDimensions();
   const responsiveImageSize = getResponsiveImageSize();
-  const subdescHeight = getResponsiveSubdescHeight(); // get height dynamically
+  const subdescHeight = getResponsiveSubdescHeight();
 
   // click on an image to navigate and toggle visibility
   const handleImageClick = (index) => {
@@ -107,21 +107,18 @@ const Projects = () => {
     ).length;
 
     if (index === currentImageIndex) {
-      // Special case: if the first image is clicked again, scroll to the second image
       if (index === 0) {
-        const nextIndex = (index + 1) % totalImages; // Move to the second image
+        const nextIndex = (index + 1) % totalImages;
         const scrollPosition = nextIndex * (responsiveImageSize.width * 1.05);
         setCurrentImageIndex(nextIndex);
         carouselRef.current.scrollTo({ left: scrollPosition, behavior: "smooth" });
       } else {
-        // Otherwise, go back to the previous image
-        const prevIndex = (index - 1 + totalImages) % totalImages; // Wrap around if necessary
+        const prevIndex = (index - 1 + totalImages) % totalImages;
         const scrollPosition = prevIndex * (responsiveImageSize.width * 1.05);
         setCurrentImageIndex(prevIndex);
         carouselRef.current.scrollTo({ left: scrollPosition, behavior: "smooth" });
       }
     } else {
-      // Otherwise, scroll to make the clicked image fully visible
       const newIndex = index % totalImages;
       const scrollPosition = newIndex * (responsiveImageSize.width * 1.05);
       setCurrentImageIndex(newIndex);
@@ -133,44 +130,43 @@ const Projects = () => {
     pauseAutoScroll();
     setSelectedProjectIndex((prevIndex) => {
       if (direction === "previous") {
-        return prevIndex === 0 ? myProjects.length - 1 : prevIndex - 1; // move to previous project
+        return prevIndex === 0 ? myProjects.length - 1 : prevIndex - 1;
       } else if (direction === "next") {
-        return prevIndex === myProjects.length - 1 ? 0 : prevIndex + 1; // move to next project
+        return prevIndex === myProjects.length - 1 ? 0 : prevIndex + 1;
       }
     });
-    setCurrentImageIndex(0); // reset the internal image index when changing projects
+    setCurrentImageIndex(0);
   };
 
-  // added: handle warning for mobile view when clicking "Live Link"
+  // handle warning for mobile view when clicking "Live Link"
   const handleLiveLinkClick = (e, link) => {
     if (screenWidth <= 768) {
-      // mobile screen threshold
-      e.preventDefault(); // prevent default navigation
+      e.preventDefault();
       const userConfirmed = window.confirm(
         "This project is best viewed on a desktop. Mobile experience will be limited. Proceed anyway?"
       );
       if (userConfirmed) {
-        window.open(link, "_blank"); // open the link if confirmed
+        window.open(link, "_blank");
       }
     }
   };
 
   const getOverlapHeight = () => {
     const viewportHeight = window.innerHeight;
-    return `${viewportHeight * 0.1}px`; // 20% of viewport height
+    return `${viewportHeight * 0.1}px`;
   };
 
   const getParallaxOffset = () => {
     if (!projectsSectionRef.current) return 0;
     const sectionTop = projectsSectionRef.current.offsetTop;
     const scrolled = Math.max(0, scrollPosition - sectionTop + window.innerHeight);
-    return Math.min(scrolled * 0.4, window.innerHeight * 0.1); // Maximum 20% parallax
+    return Math.min(scrolled * 0.4, window.innerHeight * 0.1);
   };
 
   return (
     <section
       ref={projectsSectionRef}
-      className="projects-section relative z-10 flex flex-col justify-center items-center bg-transparent px-4 py-2 pb-5"
+      className="projects-section"
       id="projects"
       style={{
         marginTop: `-${getOverlapHeight()}`,
@@ -181,120 +177,90 @@ const Projects = () => {
         transition: 'transform 0.1s ease-out'
       }}
     >
-      {/* header section for "Selected Projects" */}
-
       <div
-        className=""
         style={{
           height: responsiveSectionDimensions.height,
           width: responsiveSectionDimensions.width,
         }}
       >
-        <div className="w-full text-left mb-2 pl-3 sm:pl-6 sm:mb-4">
-          <p className="text-white text-lg sm:text-3xl font-thin">Selected Projects</p>
+        <div className="projects-header-text">
+          <p className={screenWidth > 640 ? "text-3xl" : "text-lg"}>Selected Projects</p>
         </div>
-        {/* project grid container */}
+        
         <div
-          className="relative bg-opacity-80 flex flex-col justify-center h-[responsiveSectionDimensions.height] w-[responsiveSectionDimensions.width] p-2 lg:p-5 md:p-4 sm:px-2 sm:py-4"
+          className="projects-main-container"
           style={{
-            backgroundColor: "var(--bg-secondary)",
+            height: responsiveSectionDimensions.height,
+            width: responsiveSectionDimensions.width,
+            border: `1px solid rgba(255, 255, 255, 0.2)`,
           }}
         >
           <div className="p-1 flex-1 w-full">
-            {/* internal image carousel */}
             <div
               ref={carouselRef}
-              className="whitespace-nowrap overflow-x-auto hide-scrollbar"
-              style={{
-                overflowX: "scroll", // enable horizontal scrolling
-                overflowY: "hidden",
-                cursor: "pointer",
-              }}
+              className="projects-image-carousel"
             >
-            {Object.keys(currentProject)
-            .filter((key) => key.startsWith("previewImg") || key === "videoLink")
-            .map((key, index) => {
-              if (key === "videoLink") {
-                return (
-                  <div
-                    key={index}
-                    style={{
-                      display: "inline-block",
-                      verticalAlign: "top",
-                      marginRight: "10px",
-                      height: `${responsiveImageSize.height}px`,
-                      width: `${responsiveImageSize.width}px`,
-                      position: "relative",
-                    }}
-                  >
-                    <video
-                      ref={videoRef}
-                      autoPlay={true}
-                      loop={true}
-                      muted={true}
-                      playsInline={true}
-                      onLoadedData={(e) => {
-                        const video = e.target;
-                        video.play()
-                          .then(() => console.log("Video playing"))
-                          .catch(err => console.log("Video play error:", err));
-                      }}
-                      onError={(e) => {
-                        console.log("Video error:", e);
-                      }}
+              {Object.keys(currentProject)
+                .filter((key) => key.startsWith("previewImg") || key === "videoLink")
+                .map((key, index) => {
+                  if (key === "videoLink") {
+                    return (
+                      <div
+                        key={index}
+                        className="project-media-item-video"
+                        style={{
+                          height: `${responsiveImageSize.height}px`,
+                          width: `${responsiveImageSize.width}px`,
+                        }}
+                      >
+                        <video
+                          ref={videoRef}
+                          autoPlay={true}
+                          loop={true}
+                          muted={true}
+                          playsInline={true}
+                          className="project-media-content"
+                          onLoadedData={(e) => {
+                            const video = e.target;
+                            video.play()
+                              .then(() => console.log("Video playing"))
+                              .catch(err => console.log("Video play error:", err));
+                          }}
+                          onError={(e) => {
+                            console.log("Video error:", e);
+                          }}
+                        >
+                          <source 
+                            src={currentProject[key]} 
+                            type="video/mp4"
+                          />
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    );
+                  }
+                  return (
+                    <div
+                      key={index}
+                      className="project-media-item-img"
                       style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
+                        height: `${responsiveImageSize.height}px`,
+                        width: `${responsiveImageSize.width}px`,
                       }}
+                      onClick={() => handleImageClick(index)}
                     >
-                      <source 
-                        src={currentProject[key]} 
-                        type="video/mp4"
+                      <img
+                        src={currentProject[key]}
+                        alt={`${currentProject.title} screenshot ${index + 1}`}
+                        className="project-media-content"
                       />
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                );
-              }
-              return (
-                <div
-                  key={index}
-                  style={{
-                    display: "inline-block",
-                    verticalAlign: "top",
-                    marginRight: "10px",
-                    height: `${responsiveImageSize.height}px`,
-                    width: `${responsiveImageSize.width}px`,
-                    position: "relative",
-                  }}
-                  onClick={() => handleImageClick(index)}
-                >
-                  <img
-                    src={currentProject[key]}
-                    alt={`${currentProject.title} screenshot ${index + 1}`}
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      objectPosition: "top",
-                      objectFit: "cover",
-                    }}
-                  />
-                </div>
-              );
-            })}
+                    </div>
+                  );
+                })}
             </div>
-            {/* project title and live link/github repo */}
-            <div className="mt-4 flex justify-between items-center w-full">
-              <p
-                className={`text-white font-medium ${
-                  screenWidth > 1024 ? "text-2xl" : "text-xl"
-                }`}
-              >
+            
+            <div className="project-header-row">
+              <p className={`project-title-text ${screenWidth > 1024 ? "text-2xl" : "text-xl"}`}>
                 {currentProject.title}
               </p>
               <div className="links">
@@ -303,80 +269,72 @@ const Projects = () => {
                     href={currentProject.repoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]"
+                    className="project-link-button"
                   >
-                    Github <GoArrowUpRight className="text-lg font-thin ml-1" />
+                    Github <GoArrowUpRight className="project-link-icon" />
                   </a>
                 ) : currentProject.liveLink ? (
-                  <>
-                    <a
-                      href={currentProject.liveLink}
-                      onClick={(e) => handleLiveLinkClick(e, currentProject.liveLink)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white text-sm inline-flex items-center border border-white rounded-full pl-4 pr-3 py-1.5 transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]"
-                    >
-                      Live Link <GoArrowUpRight className="text-lg font-thin ml-1" />
-                    </a>
-                  </>
+                  <a
+                    href={currentProject.liveLink}
+                    onClick={(e) => handleLiveLinkClick(e, currentProject.liveLink)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link-button"
+                  >
+                    Live Link <GoArrowUpRight className="project-link-icon" />
+                  </a>
                 ) : null}
               </div>
             </div>
-            {/* project description */}
-            <p className="mt-2 text-white font-thin text-sm sm:text-base md:text-lg lg:text-lg">
+            
+            <p className={`project-description-text ${screenWidth > 768 ? "md:text-lg lg:text-lg" : "text-sm"} ${screenWidth > 640 ? "sm:text-base" : ""}`}>
               {currentProject.desc}
             </p>
+            
             <div
-              className="subdesc mt-4 text-sm sm:text-base md:text-lg lg:text-lg"
+              className={`project-subdesc-content ${screenWidth > 768 ? "md:text-lg lg:text-lg" : "text-sm"} ${screenWidth > 640 ? "sm:text-base" : ""}`}
               dangerouslySetInnerHTML={{ __html: currentProject.subdesc }}
               style={{
                 height: subdescHeight,
               }}
             ></div>
-            {/* add tags */}
-            <div className="tags my-4 flex flex-wrap gap-2">
+            
+            <div className="project-tags-container">
               {currentProject.tags.map((tag) => (
                 <span
                   key={tag.id}
-                  className="px-3 py-1 text-sm font-thin rounded-full text-white"
-                  style={{
-                    backgroundColor: tag.color,
-                    color: tag.textColor || "#ffffff",
-                  }}
+                  className="project-tag-item"
                 >
                   {tag.name}
                 </span>
               ))}
             </div>
           </div>
-          {/* navigation buttons for projects */}
-          <div className="flex justify-between items-center px-1 pb-1 w-full">
-            {/* previous button */}
+          
+          <div className="project-navigation-row">
             <button
-              className="text-lg flex items-center "
+              className="project-nav-button"
               onClick={() => handleNavigation("previous")}
             >
-              <GoArrowLeft className="ml-1 text-white transition-colors" />
-              {/* Prev */}
+              <GoArrowLeft className="project-nav-icon" />
             </button>
-            {/* slider counter as dots */}
-            <div className="flex gap-2">
+            
+            <div className="project-dots-container">
               {myProjects.map((_, index) => (
                 <span
                   key={index}
-                  className={`w-2 h-2 rounded-full border ${
-                    index === selectedProjectIndex ? "bg-white border-white" : "border-white"
+                  className={`project-dot ${
+                    index === selectedProjectIndex ? "project-dot-active" : "project-dot-inactive"
                   }`}
                 ></span>
               ))}
             </div>
-            {/* next button */}
+            
             <button
-              className="text-lg flex items-center "
+              className="project-nav-button"
               onClick={() => handleNavigation("next")}
             >
-              <GoArrowRight className="mr-1 text-grey transition-colors" />
-              {/* Next */}
+              <GoArrowRight className="project-nav-icon" />
             </button>
           </div>
         </div>

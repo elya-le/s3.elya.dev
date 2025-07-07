@@ -443,7 +443,6 @@ const Cat = forwardRef(({ animationName = "Slow", origin = [0, 0, 0], scale = 1,
             <mesh
               name="CupO"
               castShadow
-              receiveShadow
               geometry={nodes.CupO.geometry}
               material={materials["Material.016"]}
               rotation={[Math.PI / 2, 0, 0]}

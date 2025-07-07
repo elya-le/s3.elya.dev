@@ -4,12 +4,10 @@ import { PerspectiveCamera } from "@react-three/drei";
 import { Suspense } from "react";
 import CanvasLoader from "../components/CanvasLoader";
 import Cat from "../components/Cat.jsx";
-// import "./Hero.css";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiGithub } from "react-icons/fi";
 import { LuTurtle } from "react-icons/lu";
 import { PiShootingStarDuotone } from "react-icons/pi";
-import { GoArrowDown } from "react-icons/go";
 import PageArrow from "./PageArrow.jsx";
 
 const Hero = ({ animationName, toggleAnimation }) => {
@@ -19,14 +17,41 @@ const Hero = ({ animationName, toggleAnimation }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  // dynamically calculate dimensions for the "Hi, I'm Elya" section
-  const getResponsiveSectionDimensions = () => {
+  // Responsive dimensions using CSS custom properties approach
+  const getContentStyles = () => {
+    const baseStyles = {
+      position: 'absolute',
+      zIndex: 20,
+      color: 'var(--color-text-primary)',
+      background: 'transparent',
+      padding: 'var(--space-lg)',
+      transform: 'translate(-50%, -50%)',
+    };
+
     if (screenWidth > 1024) {
-      return { height: "450px", width: "650px" }; // fullscreen
-    } else if (screenWidth > 668) {
-      return { height: "340px", width: "580px" }; // tablet
+      return {
+        ...baseStyles,
+        left: '37%',
+        top: '38%',
+        width: '650px',
+        height: '450px',
+      };
+    } else if (screenWidth > 768) {
+      return {
+        ...baseStyles,
+        left: '35%',
+        top: '23%',
+        width: '580px',
+        height: '340px',
+      };
     } else {
-      return { height: "240px", width: "400px" }; // mobile
+      return {
+        ...baseStyles,
+        left: '50%',
+        top: '22%',
+        width: '400px',
+        height: '240px',
+      };
     }
   };
 
@@ -50,116 +75,114 @@ const Hero = ({ animationName, toggleAnimation }) => {
   }, []);
 
   const getBasePosition = () => (screenWidth > 768 ? [-4, 3, 5] : [-8, 7, 7]);
-  const getCatScale = () => (screenWidth > 1024 ? .7 : screenWidth > 768 ? 1 : 1.5);
+  const getCatScale = () => (screenWidth > 1024 ? 0.7 : screenWidth > 768 ? 1 : 1.5);
 
-  const rectLightSettings = screenWidth > 768 
-    ? {
-      position: [-0.7 * 0.7, 2.5 * 0.7, 1.6 * 0.7],
-        rotation: [0.1, 0, 0],
-        width: 1.2,
-        height: 0.9,
-        intensity: 30,
-      }
-    : {
-        position: [-0.532, 1.862, 2.428],
-        rotation: [0.1, 0, 0],
-        width: 1.0,
-        height: 0.7,
-        intensity: 150,
+  const getArrowStyles = () => {
+    const baseStyles = {
+      position: 'absolute',
+      zIndex: 30,
+    };
+
+    if (screenWidth > 1024) {
+      return {
+        ...baseStyles,
+        bottom: '25vh',
+        left: 'calc(38.5% - 325px)',
       };
-
-  // dimensions for "Hi, I'm Elya" section based on screen size
-  const sectionDimensions = getResponsiveSectionDimensions();
+    } else if (screenWidth > 768) {
+      return {
+        ...baseStyles,
+        bottom: '25vh',
+        left: 'calc(35% - 290px)',
+      };
+    } else {
+      return {
+        ...baseStyles,
+        bottom: '20vh',
+        left: 'var(--space-xl)',
+      };
+    }
+  };
 
   return (
     <section 
       id="home"
-      className="relative z-10 w-full h-[100vh] sm:h-[120vh] bg-black bg-opacity-35 flex items-center justify-center z-10">
-      <div
-        className="pl-7 absolute text-black bg-transparent z-20
-        left-1/2 md:left-[35%] lg:left-[37%]
-        transform -translate-x-1/2 -translate-y-1/2 
-        top-[22%] md:top-[23%] lg:top-[38%]
-        py-0 md:py-6
-        px-4 md:px-6 lg:px-8
-        "
-        style={{
-          height: sectionDimensions.height,
-          width: sectionDimensions.width,
-          // top: '20%', // Default for small screens
-          // '@media (min-width: 768px)': { top: '60%' }, // Medium screens
-          // '@media (min-width: 1024px)': { top: '40%' } // Large screens
-          // left: "50%",
-          // top: "50%",
-          // transform: "translate(-50%, -50%)",
-          // padding: screenWidth > 1024 ? "32px" : screenWidth > 768 ? "24px" : "16px",
-        }}
-      >
-        <h1 className="text-xl md:text-4xl lg:text-6xl font mb-1 md:mb-6 lg:mb-8">
+      className="hero-section"
+      style={{ 
+        height: screenWidth > 640 ? '120vh' : '100vh',
+        backgroundColor: 'rgba(0,0,0,0.35)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 10,
+      }}
+    >
+      {/* Content Section */}
+      <div style={getContentStyles()}>
+        <h1 className="text-display">
           Hi, I'm Elya
         </h1>
-        <p className="text-l md:text-2xl lg:text-3xl font-thin"> 
+        
+        <p className="text-subtitle mb-md">
           Full-Stack Developer with a background in<br />
           UI/UX, motion design, 3D art and fabrication.
-          <br className="hidden md:block" /><br />
-          <span className="block md:inline pt-2">
-          Driven by values rooted in care, equity, and autonomy —
-          I am dedicated to building secure tools that empower communities.</span>
         </p>
-        <div className="flex flex-row items-center space-x-3 mt-3 md:mt-8 lg:mt-10">
+        
+        <p className="text-subtitle">
+          Driven by values rooted in care, equity, and autonomy —
+          I am dedicated to building secure tools that empower communities.
+        </p>
+
+        <div className="flex-start gap-md mt-lg">
           <a
             href="https://github.com/elya-le"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-grey text-sm inline-flex items-center border rounded-full 
-              pl-3 pr-3 py-1.5 
-              transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]
-              sm:w-auto justify-center sm:justify-start"
+            className="btn"
           >
-            Github <span className="ml-1"><FiGithub /></span>
+            Github <FiGithub />
           </a>
+          
           <a
             href="mailto:hello@elya.dev"
-            className="text-grey text-sm inline-flex items-center border rounded-full 
-              pl-3 pr-3 py-1.5 
-              transition-colors hover:bg-[var(--bg-button-hover)] bg-[var(--bg-button)]
-              sm:w-auto justify-center sm:justify-start"
+            className="btn"
           >
-            Email <span className="ml-1"><AiOutlineMail /></span>
+            Email <AiOutlineMail />
           </a>
-          <label className="toggle-switch flex items-center justify-center sm:justify-start w-full sm:w-auto">
+          
+          <label className="toggle-switch">
             <input
               type="checkbox"
               checked={animationName === "Fast"}
               onChange={toggleAnimation}
-              className="hidden"
             />
             <span className="slider">
               {animationName === "Fast" ? (
-                <LuTurtle className="icon-slow" />
+                <LuTurtle className="toggle-icon icon-slow" />
               ) : (
-                <PiShootingStarDuotone className="icon-star-power" />
+                <PiShootingStarDuotone className="toggle-icon icon-star-power" />
               )}
             </span>
           </label>
         </div>
-        <p className="text-l md:text-xl lg:text-xl font-thin pt-2">
+
+        <p className="text-body mt-sm">
           Resume available upon request.
         </p>
       </div>
-      <div className="absolute z-30
-        bottom-[20vh]  /* Default for mobile */ 
-        left-8       /* Default for mobile */
-        md:bottom-[25vh]  /* Medium screens and up */
-        md:right-auto    /* Clear right positioning */
-        md:left-[calc(35%-290px)] 
-        lg:left-[calc(38.5%-325px)]">
-          <PageArrow scrollProgress={scrollProgress} />
-          {/* <GoArrowDown className="text-2xl text-white transition-colors animate-bounce" /> */}
+
+      {/* Page Arrow */}
+      <div style={getArrowStyles()}>
+        <PageArrow scrollProgress={scrollProgress} />
       </div>
+
+      {/* 3D Canvas */}
       <Canvas
-        className="w-full h-full z-10"
-        style={{ height: "100%" }}
+        style={{ 
+          width: '100%', 
+          height: '100%', 
+          zIndex: 10 
+        }}
         onPointerDown={(e) => e.stopPropagation()}
         onWheel={(e) => e.stopPropagation()}
         shadows 
@@ -185,13 +208,13 @@ const Hero = ({ animationName, toggleAnimation }) => {
           <Cat
             ref={catRef}
             animationName={animationName}
-            origin={screenWidth < 768 ? [-.5, -1.2, 0] : [-.8, .2, 0]}
+            origin={screenWidth < 768 ? [-0.5, -1.2, 0] : [-0.8, 0.2, 0]}
             scale={getCatScale()}
           />
-          {/* invisible shadow floor */}
+          {/* Shadow floor */}
           <mesh 
             rotation={[-Math.PI / 2, 0, 0]} 
-            position={[0, -.07, 0]} 
+            position={[0, -0.07, 0]} 
             receiveShadow
           >
             <planeGeometry args={[50, 50]} />
@@ -210,8 +233,8 @@ const CameraZoom = ({ scrollProgress, cameraRef, basePosition, screenWidth }) =>
   const yEnd = screenWidth > 768 ? -3 : -4;
   const zEnd = screenWidth > 768 ? 6.7 : 10;
 
-  const startLookAt = screenWidth > 768 ? [-2, 1.0, .2] : [-0.5, 3, 0.5];
-  const endLookAt = screenWidth > 768 ? [.5, 1, .4] : [0, .5, 0];
+  const startLookAt = screenWidth > 768 ? [-2, 1.0, 0.2] : [-0.5, 3, 0.5];
+  const endLookAt = screenWidth > 768 ? [0.5, 1, 0.4] : [0, 0.5, 0];
 
   useFrame(() => {
     if (cameraRef.current) {
@@ -237,12 +260,4 @@ export default Hero;
 
 
 
-{/* <rectAreaLight
-  ref={rectLightRef}
-  position={rectLightSettings.position}
-  rotation={rectLightSettings.rotation}
-  width={rectLightSettings.width}
-  height={rectLightSettings.height}
-  intensity={rectLightSettings.intensity}
-  color={"#6F74F7"}
-/> */}
+
