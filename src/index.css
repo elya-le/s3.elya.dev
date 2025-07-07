@@ -28,12 +28,16 @@
   --color-projects-nav: #ffffff;        /* Navigation arrows/dots */
   
   /* Contact section text colors */
-  --color-contact-header: #ffffff;      /* "Lets build together!!" */
+  --color-contact-header: black;      /* "Lets build together!!" */
   --color-contact-input: #ffffff;       /* Input field text */
   --color-contact-placeholder: rgba(255, 255, 255, 0.3); /* Placeholder text */
   --color-contact-status: #ffffff;      /* Status messages */
   --color-contact-button-text: #ffffff; /* Submit button text */
   --color-contact-nav: #ffffff;         /* Navigation link text */
+  --contact-section-background: #A0DBFF; /* Contact form background */
+  --contact-bg-input: none; /* Input background - FIXED */
+  --contact-bg-button: #517891; /* Button background */
+  --contact-bg-button-hover: #517891; /* Button hover background */
   
   /* Non-code projects text colors */
   --color-noncode-mute-button: #000000; /* Mute button text */
@@ -45,7 +49,7 @@
   --color-shadow: rgba(0,0,0,0.1); /* Shadows */
   
   /* Toggle colors */
-  --color-toggle-off: #732323;
+  --color-toggle-off: #517891;
   --color-toggle-on: #FFB833;
   
   /* === PROJECTS SECTION VARIABLES === */
@@ -104,10 +108,7 @@
   --noncode-subdesc-height-desktop: 190px;
   
   /* === CONTACT SECTION VARIABLES === */
-  --contact-bg-secondary: #77B1D4; /* Contact form background */
-  --contact-bg-input: none; /* Input background - FIXED */
-  --contact-bg-button: #517891; /* Button background */
-  --contact-bg-button-hover: #517891; /* Button hover background */
+ 
   
   /* Contact responsive dimensions - preserving exact original sizes */
   --contact-height-mobile: 770px;
@@ -776,6 +777,7 @@ input:checked + .slider:before {
 }
 
 /* ===== CONTACT SECTION ===== */
+
 .contact-section {
   display: flex;
   flex-direction: column;
@@ -804,7 +806,7 @@ input:checked + .slider:before {
 
 .contact-image-section {
   width: 100%;
-  background-color: var(--contact-bg-secondary);
+  background-color: var(--contact-section-background);
   padding: var(--space-xl);
 }
 
@@ -816,7 +818,7 @@ input:checked + .slider:before {
 
 .contact-form-section {
   width: 100%;
-  background-color: var(--contact-bg-secondary);
+  background-color: var(--contact-section-background);
   padding: var(--space-xl);
 }
 
