@@ -9,7 +9,7 @@ const PageArrow = ({ scrollProgress }) => {
         width="20" 
         height="90"  
         viewBox="0 0 40 180"  
-        className="stroke-white"
+        className="stroke-black"
       >
         {/* Main line */}
         <path 

@@ -299,7 +299,8 @@ const Projects = () => {
               }}
             ></div>
             
-            <div className="project-tags-container">
+            <div className="project-tag-container">
+              Built With: 
               {currentProject.tags.map((tag) => (
                 <span
                   key={tag.id}

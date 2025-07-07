@@ -316,7 +316,7 @@ const NonCodeProjects = () => {
                 style={{ height: subdescHeight }}
               ></div>
               
-              <div className="project-tags-container">
+              <div className="project-tag-container">
                 {currentProject.tags.map((tag) => (
                   <span
                     key={tag.id}
