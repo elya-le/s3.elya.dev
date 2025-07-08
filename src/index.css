@@ -747,7 +747,6 @@ main {
 }
 
 .project-subdesc-content {
-  border: 1px solid red;
   margin-bottom: var(--space-md);
   margin-top: var(--space-md);
   color: var(--color-projects-subdesc);
@@ -758,14 +757,14 @@ main {
 }
 
 .project-tag-section {
-
   display: flex;
+  flex-direction: column; 
   align-items: flex-start;
-  font-size: var(--text-xxs);
+  font-size: 0.875rem;
   font-weight: var(--font-weight-thin);
+  gap: var(--space-sm);
 }
 .project-tag-container {
-  border: 1px solid red;
   display: flex;
   margin-bottom: 2px;
   margin-left: 1px;
@@ -1221,6 +1220,13 @@ input:checked + .slider:before {
     font-size: 1.125rem;
     line-height: 1.75rem;
   }
+
+  .project-tag-section {
+    flex-direction: row; /* Sside by side on desktop */
+    align-items: flex-start;
+    gap: var(--space-xs); /* small gap between text and first tag */
+  }
+  
   
   .project-tag-container {
     font-size: 1.125rem;
@@ -1230,6 +1236,7 @@ input:checked + .slider:before {
   .noncode-subdesc-content {
     font-size: 1.125rem;
     line-height: 1.75rem;
+    margin-left: 1px; /* restore small left margin for desktop */
   }
 }
 
