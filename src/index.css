@@ -936,11 +936,20 @@ main {
   transition: color var(--transition-normal);
 }
 
+
+.project-nav-button:hover {
+  color: var(--color-accent);
+}
+
 .project-nav-icon {
   margin-left: 4px;
   margin-right: 4px;
   color: black;
   transition: colors 0.3s ease-in-out;
+}
+
+.project-nav-icon:hover {
+  color: var(--color-accent);
 }
 
 .project-dots-container {
