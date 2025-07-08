@@ -432,7 +432,7 @@ main {
 }
 
 .navbar-link:hover {
-  color: var(--color-text-inverse);   /* Change color on hover */
+  color: var(--color-accent);   /* Change color on hover */
   opacity: 1;
 }
 
@@ -605,7 +605,7 @@ main {
 }
 
 .footer-link:hover {
-  color: var(--footer-link-hover);
+  color: var(--color-accent);
 }
 
 /* =============================================== */
@@ -703,6 +703,7 @@ main {
 }
 
 .noncode-back-link:hover {
+  color: var(--color-accent);
   opacity: 0.8;
 }
 
@@ -1106,6 +1107,7 @@ main {
 }
 
 .contact-nav-link:hover {
+  color: var(--color-accent);
   opacity: 0.8;
 }
 

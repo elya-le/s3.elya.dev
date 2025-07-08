@@ -356,7 +356,7 @@ const NonCodeProjects = () => {
                         </>
                       ) : (
                         <>
-                          Back to Parallax <GoArrowLeft className="project-link-icon" />
+                          Main Video <GoArrowLeft className="project-link-icon" />
                         </>
                       )}
                     </button>

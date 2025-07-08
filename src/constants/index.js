@@ -216,29 +216,29 @@ export const otherProjects = [
       { id: 905, name: 'Redshift', color: '#393D00' },
     ],
   },
-  {
-    title: 'Furniture Design | Couch Build',
-    desc: '',
-    subdesc: 
-    `
-      Role: <span class="font-thin">Designer, Builder</span><br><br>
-    <span class="font-thin">
-      Designed and built a custom couch for a new apartment, incorporating woodworking, CAD design, and upholstery techniques to craft a functional and aesthetic piece of furniture.
-    </span><br><br>
-    <span class="font-thin">
-      Extra special thanks to Stefano for cheering me on and being a big brain to problem solve with.
-    </span>
-    `,
-    previewImg1: '/assets/aws1.gif',
-    previewImg2: '/assets/aws2.gif',
-    tags: [
-      { id: 111, name: 'Rhino', color: '#393D00'}, 
-      { id: 112, name: 'Woodworking', color: '#393D00' },
-      { id: 113, name: 'Carpentry', color: '#393D00' },
-      { id: 114, name: 'Sewing', color: '#393D00'}, 
-      { id: 115, name: 'Upholstery', color: '#393D00'}, 
-    ],
-  },
+  // {
+  //   title: 'Furniture Design | Couch Build',
+  //   desc: '',
+  //   subdesc: 
+  //   `
+  //     Role: <span class="font-thin">Designer, Builder</span><br><br>
+  //   <span class="font-thin">
+  //     Designed and built a custom couch for a new apartment, incorporating woodworking, CAD design, and upholstery techniques to craft a functional and aesthetic piece of furniture.
+  //   </span><br><br>
+  //   <span class="font-thin">
+  //     Extra special thanks to Stefano for cheering me on and being a big brain to problem solve with.
+  //   </span>
+  //   `,
+  //   previewImg1: '/assets/aws1.gif',
+  //   previewImg2: '/assets/aws2.gif',
+  //   tags: [
+  //     { id: 111, name: 'Rhino', color: '#393D00'}, 
+  //     { id: 112, name: 'Woodworking', color: '#393D00' },
+  //     { id: 113, name: 'Carpentry', color: '#393D00' },
+  //     { id: 114, name: 'Sewing', color: '#393D00'}, 
+  //     { id: 115, name: 'Upholstery', color: '#393D00'}, 
+  //   ],
+  // },
 ];
 
 
