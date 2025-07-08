@@ -42,7 +42,7 @@ const NonCodeProjects = () => {
 
   const getResponsiveSectionDimensions = () => {
     if (screenWidth > 1024) {
-      return { height: "630px", width: "900px" };
+      return { height: "900px", width: "900px" };
     } else if (screenWidth > 768) {
       return { height: "660px", width: "800px" };
     } else {
@@ -200,10 +200,7 @@ const NonCodeProjects = () => {
         id="non-code-projects"
       >
         <div
-          style={{
-            height: responsiveSectionDimensions.height,
-            width: responsiveSectionDimensions.width,
-          }}
+      
         >
           <div className="projects-header-text">
             <p className={screenWidth > 640 ? "text-xl" : "text-lg"}>Non-Code Projects</p>
@@ -376,8 +373,9 @@ const NonCodeProjects = () => {
                 dangerouslySetInnerHTML={{ __html: currentProject.subdesc }}
                 style={{ height: subdescHeight }}
               ></div>
-              
+          
               <div className="project-tag-container">
+                    Built with:
                 {currentProject.tags.map((tag) => (
                   <span
                     key={tag.id}

@@ -4,18 +4,18 @@ const PercentageLoadingCircle = ({
   percentage = 0,
   size = 60, 
   text = "Loading video content...", 
-  textSize = "text-lg",
   className = "",
   strokeWidth = 4,
-  color = "#3b82f6" // blue-500
+  color = null, // will use CSS variable if null
+  isDark = false // dark theme override
 }) => {
   const [displayPercentage, setDisplayPercentage] = useState(0);
   
-  // Animate the percentage counter
+  // animate the percentage counter
   useEffect(() => {
     let start = 0;
     const end = percentage;
-    const duration = 300; // Animation duration in ms
+    const duration = 300; // animation duration in ms
     const stepTime = 16; // ~60fps
     const steps = duration / stepTime;
     const increment = (end - start) / steps;
@@ -38,50 +38,52 @@ const PercentageLoadingCircle = ({
   const strokeDasharray = circumference;
   const strokeDashoffset = circumference - (displayPercentage / 100) * circumference;
 
+  // use CSS variables or fallback to prop colors
+  const progressColor = color || 'var(--loading-circle-progress-color)';
+  const backgroundColor = 'var(--loading-circle-background-color)';
+
   return (
-    <div className={`flex flex-col items-center justify-center space-y-3 ${className}`}>
-      {/* Percentage Circle */}
-      <div className="relative" style={{ width: size, height: size }}>
+    <div className={`loading-circle-container ${isDark ? 'loading-circle-dark' : ''} ${className}`}>
+      {/* percentage Circle */}
+      <div className="loading-circle-svg-container" style={{ width: size, height: size }}>
         <svg
           width={size}
           height={size}
-          className="transform -rotate-90"
+          className="loading-circle-svg"
         >
-          {/* Background circle */}
+          {/* background circle */}
           <circle
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            stroke="#e5e7eb"
+            stroke={backgroundColor}
             strokeWidth={strokeWidth}
             fill="transparent"
           />
-          {/* Progress circle */}
+          {/* progress circle */}
           <circle
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            stroke={color}
+            stroke={progressColor}
             strokeWidth={strokeWidth}
             fill="transparent"
             strokeDasharray={strokeDasharray}
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
-            style={{
-              transition: 'stroke-dashoffset 0.3s ease-in-out',
-            }}
+            className="loading-circle-progress"
           />
         </svg>
-        {/* Percentage text in center */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-sm font-semibold text-gray-700">
+        {/* percentage text in center */}
+        <div className="loading-circle-percentage-container">
+          <span className="loading-circle-percentage">
             {displayPercentage}%
           </span>
         </div>
       </div>
       
-      {/* Loading Text */}
-      <p className={`text-gray-600 ${textSize} font-medium text-center`}>
+      {/* loading Text */}
+      <p className="loading-circle-text">
         {text}
       </p>
     </div>

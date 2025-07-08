@@ -170,6 +170,7 @@ const Projects = () => {
       id="projects"
       style={{
         marginTop: `-${getOverlapHeight()}`,
+        marginBottom: "40px",
         position: 'relative',
         background: 'transparent',
         paddingTop: getOverlapHeight(),

@@ -66,6 +66,7 @@ const ContactForm = () => {
       id="contact"
     >
       <div
+        key={screenWidth}
         style={{
           height: responsiveSectionDimensions.height,
           width: responsiveSectionDimensions.width,
