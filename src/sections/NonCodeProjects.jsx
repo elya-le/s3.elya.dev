@@ -6,16 +6,17 @@ import s3Client from "/src/awsConfig.js";
 import AspectRatioImage from "./AspectRatioImage";
 import { Link, useNavigate } from 'react-router-dom';
 import HorizontalArrow from "./HorizontalArrow";
+import PercentageLoadingCircle from "../components/PercentageLoadingCircle";
 
 const NonCodeProjects = () => {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [videoSources, setVideoSources] = useState([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPlaceholder, setCurrentPlaceholder] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [videoError, setVideoError] = useState(false);
   const videoRef = useRef(null);
   const currentProject = otherProjects[selectedProjectIndex];
   const carouselRef = useRef(null);
@@ -27,57 +28,12 @@ const NonCodeProjects = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Handle video loading and cleanup
+  // Reset video state when project changes
   useEffect(() => {
-    setIsLoading(true);
-    
-    videoSources.forEach(src => {
-      if (src) URL.revokeObjectURL(src);
-    });
-    setVideoSources([]);
     setCurrentVideoIndex(0);
-
-    const fetchVideos = async () => {
-      if (currentProject.videos) {
-        // Set initial placeholder immediately
-        if (currentProject.videos[0]?.placeholder) {
-          setCurrentPlaceholder(currentProject.videos[0].placeholder);
-        }
-
-        const sources = await Promise.all(
-          currentProject.videos.map(async (video) => {
-            try {
-              const videoBody = await getVideoFromS3(video.url);
-              return videoBody ? URL.createObjectURL(videoBody) : null;
-            } catch (error) {
-              console.error("Error fetching video:", error);
-              return null;
-            }
-          })
-        );
-        setVideoSources(sources.filter(Boolean));
-        setIsLoading(false);
-      } else if (currentProject.videoLink) {
-        try {
-          const videoBody = await getVideoFromS3(currentProject.videoLink);
-          if (videoBody) {
-            setVideoSources([URL.createObjectURL(videoBody)]);
-          }
-          setIsLoading(false);
-        } catch (error) {
-          console.error("Error fetching video:", error);
-          setIsLoading(false);
-        }
-      }
-    };
-
-    fetchVideos();
-
-    return () => {
-      videoSources.forEach(src => {
-        if (src) URL.revokeObjectURL(src);
-      });
-    };
+    setIsLoading(false);
+    setLoadingProgress(0);
+    setVideoError(false);
   }, [selectedProjectIndex]);
 
   useEffect(() => {
@@ -129,16 +85,69 @@ const NonCodeProjects = () => {
     }
   };
 
-  const handleVideoSwitch = () => {
-    if (videoSources.length > 1) {
-      const nextIndex = (currentVideoIndex + 1) % videoSources.length;
-      setCurrentVideoIndex(nextIndex);
-      // Update placeholder when switching videos
-      if (currentProject.videos[nextIndex]?.placeholder) {
-        setCurrentPlaceholder(currentProject.videos[nextIndex].placeholder);
-      }
-      setIsLoading(true);
+  const getCurrentVideoUrl = () => {
+    if (currentProject.videos && currentProject.videos.length > 0) {
+      return currentProject.videos[currentVideoIndex]?.url;
     }
+    return currentProject.videoLink;
+  };
+
+  const getCurrentPlaceholder = () => {
+    if (currentProject.videos && currentProject.videos.length > 0) {
+      return currentProject.videos[currentVideoIndex]?.placeholder;
+    }
+    return null;
+  };
+
+  const hasMultipleVideos = () => {
+    return currentProject.videos && currentProject.videos.length > 1;
+  };
+
+  const handleVideoSwitch = () => {
+    if (hasMultipleVideos()) {
+      const nextIndex = (currentVideoIndex + 1) % currentProject.videos.length;
+      setCurrentVideoIndex(nextIndex);
+      setIsLoading(true);
+      setLoadingProgress(0);
+      setVideoError(false);
+    }
+  };
+
+  const handleVideoLoadStart = () => {
+    setIsLoading(true);
+    setLoadingProgress(10);
+    setVideoError(false);
+  };
+
+  const handleVideoProgress = () => {
+    if (videoRef.current) {
+      try {
+        const video = videoRef.current;
+        if (video.buffered.length > 0) {
+          const buffered = video.buffered.end(0);
+          const duration = video.duration;
+          if (duration > 0) {
+            const progress = Math.min(Math.round((buffered / duration) * 100), 95);
+            setLoadingProgress(progress);
+          }
+        }
+      } catch (error) {
+        // Silently handle any buffering errors
+      }
+    }
+  };
+
+  const handleVideoCanPlay = () => {
+    setLoadingProgress(100);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+  };
+
+  const handleVideoError = () => {
+    setVideoError(true);
+    setIsLoading(false);
+    console.error("Video failed to load");
   };
 
   const handleImageClick = (index) => {
@@ -177,26 +186,12 @@ const NonCodeProjects = () => {
     setCurrentImageIndex(0);
   };
 
-  const getVideoFromS3 = async (key) => {
-    try {
-      const cleanKey = key.replace('https://s3.us-east-2.amazonaws.com/elya.dev/', '');
-      const command = new GetObjectCommand({ 
-        Bucket: "elya.dev", 
-        Key: cleanKey
-      });
-      const response = await s3Client.send(command);
-      const blob = await response.Body.transformToByteArray();
-      return new Blob([blob], { type: 'video/mp4' });
-    } catch (error) {
-      console.error("Error fetching video:", error);
-      return null;
-    }
-  };
-
   const responsiveVideoSize = getResponsiveVideoSize();
   const responsiveSectionDimensions = getResponsiveSectionDimensions();
   const responsiveImageSize = getResponsiveImageSize();
   const subdescHeight = getResponsiveSubdescHeight();
+  const currentVideoUrl = getCurrentVideoUrl();
+  const currentPlaceholder = getCurrentPlaceholder();
 
   return (
     <div className="min-h-screen pt-20 mb-24" style={{ backgroundColor: "var(--color-primary)" }}>
@@ -246,25 +241,91 @@ const NonCodeProjects = () => {
                     </div>
                   ))}
                   
-                {videoSources.length > 0 && (
+                {/* Video Section */}
+                {currentVideoUrl && (
                   <div 
                     className="noncode-video-container" 
                     style={{ width: responsiveVideoSize.width }}
                   >
-                    <div className="noncode-video-wrapper">
+                    <div className="noncode-video-wrapper relative">
+                      {/* Video Element */}
                       <video
                         ref={videoRef}
-                        key={videoSources[currentVideoIndex]}
+                        key={`${selectedProjectIndex}-${currentVideoIndex}`}
                         className="noncode-video-element"
                         autoPlay
                         loop
                         playsInline
                         muted={isMuted}
+                        preload="metadata"
+                        onLoadStart={handleVideoLoadStart}
+                        onProgress={handleVideoProgress}
+                        onCanPlay={handleVideoCanPlay}
+                        onCanPlayThrough={handleVideoCanPlay}
+                        onError={handleVideoError}
+                        style={{ 
+                          display: isLoading ? 'none' : 'block',
+                          width: '100%',
+                          height: '100%'
+                        }}
                       >
-                        <source src={videoSources[currentVideoIndex]} type="video/mp4" />
+                        <source src={currentVideoUrl} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
-                      {currentVideoIndex === 1 && (
+
+                      {/* Loading Overlay */}
+                      {isLoading && (
+                        <div 
+                          className="absolute inset-0 flex items-center justify-center"
+                          style={{ 
+                            height: responsiveVideoSize.height,
+                            backgroundImage: currentPlaceholder ? `url(${currentPlaceholder})` : 'none',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundColor: currentPlaceholder ? 'transparent' : 'white'
+                          }}
+                        >
+                          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+                          <div className="relative z-10">
+                            <PercentageLoadingCircle 
+                              percentage={loadingProgress}
+                              size={80} 
+                              text="Loading video content..." 
+                              textSize="text-lg"
+                              color="#ffffff"
+                              className="text-white"
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Video Error */}
+                      {videoError && (
+                        <div 
+                          className="absolute inset-0 flex items-center justify-center bg-gray-800"
+                          style={{ height: responsiveVideoSize.height }}
+                        >
+                          <div className="text-center text-white">
+                            <p className="text-lg mb-2">Video failed to load</p>
+                            <button 
+                              onClick={() => {
+                                setVideoError(false);
+                                setIsLoading(true);
+                                setLoadingProgress(0);
+                                if (videoRef.current) {
+                                  videoRef.current.load();
+                                }
+                              }}
+                              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                            >
+                              Retry
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Mute Button */}
+                      {!isLoading && !videoError && hasMultipleVideos() && currentVideoIndex === 1 && (
                         <button
                           onClick={() => {
                             setIsMuted(!isMuted);
@@ -287,7 +348,7 @@ const NonCodeProjects = () => {
                   {currentProject.title}
                 </p>
                 <div className="noncode-link-container">
-                  {videoSources.length > 1 && (
+                  {hasMultipleVideos() && !isLoading && (
                     <button
                       onClick={handleVideoSwitch}
                       className="project-link-button noncode-button"
