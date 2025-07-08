@@ -352,7 +352,7 @@ const NonCodeProjects = () => {
                     >
                       {currentVideoIndex === 0 ? (
                         <>
-                          Behind the scenes video <GoArrowUpRight className="project-link-icon" />
+                          BTS Video <GoArrowUpRight className="project-link-icon" />
                         </>
                       ) : (
                         <>

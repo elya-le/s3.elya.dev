@@ -93,7 +93,7 @@ Result:<span class="font-thin"> A clean, interactive site that highlights 3D ele
 
 export const otherProjects = [
   {
-    title: '20ft Wood Art Sculpture',
+    title: 'Wood Art Sculpture',
     desc: ' ',
     subdesc: 
     `

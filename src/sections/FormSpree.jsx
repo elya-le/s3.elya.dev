@@ -107,6 +107,7 @@ const ContactForm = () => {
                   rows="4"
                   className="contact-textarea"
                   placeholder="Message"
+                  style={{ resize: 'none', height: '180px' }}
                   required
                 ></textarea>
               </div>

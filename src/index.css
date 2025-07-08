@@ -11,8 +11,8 @@
   /* === COLORS === */
   --color-primary: #90D5FF;        /* Main background */
   --color-secondary: #ffffff;      /* Secondary background */
-  --color-accent: #FFB01F;         /* Accent/hover color */
-  --color-neutral: #517891;        /* Neutral elements - FIXED */
+  --color-accent: #56809A;         /* Accent/hover color */
+  --color-neutral: #5AA1CC;        /* Neutral elements - FIXED */
   
   /* === ALL FONT COLORS - EDIT HERE === */
   --color-text-primary: #000000;   /* Main text (Hero, body text) */
@@ -28,15 +28,15 @@
   
   /* Contact section text colors */
   --color-contact-header: black;      /* "Lets build together!!" */
-  --color-contact-input: #ffffff;       /* Input field text */
+  --color-contact-input: black;       /* Input field text */
   --color-contact-placeholder: #Black; /* Placeholder text */
-  --color-contact-status: #ffffff;      /* Status messages */
-  --color-contact-button-text: #ffffff; /* Submit button text */
+  --color-contact-status: black;      /* Status messages */
+  --color-contact-button-text: black; /* Submit button text */
   --color-contact-nav: Black;         /* Navigation link text */
   --contact-section-background: #A0DBFF; /* Contact form background */
   --contact-bg-input: none; /* Input background - FIXED */
-  --contact-bg-button: #517891; /* Button background */
-  --contact-bg-button-hover: #517891; /* Button hover background */
+  --contact-bg-button: var(--color-neutral); /* Button background */
+  --contact-bg-button-hover: var(--color-accent); /* Button hover background */
   
   /* Non-code projects text colors */
   --color-noncode-mute-button: #000000; /* Mute button text */
@@ -239,8 +239,8 @@ main {
   font-size: var(--text-sm);
   font-weight: var(--font-weight-thin);
   color: var(--color-text-primary);
-  background-color: var(--color-primary);
-  border: var(--border-width) solid var(--color-button-border);
+  background-color: var(--color-neutral);
+  /* border: var(--border-width) solid var(--color-button-border); */
   border-radius: var(--border-radius-full);
   cursor: pointer;
   transition: all var(--transition-normal);
@@ -850,7 +850,6 @@ main {
   font-size: var(--text-sm);
   display: inline-flex;
   align-items: center;
-  border: 1px solid white;
   border-radius: 9999px;
   padding-left: 16px;
   padding-right: 12px;
@@ -858,11 +857,11 @@ main {
   padding-bottom: 6px;
   transition: colors 0.3s ease-in-out;
   text-decoration: none;
-  background-color: var(--projects-bg-button);
+  background-color: var(--color-neutral);
 }
 
 .project-link-button:hover {
-  background-color: var(--projects-bg-button-hover);
+  background-color: var(--color-accent);
 }
 
 .project-link-icon {
@@ -1009,6 +1008,7 @@ main {
 
 .contact-form-section {
   width: 100%;
+  
   background-color: var(--contact-section-background);
   padding: var(--space-xl);
 }
@@ -1017,6 +1017,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  height: 100%;
 }
 
 .contact-input-group {
@@ -1025,21 +1026,22 @@ main {
 
 .contact-input,
 .contact-textarea {
+  resize: none;
   margin-top: 4px;
   display: block;
   width: 100%;
   padding: var(--space-sm) 12px;
-  background-color: var(--contact-bg-input);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* background-color: var(--color-primary); */
+  background-color: rgba(255, 255, 255, 0.2); 
   border-radius: 0;
-  color: var(--color-contact-input);
+  color: black;
   font-size: var(--text-sm);
   transition: border-color var(--transition-normal);
 }
 
 .contact-input::placeholder,
 .contact-textarea::placeholder {
-  color: var(--color-contact-placeholder);
+  color: rgba(0, 0, 0, 0.2);
 }
 
 .contact-input:focus,
@@ -1074,7 +1076,6 @@ main {
   font-size: var(--text-sm);
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: var(--border-radius-full);
   padding: 6px var(--space-md);
   transition: colors var(--transition-normal);
