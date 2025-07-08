@@ -88,14 +88,14 @@ const Navbar = () => {
 
     // const finalText = "Full Stack Developer ";  // <----------- comment back in
     // typing effect for the final "Full Stack Developer"
-    for (let i = 0; i <= finalText.length; i++) {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          // setDisplayText("Elya — " + finalText.substring(0, i)); // typing the final text  // <----------- comment back in
-          resolve();
-        }, typingSpeed);
-      });
-    }
+    // for (let i = 0; i <= finalText.length; i++) {
+    //   await new Promise((resolve) => {
+    //     setTimeout(() => {
+    //       // setDisplayText("Elya — " + finalText.substring(0, i)); // typing the final text  // <----------- comment back in
+    //       resolve();
+    //     }, typingSpeed);
+    //   });
+    // }
 
     setIsTyping(false);
 
@@ -152,28 +152,20 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  
-
   return (
     <>
       <div ref={heroRef} id="hero"></div> {/* add this div to mark the Hero section */}
-      <nav
-        className={`fixed top-0 left-0 w-full text-white py-2 md:py-3 z-50 transition-all duration-300 ${
-          isTransparent
-            ? "bg-transparent border-transparent"
-            : "bg-[var(--bg-primary)] border-b border-white border-opacity-10"
-        }`}
-      >
+      <nav className={`navbar ${isTransparent ? 'transparent' : 'solid'}`}>
         {/* container for E and menu/hamburger */}
         <div className="flex justify-between items-center">
           {/* 'E' icon with typing effect */}
-          <a href="#home" onClick={(e) => handleClick(e, "#home")} className="logo">
+          <a href="#home" onClick={(e) => handleClick(e, "#home")} className="navbar-logo">
             {/* <span>{displayText}</span> */} {/* <-------- comment back in */} 
             {/* {isFlashing && displayText === "Elya" && <span className="flashing-underscore">_</span>} */} {/* <-------- comment back in */} 
           </a>
 
           {/* hamburger menu (hidden on desktop) */}
-          <button className="md:hidden text-white m-0 pb-1 px-4 flex items-center justify-center" onClick={toggleMenu}>
+          <button className="md:hidden navbar-hamburger" onClick={toggleMenu}>
             {isMenuOpen ? "✕" : "☰"}
           </button>
 
@@ -185,11 +177,7 @@ const Navbar = () => {
                 <Link
                   to={link.href}
                   onClick={(e) => handleClick(e, link.href)}
-                  className={`px-4 py-2 ${
-                    activeLink === link.href
-                      ? "text-white"
-                      : "text-white opacity-80"
-                  } hover:text-white hover:opacity-100`}
+                  className={`navbar-link ${activeLink === link.href ? 'active' : ''}`}
                 >
                   {link.name}
                 </Link>
@@ -199,22 +187,14 @@ const Navbar = () => {
         </div>
 
         {/* links for mobile view (toggleable) */}
-        <ul
-          className={`${
-            isMenuOpen ? "block w-full text-right py-4 bg-[var(--bg-secondary)]" : "hidden"
-          } md:hidden`}
-        >
+        <ul className={`${isMenuOpen ? 'block navbar-mobile-menu' : 'hidden'} md:hidden`}>
           {navLinks.map((link) => (
-            <li key={link.id} className="my-2">
+            <li key={link.id} className="navbar-mobile-link">
               {/* Updated to use Link for routing */}
               <Link
                 to={link.href}
                 onClick={(e) => handleClick(e, link.href)}
-                className={`px-4 py-2 ${
-                  activeLink === link.href
-                    ? "text-white"
-                    : "text-white opacity-80"
-                } hover:text-white hover:opacity-100`}
+                className={`navbar-link ${activeLink === link.href ? 'active' : ''}`}
               >
                 {link.name}
               </Link>

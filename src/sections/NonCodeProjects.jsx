@@ -202,7 +202,7 @@ const NonCodeProjects = () => {
         <div
       
         >
-          <div className="projects-header-text">
+          <div className="noncode-projects-footer-nav">
             <p className={screenWidth > 640 ? "text-xl" : "text-lg"}>Non-Code Projects</p>
           </div>
           

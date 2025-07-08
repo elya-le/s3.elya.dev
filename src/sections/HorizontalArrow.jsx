@@ -50,7 +50,7 @@ const HorizontalArrow = ({ direction = 'right' }) => {
         width="90"
         height="33"
         viewBox="0 0 120 33"
-        className="stoke-black"
+        className="stroke-black"
         style={{
           transform: direction === 'left' ? 'rotate(180deg)' : 'rotate(0deg)',
           transformOrigin: 'center'

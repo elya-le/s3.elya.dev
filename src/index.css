@@ -23,8 +23,8 @@
   --color-projects-title: black;      /* Project titles */
   --color-projects-description: #000000; /* Project descriptions */
   --color-projects-subdesc: #000000;    /* Project subdescriptions */
-  --color-projects-button-text: #ffffff; /* Project button text */
-  --color-projects-nav: #ffffff;        /* Navigation arrows/dots */
+  --color-projects-button-text: black; /* Project button text */
+  --color-projects-nav: black;        /* Navigation arrows/dots */
   
   /* Contact section text colors */
   --color-contact-header: black;      /* "Lets build together!!" */
@@ -32,7 +32,7 @@
   --color-contact-placeholder: #Black; /* Placeholder text */
   --color-contact-status: #ffffff;      /* Status messages */
   --color-contact-button-text: #ffffff; /* Submit button text */
-  --color-contact-nav: #ffffff;         /* Navigation link text */
+  --color-contact-nav: Black;         /* Navigation link text */
   --contact-section-background: #A0DBFF; /* Contact form background */
   --contact-bg-input: none; /* Input background - FIXED */
   --contact-bg-button: #517891; /* Button background */
@@ -71,9 +71,11 @@
   --color-loading-circle-percentage-dark: #ffffff;
   --color-loading-circle-text-dark: #ffffff;
 
-
-
-
+  /* === NAVBAR & FOOTER VARIABLES === */
+  --navbar-bg-primary: var(--color-primary); /* Solid navbar background */
+  --navbar-bg-secondary: var(--projects-bg-secondary); /* Mobile menu background */
+  --footer-bg-primary: var(--color-primary); /* Footer background */
+  --footer-link-hover: var(--projects-bg-button-hover); /* Footer link hover color */
   
   /* === TYPOGRAPHY === */
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -367,7 +369,98 @@ main {
 /* =============================================== */
 /* ===== SECTION: NAVBAR COMPONENT ===== */
 /* =============================================== */
-/* Navbar styles will go here */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: var( --color-text-primary);
+  padding: 0.5rem 0;
+  z-index: 50;
+  transition: all var(--transition-normal);
+}
+
+.navbar.transparent {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.navbar.solid {
+  background-color: var(--navbar-bg-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-logo {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: opacity var(--transition-normal);
+}
+
+.navbar-logo:hover {
+  opacity: 0.8;
+}
+
+.navbar-hamburger {
+  color: var(--color-text-primary);
+  margin: 0;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition-normal);
+}
+
+.navbar-hamburger:hover {
+  opacity: 0.8;
+}
+
+.navbar-link {
+  padding: 0.5rem 1rem;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: opacity var(--transition-normal);
+  display: inline-block;
+}
+
+.navbar-link:not(.active) {
+  opacity: 0.8;
+}
+
+.navbar-link:hover {
+  color: var(--color-text-inverse);   /* Change color on hover */
+  opacity: 1;
+}
+
+.navbar-link.active {
+  color: var(--color-text-primary);
+  opacity: 1;
+}
+
+.navbar-mobile-menu {
+  width: 100%;
+  text-align: right;
+  padding: 1rem 0;
+  background-color: var(--navbar-bg-secondary);
+}
+
+.navbar-mobile-link {
+  margin: 0.5rem 0;
+  display: block;
+}
+
+.flashing-underscore {
+  animation: flash 1s infinite;
+}
+
+@keyframes flash {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
 
 /* =============================================== */
 /* ===== SECTION: ABOUT COMPONENT ===== */
@@ -473,7 +566,47 @@ main {
 /* =============================================== */
 /* ===== SECTION: FOOTER COMPONENT ===== */
 /* =============================================== */
-/* Footer styles will go here */
+.footer-container {
+  background-color: var(--footer-bg-primary);
+}
+
+.footer {
+  color: var(--color-text-primary);
+  padding: 1rem 0;
+  text-align: center;
+  padding-bottom: 1.5rem;
+  background-color: var(--footer-bg-primary);
+}
+
+.footer-text {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-thin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  line-height: 1.5;
+}
+
+.footer-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-content {
+  align-items: center;
+  padding-bottom: 1px;
+}
+
+.footer-link {
+  text-decoration: underline;
+  color: var(--color-text-primary);
+  transition: color var(--transition-normal);
+}
+
+.footer-link:hover {
+  color: var(--footer-link-hover);
+}
 
 /* =============================================== */
 /* ===== SECTION: FORM SPREE COMPONENT ===== */
@@ -557,7 +690,7 @@ main {
 }
 
 .noncode-back-link {
-  color: white;
+  color: black;
   font-weight: var(--font-weight-thin);
   text-decoration: none;
   transition: opacity 0.3s ease-in-out;
@@ -647,7 +780,7 @@ main {
   padding: var(--space-sm);
 }
 
-.projects-header-text {
+.noncode-projects-footer-nav {
   width: 100%;
   text-align: left;
   color: var(--color-projects-header);
@@ -819,16 +952,16 @@ main {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 1px solid white;
+  border: 1px solid black;
 }
 
 .project-dot-active {
-  background-color: white;
-  border-color: white;
+  background-color: black;
+  border-color: black
 }
 
 .project-dot-inactive {
-  border-color: white;
+  border-color: black;
 }
 
 /* =============================================== */
@@ -1084,6 +1217,13 @@ input:checked + .slider:before {
 /* =============================================== */
 /* ===== RESPONSIVE BREAKPOINTS ===== */
 /* =============================================== */
+
+/* === NAVBAR RESPONSIVE STYLES === */
+@media (min-width: 768px) {
+  .navbar {
+    padding: 0.75rem 0;
+  }
+}
 
 /* === TABLET BREAKPOINT === */
 

@@ -4,28 +4,20 @@ import { PiCopyrightLight } from "react-icons/pi";
 
 const Footer = () => {
   return (
-    <div style={{ backgroundColor: "var(--bg-primary)" }}> {/* Using CSS variable */}
-      <footer
-        className="text-white py-4 text-center pb-6"
-        style={{
-          backgroundColor: "var(--bg-primary)", // Using CSS variable
-        }}
-      >
-        <p
-          className="text-sm font-thin flex items-center justify-center gap-1"
-          style={{ lineHeight: 1.5 }}
-        >
+    <div className="footer-container">
+      <footer className="footer">
+        <p className="footer-text">
           {/* copyright icon */}
-          <span className="inline-flex items-center">
+          <span className="footer-icon">
             <PiCopyrightLight />
           </span>
 
           {/* text content */}
-          <span className="items-center pb-[1px]">
+          <span className="footer-content">
             {new Date().getFullYear()}{" "}
             <a 
               href="https://www.elya.dev" 
-              className="underline hover:text-[var(--bg-secondary-hover)] transition-colors" // Added hover effect using CSS variable
+              className="footer-link"
             >
               Elya.dev
             </a>{" "}
@@ -33,7 +25,7 @@ const Footer = () => {
           </span>
 
           {/* star icon */}
-          <span className="inline-flex items-center">
+          <span className="footer-icon">
             <CiStar />
           </span>
         </p>

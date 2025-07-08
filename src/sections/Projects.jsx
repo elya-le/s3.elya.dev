@@ -184,7 +184,7 @@ const Projects = () => {
           width: responsiveSectionDimensions.width,
         }}
       >
-        <div className="projects-header-text">
+        <div className="noncode-projects-footer-nav">
           <p className={screenWidth > 640 ? "text-3xl" : "text-lg"}>Selected Projects</p>
         </div>
         
@@ -193,7 +193,7 @@ const Projects = () => {
           style={{
             height: responsiveSectionDimensions.height,
             width: responsiveSectionDimensions.width,
-            border: `1px solid rgba(255, 255, 255, 0.2)`,
+      
           }}
         >
           <div className="p-1 flex-1 w-full">
