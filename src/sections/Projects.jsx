@@ -299,9 +299,9 @@ const Projects = () => {
                 height: subdescHeight,
               }}
             ></div>
-            
-            <div className="project-tag-container">
+            <div className={`project-tag-section ${screenWidth > 768 ? "md:text-lg lg:text-lg" : "text-sm"} ${screenWidth > 640 ? "sm:text-base" : ""}`}>
               Built With: 
+              <div className="project-tag-container" >   
               {currentProject.tags.map((tag) => (
                 <span
                   key={tag.id}
@@ -311,6 +311,8 @@ const Projects = () => {
                 </span>
               ))}
             </div>
+            </div>
+            
           </div>
           
           <div className="project-navigation-row">

@@ -10,7 +10,7 @@ export const myProjects = [
     desc: 'Online community space with real-time messaging, custom servers and channels.',
     subdesc: 
     `Focus: <span class="font-thin">Learning and implementing real-time communication with web sockets. (2-week build deadline)</span><br><br>
-Result: <span class="font-thin"> Delivered a precise, high-quality web app while expanding my technical skills, and proficiency in real-time communication systems. (3 feature CRUD)</span>`,
+Result: <span class="font-thin"> Delivered a precise, high-quality web app while expanding my proficiency with real-time communication systems. (3 feature CRUD)</span>`,
     liveLink: 'https://elya-le-banter.onrender.com',
     repoLink: 'https://github.com/elya-le/Banter/',
     previewImg1: '/assets/banter1.png',

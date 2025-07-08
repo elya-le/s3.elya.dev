@@ -747,6 +747,8 @@ main {
 }
 
 .project-subdesc-content {
+  border: 1px solid red;
+  margin-bottom: var(--space-md);
   margin-top: var(--space-md);
   color: var(--color-projects-subdesc);
   font-weight: var(--font-weight-thin);
@@ -755,9 +757,18 @@ main {
   height: var(--project-subdesc-height-mobile);
 }
 
-.project-tag-container {
-  margin: var(--space-md) 0;
+.project-tag-section {
+
   display: flex;
+  align-items: flex-start;
+  font-size: var(--text-xxs);
+  font-weight: var(--font-weight-thin);
+}
+.project-tag-container {
+  border: 1px solid red;
+  display: flex;
+  margin-bottom: 2px;
+  margin-left: 1px;
   flex-wrap: wrap;
   gap: var(--space-sm);
   line-height: 1.25rem;
