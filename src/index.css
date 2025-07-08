@@ -15,8 +15,6 @@
   
   /* === ALL FONT COLORS - EDIT HERE === */
   --color-text-primary: #000000;   /* Main text (Hero, body text) */
-  --color-text-secondary: #333333; /* Secondary text - NEED FIXED */
-  --color-text-muted: #666666;     /* Muted text - NEED FIXED */
   --color-text-inverse: #FFFFFF;   /* Text on dark backgrounds */
   
   /* Projects section text colors */
@@ -156,6 +154,7 @@
   --font-weight-bold: 700;
   
   /* Font sizes - responsive via clamp() */
+  --text-xxs: clamp(0.75rem, 0.5rem + 0.20vw, 0.675rem);
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
   --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
   --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
@@ -620,17 +619,72 @@ input:checked + .slider:before {
   margin-left: 4px;
 }
 
-/* Project descriptions - preserving exact original styling */
+/* Project description text styles - RESPONSIVE CONVERTED FROM TAILWIND */
 .project-description-text {
   margin-top: var(--space-sm);
-  color: black;
+  color: var(--color-projects-description);
   font-weight: var(--font-weight-thin);
+  /* Base styles (always applied) */
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.25rem;
 }
 
+/* Screen width > 640px */
+@media (min-width: 640px) {
+  .project-description-text {
+    font-size: 1rem; /* sm:text-base */
+    line-height: 1.5rem;
+  }
+}
+
+/* Screen width > 768px */
+@media (min-width: 768px) {
+  .project-description-text {
+    font-size: 1.125rem; /* md:text-lg */
+    line-height: 1.75rem;
+  }
+}
+
+/* Screen width > 1024px */
+@media (min-width: 1024px) {
+  .project-description-text {
+    font-size: 1.125rem; /* lg:text-lg */
+    line-height: 1.75rem;
+  }
+}
+
+/* Project subdesc content styles - RESPONSIVE CONVERTED FROM TAILWIND */
 .project-subdesc-content {
   margin-top: var(--space-md);
-  color: black;
+  color: var(--color-projects-subdesc);
   font-weight: var(--font-weight-thin);
+  /* Base styles (always applied) */
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.25rem;
+}
+
+/* Screen width > 640px */
+@media (min-width: 640px) {
+  .project-subdesc-content {
+    font-size: 1rem; /* sm:text-base */
+    line-height: 1.5rem;
+  }
+}
+
+/* Screen width > 768px */
+@media (min-width: 768px) {
+  .project-subdesc-content {
+    font-size: 1.125rem; /* md:text-lg */
+    line-height: 1.75rem;
+  }
+}
+
+/* Screen width > 1024px */
+@media (min-width: 1024px) {
+  .project-subdesc-content {
+    font-size: 1.125rem; /* lg:text-lg */
+    line-height: 1.75rem;
+  }
 }
 
 /* Project tags - preserving exact original styling */
@@ -639,15 +693,40 @@ input:checked + .slider:before {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
-  font-size: 1.125rem;
+  /* Base styles (always applied) - matching subdesc text */
+  line-height: 1.25rem;
+}
+
+/* Screen width > 640px */
+@media (min-width: 640px) {
+  .project-tag-container {
+
+    line-height: 1.5rem;
+  }
+}
+
+/* Screen width > 768px */
+@media (min-width: 768px) {
+  .project-tag-container {
+    font-size: 1.125rem; /* md:text-lg */
+    line-height: 1.75rem;
+  }
+}
+
+/* Screen width > 1024px */
+@media (min-width: 1024px) {
+  .project-tag-container {
+    font-size: 1.125rem; /* lg:text-lg */
+    line-height: 1.75rem;
+  }
 }
 
 .project-tag-item {
-  padding: 4px 10px;
-  font-size: var(--text-xs);
+  padding: 1px 8px;
+  font-size: var(--text-xxs);
   font-weight: var(--font-weight-thin);
   border: .5px solid var(--project-tag-border-color);
-  border-radius: 4px;
+  border-radius: 999px;
   background-color: var(--project-tag-background-color);
   color: var(--project-tag-text-color);
 }
@@ -957,11 +1036,6 @@ input:checked + .slider:before {
   font-size: var(--text-xl);
 }
 
-.project-description-text,
-.project-subdesc-content {
-  font-size: var(--text-sm);
-}
-
 /* Non-code projects mobile */
 .noncode-projects-main-container {
   height: var(--noncode-projects-height-mobile);
@@ -1034,11 +1108,6 @@ input:checked + .slider:before {
     height: var(--project-subdesc-height-tablet);
   }
 
-  .project-description-text,
-  .project-subdesc-content {
-    font-size: var(--text-base);
-  }
-
   /* Non-code projects tablet */
   .noncode-projects-main-container {
     height: var(--noncode-projects-height-tablet);
@@ -1083,11 +1152,6 @@ input:checked + .slider:before {
   
   .project-title-text {
     font-size: var(--text-2xl);
-  }
-  
-  .project-description-text,
-  .project-subdesc-content {
-    font-size: var(--text-lg);
   }
 
   /* Non-code projects desktop */
