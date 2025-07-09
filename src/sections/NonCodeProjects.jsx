@@ -365,7 +365,7 @@ const NonCodeProjects = () => {
                 <p className={`project-title-text ${screenWidth > 1024 ? "text-2xl" : screenWidth > 640 ? "text-l" : "text-xs"}`} >
                   {currentProject.title}
                 </p>
-                <div className="noncode-link-container border">
+                <div className="noncode-link-container">
                   {hasMultipleVideos() ? (
                     <button
                       onClick={handleVideoSwitch}

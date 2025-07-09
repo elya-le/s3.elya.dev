@@ -463,8 +463,8 @@ main {
 }
 
 .navbar-link {
-  font-size: var(--text-xl);
-  padding: 0.2rem 1rem;
+  font-size: var(--text-l);
+  padding: 0.4rem 1rem;
   color: var(--color-text-primary);
   text-decoration: none;
   transition: opacity var(--transition-normal);
@@ -579,13 +579,13 @@ main {
 .loading-circle-percentage {
   color: var(--loading-circle-percentage-color);
   font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-thin);
 }
 
 .loading-circle-text {
   color: var(--loading-circle-text-color);
   font-size: var(--text-lg);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-thin);
   text-align: center;
 }
 

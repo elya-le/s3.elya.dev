@@ -1,6 +1,6 @@
 export const navLinks = [
   { id: 1, name: "Code Projects", href: "#projects" },
-  { id: 2, name: "Additional Work", href: "/non-code-projects" }, // Ensure this points to your route
+  { id: 2, name: "Additional Work (Non-Code Projects)", href: "/non-code-projects" }, // Ensure this points to your route
   { id: 3, name: "Contact Me", href: "#contact" },
 ];
 
@@ -190,7 +190,7 @@ export const otherProjects = [
     ],
   },
   {
-    title: 'Visual Design Lead ',
+    title: 'Visual Design System',
     desc: '',
     subdesc: 
     `
