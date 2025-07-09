@@ -369,6 +369,9 @@ main {
 /* =============================================== */
 /* ===== SECTION: NAVBAR COMPONENT ===== */
 /* =============================================== */
+/* =============================================== */
+/* ===== SECTION: NAVBAR COMPONENT ===== */
+/* =============================================== */
 .navbar {
   position: fixed;
   top: 0;
@@ -403,9 +406,7 @@ main {
 .navbar-hamburger {
   color: var(--color-text-primary);
   margin: 0;
-  padding-bottom: 0.25rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.75rem 1.25rem; /* increased padding for more space */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -413,14 +414,57 @@ main {
   border: none;
   cursor: pointer;
   transition: opacity var(--transition-normal);
+  font-size: 1.5rem; /* make the icon larger */
+  line-height: 1.8; /* increase line height for taller appearance */
+  letter-spacing: 0.1rem; /* add letter spacing for more spacing */
 }
 
 .navbar-hamburger:hover {
   opacity: 0.8;
 }
 
+/* alternative custom hamburger with lines */
+.navbar-hamburger-custom {
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition-normal);
+  width: 48px;
+  height: 48px;
+  gap: 6px; /* space between lines */
+}
+
+.navbar-hamburger-custom span {
+  display: block;
+  width: 24px;
+  height: 0;
+  border-top: 1.2px solid var(--color-text-primary);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animated version when menu is open */
+.navbar-hamburger-custom.open span:nth-child(1) {
+  transform: rotate(45deg) translate(3.5px, 3.5px);
+}
+
+.navbar-hamburger-custom.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-hamburger-custom.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
 .navbar-link {
-  padding: 0.5rem 1rem;
+  font-size: var(--text-xl);
+  padding: 0.2rem 1rem;
   color: var(--color-text-primary);
   text-decoration: none;
   transition: opacity var(--transition-normal);
@@ -444,7 +488,7 @@ main {
 .navbar-mobile-menu {
   width: 100%;
   text-align: right;
-  padding: 1rem 0;
+  padding: rem 0;
   background-color: var(--navbar-bg-secondary);
 }
 

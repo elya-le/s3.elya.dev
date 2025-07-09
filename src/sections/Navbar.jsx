@@ -165,8 +165,10 @@ const Navbar = () => {
           </a>
 
           {/* hamburger menu (hidden on desktop) */}
-          <button className="md:hidden navbar-hamburger" onClick={toggleMenu}>
-            {isMenuOpen ? "✕" : "☰"}
+          <button className={`md:hidden navbar-hamburger-custom ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
 
           {/* links for desktop (hidden on mobile) */}
