@@ -1,10 +1,12 @@
 import React from 'react';
 
 const PageArrow = ({ scrollProgress }) => {
-  const shouldAnimate = scrollProgress < 1;
+  const shouldAnimate = scrollProgress < .5;
 
   return (
-    <div style={{ opacity: shouldAnimate ? 1 : 0 }}>
+    <div 
+      className="sm:relative sm:left-4 sm:top-2" 
+      style={{ opacity: shouldAnimate ? 1 : 0 }}>
       <svg 
         width="20" 
         height="90"  
@@ -43,6 +45,7 @@ const PageArrow = ({ scrollProgress }) => {
         />
       </svg>
       <style jsx>{`
+        
         @keyframes mainLine {
           0% { stroke-dashoffset: 150; opacity: 1; }
           50% { stroke-dashoffset: 0; opacity: 1; }
