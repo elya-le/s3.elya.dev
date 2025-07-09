@@ -107,12 +107,12 @@ export const otherProjects = [
       videos: [
         {
           url: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_Paralax.mp4',
-          title: 'Parallax View',
+          title: 'Main Video',
           placeholder: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_LoadingPhoto.png',
         },
         {
           url: 'https://s3.us-east-2.amazonaws.com/elya.dev/Odonata_BS_2018.mp4', 
-          title: 'Secondary View',
+          title: 'BTS Video',
           placeholder: 'https://s3.us-east-2.amazonaws.com/elya.dev/OdanataBS_LoadingPhoto.JPG',
         }
       ],
@@ -132,7 +132,7 @@ export const otherProjects = [
     ]
   },
   {
-    title: 'Fabrication | Activations',
+    title: 'Brand Activations',
     desc: '',
     subdesc: 
     `
@@ -140,13 +140,20 @@ export const otherProjects = [
     Role: <span class="font-thin">Fabrication Lead</span>
     <span class="font-thin">— In partnership with <a href="https://www.hellothereyou.com/" style="text-decoration: underline;">HelloThereYou</a> & <a href="https://www.instagram.com/bymadelinejo/" style="text-decoration: underline;">Madeline Jo</a></span><br><br>
     <span class="font-thin">
-    Built custom activations for top brands, providing an engaging photo/video experience for event attendees.
+    Fabrication of custom activations, providing an engaging photo/video experience for event attendees.
     </span>
     <span class="font-thin">
     Extra special thanks to Patrick for entrusting me with taking on a bigger role with these activations.
     </span>
     `,
-    videoLink: "https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019.mp4",
+    
+    videos: [
+      {
+        url: 'https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019.mp4',
+        title: 'Activations Demo',
+        placeholder: '', // add placeholder image
+      }
+    ],
     tags: [
       { id: 601, name: 'CAD', color: '#393D00'}, 
       { id: 602, name: 'Project Management', color: '#393D00' },
@@ -157,17 +164,23 @@ export const otherProjects = [
     ],
   },
   {
-    title: 'Motion Design Activations',
+    title: 'Motion Activations',
     desc: '',
     subdesc: 
     `
     Client: <span class="font-thin">Washington Federal Credit Union</span><br><br>
     Role: <span class="font-thin">Motion Designer</span><br><br>
     <span class="font-thin">
-    This project defined WaFd Bank’s visual identity in their Seattle headquarters with 12-foot video walls in the Main Entry and an 8-foot video wall in the Interior Lobby, featuring 50+ custom animations.
+    This project defined WaFd Bank's visual identity in their Seattle headquarters with 12-foot video walls in the Main Entry and an 8-foot video wall in the Interior Lobby, featuring 50+ custom animations.
     </span><br><br>
     `,
-    videoLink: "https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019.mp4",
+    videos: [
+      {
+        url: 'https://s3.us-east-2.amazonaws.com/elya.dev/WAFD_Motion_Activations.mp4',
+        title: 'Motion Design Demo',
+        placeholder: 'https://s3.us-east-2.amazonaws.com/elya.dev/WAFD_Placeholder.jpg', // add placeholder image URL 
+      }
+    ],
     tags: [
       { id: 701, name: 'After Effects', color: '#393D00'}, 
       { id: 702, name: 'Illustrator', color: '#393D00' },
@@ -177,16 +190,22 @@ export const otherProjects = [
     ],
   },
   {
-    title: 'Graphic Design | Content Creation',
+    title: 'Visual Design Lead ',
     desc: '',
     subdesc: 
     `
     Client: <span class="font-thin">Amazon | </span><span class="font-thin"><a href="https://www.instagram.com/amazonhome/" style="text-decoration: underline;">Amazon Home</a></span><br><br> 
     Role: <span class="font-thin">Visual Design, Motion Lead</span><br><br> 
-    <span class="font-thin"> Created daily 2D/3D assets for Amazon Home's social platforms, driving follower growth while maintaining brand consistency and optimizing content engagement across channels. </span><br><br> 
+    <span class="font-thin"> Designed daily 2D/3D assets for Amazon Home's social platforms, as well as internal asset systems, driving follower growth while maintaining brand consistency and optimizing content engagement across channels. </span><br><br> 
     
     `,
-    videoLink: "https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019.mp4",
+    videos: [
+      {
+        url: 'https://s3.us-east-2.amazonaws.com/elya.dev/Amazon_Home.png',
+        title: 'Content Systems',
+        placeholder: 'https://s3.us-east-2.amazonaws.com/elya.dev/Amazon_Home.png', 
+      }
+    ],
     tags: [
       { id: 801, name: 'Cinema4D', color: '#393D00'}, 
       { id: 802, name: 'After Effects', color: '#393D00'}, 
@@ -203,11 +222,16 @@ export const otherProjects = [
     Client: <span class="font-thin">AWS Summit</span><br><br>
     Role: <span class="font-thin">Motion Designer</span><br><br>
     <span class="font-thin">
-      Created 2D/3D motion assets for the annual AWS Summit, enhancing presentations and driving engagement with aligned animations.
+      Design of 2D/3D motion assets for the annual AWS Summit, enhancing presentations and driving engagement with aligned animations.
     </span>
     `,
-    previewImg1: '/assets/aws1.gif',
-    previewImg2: '/assets/aws2.gif',
+    videos: [
+      {
+        url: 'https://s3.us-east-2.amazonaws.com/elya.dev/AWS_Summit_01.mp4', 
+        title: 'AWS Motion Demo',
+        placeholder: '/assets/aws1.gif', 
+      }
+    ],
     tags: [
       { id: 901, name: 'Cinema4D', color: '#393D00'}, 
       { id: 902, name: 'After Effects', color: '#393D00'}, 
@@ -229,8 +253,13 @@ export const otherProjects = [
   //     Extra special thanks to Stefano for cheering me on and being a big brain to problem solve with.
   //   </span>
   //   `,
-  //   previewImg1: '/assets/aws1.gif',
-  //   previewImg2: '/assets/aws2.gif',
+  //   videos: [
+  //     {
+  //       url: '/assets/aws1.gif',
+  //       title: 'Furniture Build Demo',
+  //       placeholder: '/assets/aws2.gif',
+  //     }
+  //   ],
   //   tags: [
   //     { id: 111, name: 'Rhino', color: '#393D00'}, 
   //     { id: 112, name: 'Woodworking', color: '#393D00' },
@@ -240,5 +269,3 @@ export const otherProjects = [
   //   ],
   // },
 ];
-
-

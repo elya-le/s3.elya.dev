@@ -28,7 +28,7 @@ const NonCodeProjects = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Reset video state when project changes
+  // reset video state when project changes
   useEffect(() => {
     setCurrentVideoIndex(0);
     setIsLoading(false);
@@ -46,7 +46,7 @@ const NonCodeProjects = () => {
     } else if (screenWidth > 768) {
       return { height: "660px", width: "800px" };
     } else {
-      return { height: "600px", width: "99%" };
+      return { height: "650px", width: "99%" };
     }
   };
 
@@ -56,7 +56,7 @@ const NonCodeProjects = () => {
     } else if (screenWidth > 768) {
       return { width: 600 };
     } else {
-      return { width: 420 };
+      return { width: Math.min(320, screenWidth * 0.8) };
     }
   };
 
@@ -132,7 +132,7 @@ const NonCodeProjects = () => {
           }
         }
       } catch (error) {
-        // Silently handle any buffering errors
+        // silently handle any buffering errors
       }
     }
   };
@@ -199,9 +199,7 @@ const NonCodeProjects = () => {
         className="non-code-projects"
         id="non-code-projects"
       >
-        <div
-      
-        >
+        <div>
           <div className="noncode-projects-footer-nav">
             <p className={screenWidth > 640 ? "text-xl" : "text-lg"}>Non-Code Projects</p>
           </div>
@@ -238,13 +236,20 @@ const NonCodeProjects = () => {
                     </div>
                   ))}
                   
-                {/* Video Section */}
+                {/* Video Section - FIXED */}
                 {currentVideoUrl && (
                   <div 
                     className="noncode-video-container" 
                     style={{ width: responsiveVideoSize.width }}
                   >
-                    <div className="noncode-video-wrapper relative">
+                    <div 
+                      className="noncode-video-wrapper relative"
+                      style={{ 
+                        width: '100%',
+                        height: responsiveVideoSize.height,
+                        position: 'relative'
+                      }}
+                    >
                       {/* Video Element */}
                       <video
                         ref={videoRef}
@@ -263,19 +268,21 @@ const NonCodeProjects = () => {
                         style={{ 
                           display: isLoading ? 'none' : 'block',
                           width: '100%',
-                          height: '100%'
+                          height: '100%',
+                          objectFit: 'cover'
                         }}
                       >
                         <source src={currentVideoUrl} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
 
-                      {/* Loading Overlay */}
+                      {/* Loading Overlay - FIXED to match video dimensions */}
                       {isLoading && (
                         <div 
                           className="absolute inset-0 flex items-center justify-center"
                           style={{ 
-                            height: responsiveVideoSize.height,
+                            width: '100%',
+                            height: '100%',
                             backgroundImage: currentPlaceholder ? `url(${currentPlaceholder})` : 'none',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
@@ -296,13 +303,24 @@ const NonCodeProjects = () => {
                         </div>
                       )}
 
-                      {/* Video Error */}
+                      {/* Video Error - FIXED to use placeholder background */}
                       {videoError && (
                         <div 
-                          className="absolute inset-0 flex items-center justify-center bg-gray-800"
-                          style={{ height: responsiveVideoSize.height }}
+                          className="absolute inset-0 flex items-center justify-center"
+                          style={{ 
+                            width: '100%',
+                            height: '100%',
+                            backgroundImage: currentPlaceholder ? `url(${currentPlaceholder})` : 'none',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundColor: currentPlaceholder ? 'transparent' : '#374151'
+                          }}
                         >
-                          <div className="text-center text-white">
+                          {/* Dark overlay for better text visibility */}
+                          <div className="absolute inset-0 bg-black bg-opacity-80"></div>
+                          
+                          {/* Error content */}
+                          <div className="relative z-10 text-center text-white">
                             <p className="text-lg mb-2">Video failed to load</p>
                             <button 
                               onClick={() => {
@@ -313,7 +331,10 @@ const NonCodeProjects = () => {
                                   videoRef.current.load();
                                 }
                               }}
-                              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                              className="px-4 py-2 text-white rounded-full hover:bg-blue-600 transition-colors"
+                              style={{ 
+                                backgroundColor: '#719755',
+                              }}
                             >
                               Retry
                             </button>
@@ -341,14 +362,19 @@ const NonCodeProjects = () => {
               </div>
               
               <div className="project-header-row">
-                <p className={`project-title-text ${screenWidth > 1024 ? "text-2xl" : "text-xl"}`}>
+                <p className={`project-title-text ${screenWidth > 1024 ? "text-2xl" : screenWidth > 640 ? "text-l" : "text-xs"}`} >
                   {currentProject.title}
                 </p>
-                <div className="noncode-link-container">
-                  {hasMultipleVideos() && !isLoading && (
+                <div className="noncode-link-container border">
+                  {hasMultipleVideos() ? (
                     <button
                       onClick={handleVideoSwitch}
                       className="project-link-button noncode-button"
+                      style={{ 
+                        visibility: isLoading ? 'hidden' : 'visible',
+                        opacity: isLoading ? 0 : 1,
+                        transition: 'opacity 0.2s ease'
+                      }}
                     >
                       {currentVideoIndex === 0 ? (
                         <>
@@ -360,6 +386,11 @@ const NonCodeProjects = () => {
                         </>
                       )}
                     </button>
+                  ) : (
+                    // Placeholder div to maintain consistent spacing
+                    <div className="project-link-button noncode-button" style={{ visibility: 'hidden' }}>
+                      Placeholder <GoArrowUpRight className="project-link-icon" />
+                    </div>
                   )}
                 </div>
               </div>
@@ -375,7 +406,9 @@ const NonCodeProjects = () => {
               ></div>
           
               <div className="project-tag-container">
-                    Built with:
+                <span className={`${screenWidth > 768 ? "md:text-lg lg:text-lg" : "text-sm"} ${screenWidth > 640 ? "sm:text-base" : ""}`}>
+                  Built with:
+                </span>
                 {currentProject.tags.map((tag) => (
                   <span
                     key={tag.id}
