@@ -985,6 +985,7 @@ main {
   background-color: var(--color-primary);
   padding: var(--space-md);
   margin-top: -6rem;
+  padding-bottom: 80px; 
 }
 
 .contact-header-text {
@@ -1240,6 +1241,11 @@ input:checked + .slider:before {
 /* === TABLET BREAKPOINT === */
 
 @media (min-width: 715px) {
+
+  .contact-section {
+    padding-bottom: var(--space-lg);
+  }
+
   .contact-main-container {
     flex-direction: row;
     gap: var(--space-md);
