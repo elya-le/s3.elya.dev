@@ -151,7 +151,7 @@ export const otherProjects = [
       {
         url: 'https://s3.us-east-2.amazonaws.com/elya.dev/Activations_2019.mp4',
         title: 'Activations Demo',
-        placeholder: '', // add placeholder image
+        placeholder: 'https://s3.us-east-2.amazonaws.com/elya.dev/Activations_Placeholder.png', // add placeholder image
       }
     ],
     tags: [
