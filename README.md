@@ -2,7 +2,7 @@
 
 Personal portfolio site showcasing web development, design, and fabrication projects.
 
-This is the full progression from zero to learning how to incorporate Blender/Feather 3D and Three.js into a personalized expression of things I've learned, accomplished, and am interested in.
+This is the full progression from zero to learning how to incorporate Blender/Feather 3D and Three.js into a personalized expression of things I've learned, accomplished, and am pasionate about.
 
 ## Tech Stack
 [![Blender](https://img.shields.io/badge/Blender-F5792A.svg?logo=blender&logoColor=white)](https://www.blender.org/)[![Feather 3D](https://img.shields.io/badge/Feather%203D-4A90E2.svg?logo=feather&logoColor=white)](https://feather3d.com/)
