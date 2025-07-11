@@ -5,6 +5,116 @@
     <link rel="icon" type="image/svg+xml" href="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elya | Creative Developer</title>
+    
+    <!-- Portfolio Visitor Tracking Script -->
+    <script>
+    (function() {
+        const TRACKING_ENDPOINT = 'https://3ojudnijxk.execute-api.us-east-1.amazonaws.com/prod/track';
+        
+        if (isBot() || isDevelopment()) {
+            return;
+        }
+        
+        function collectVisitorData() {
+            return {
+                url: window.location.href,
+                referrer: document.referrer || 'direct',
+                userAgent: navigator.userAgent,
+                timestamp: new Date().toISOString(),
+                screenSize: screen.width + 'x' + screen.height,
+                language: navigator.language || 'unknown',
+                timezone: getTimezone(),
+                sessionId: getOrCreateSessionId(),
+                pageTitle: document.title || 'Unknown Page'
+            };
+        }
+        
+        function getTimezone() {
+            try {
+                return Intl.DateTimeFormat().resolvedOptions().timeZone;
+            } catch (e) {
+                return 'unknown';
+            }
+        }
+        
+        function getOrCreateSessionId() {
+            let sessionId = sessionStorage.getItem('portfolio_visitor_session');
+            if (!sessionId) {
+                sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem('portfolio_visitor_session', sessionId);
+            }
+            return sessionId;
+        }
+        
+        function isBot() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const botPatterns = [
+                'bot', 'crawler', 'spider', 'scraper', 'lighthouse', 
+                'pingdom', 'monitor', 'health', 'check', 'facebook',
+                'twitter', 'google', 'bing', 'yahoo', 'baidu'
+            ];
+            return botPatterns.some(pattern => userAgent.includes(pattern));
+        }
+        
+        function isDevelopment() {
+            return 
+            window.location.hostname === 'localhost' || 
+            window.location.hostname === '127.0.0.1' || 
+            window.location.hostname.includes('dev') ||
+            window.location.protocol === 'file:';
+        }
+        
+        function trackVisit() {
+            const data = collectVisitorData();
+            const payload = JSON.stringify(data);
+            
+            if (navigator.sendBeacon) {
+                const blob = new Blob([payload], { type: 'application/json' });
+                const success = navigator.sendBeacon(TRACKING_ENDPOINT, blob);
+                
+                if (!success) {
+                    sendViaFetch(data);
+                }
+            } else {
+                sendViaFetch(data);
+            }
+        }
+        
+        function sendViaFetch(data) {
+            fetch(TRACKING_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                keepalive: true
+            }).catch(function(error) {
+                console.debug('Visitor tracking failed:', error);
+            });
+        }
+        
+        function initializeTracking() {
+            setTimeout(trackVisit, 1000);
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeTracking);
+        } else {
+            initializeTracking();
+        }
+        
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                trackVisit();
+            }
+        });
+        
+        window.addEventListener('beforeunload', function() {
+            trackVisit();
+        });
+        
+    })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
